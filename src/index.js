@@ -4,11 +4,14 @@ import App from './Components/App';
 import reportWebVitals from './reportWebVitals';
 import { store } from './store/store';
 import { Provider } from 'react-redux';
+import UIProvider from "./Components/UIProvider";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <Provider store={store}>
-      <App />
+      <UIProvider>
+        <App />
+      </UIProvider>
     </Provider>
 );
 

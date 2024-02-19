@@ -1,0 +1,96 @@
+.subMenuMain {
+    background-color: var(--white);
+}
+
+.subMenuHeader {
+    background-color: var(--primaryColor);
+    width: 100%;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+    opacity: 1;
+
+    border-radius: 0px 0px 50px 50px;
+}
+
+.subMenuHeaderContainer {
+    z-index: 551;
+    transition: transform 0.5s ease-in;
+    position: relative;
+}
+
+.subMenuHeader a.active {
+    border-bottom: 3px solid white;
+}
+
+.subMenuHeader a {
+    padding-bottom: 3px;
+    margin-bottom: 2px;
+}
+
+
+.subMenuHeader i {
+    color: white;
+    height: auto;
+    width: 45px;
+    text-align: center;
+}
+
+.subMenuHeader i:hover {
+    background-color: rgba(255, 255, 255, 0.3); /* Blanc avec une opacité de 0.3 */
+    border-radius: 10px;
+
+}
+
+.buttonSubMenuHeader {
+    background-image: url('../../../public/assets/images/buttonSubmenu.png');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100px;
+    cursor: pointer;
+    font-size: 25px;
+    color: white;
+}
+
+
+
+.arrowMenu {
+    transform: translateY(-5px);
+}
+
+.arrowMenu.rotateDown {
+    transform: translateY(-5px) rotate(180deg) !important;
+}
+
+
+.containerButtonSubMenuHeader {
+    z-index: 400;
+    filter: drop-shadow(0px 3px 1px rgba(0, 0, 0, 0.3));
+}
+
+@media screen and (max-width: 576px){
+    .subMenuHeader {
+        height: 35px;
+    }
+    .subMenuHeaderContainer {
+        height: 57px;
+    }
+}
+
+@media screen and (min-width: 577px) and (max-width: 1400px){
+    .subMenuHeader {
+        height: 35px;
+    }
+    .subMenuHeaderContainer {
+        height: 57px;
+    }
+}
+
+
+@media screen and (min-width: 1401px){
+    .subMenuHeader {
+        height: 50px;
+    }
+    .subMenuHeaderContainer {
+        height: 75px;
+    }
+}

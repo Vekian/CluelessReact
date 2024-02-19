@@ -35,32 +35,15 @@ export function getLvl(popularity) {
   return Math.floor(Math.log(popularity / 100) / Math.log(1.2));
 }
 
-export function displayElement(event, classParent, classEnfant){
-  event.stopPropagation();
-  const clickedElement = event.currentTarget;
-  clickedElement.querySelector('.fa-angle-up').classList.toggle("rotateDown");
-  let parent = clickedElement.parentNode;
-  while (parent && !parent.classList.contains(classParent)) {
-      parent = parent.parentNode;
-  }
-  
-  let listComments = parent.querySelector("." + classEnfant);
-  let listeLi = listComments.querySelectorAll(':scope > li');
-
-  for (let li of listeLi) {
-      li.classList.toggle('active');
-  }
-}
-
 
 export function fetchData(url, method, processData, token = null, bodyData = null) {
   let body = bodyData;
   let headers = "";
-  let credentials ="omit";
+  let credentials = "omit";
 
   if (method === 'POST') {
     body = JSON.stringify(bodyData);
-    if (url === 'login_check') {
+    if (url === 'login_check' || url === 'token/refresh') {
       headers = {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
@@ -79,6 +62,13 @@ export function fetchData(url, method, processData, token = null, bodyData = nul
       'Content-Type': 'application/json; charset=UTF-8',
     };
   }
+  else if (method === 'PUT') {
+    body = JSON.stringify(bodyData);
+    headers = {
+      'Accept': 'application/ld+json',
+      'Content-Type': 'application/ld+json',
+    };
+  }
 
   if (token) {
     headers.Authorization = `Bearer ${token}`;
@@ -88,12 +78,10 @@ export function fetchData(url, method, processData, token = null, bodyData = nul
     {
         method: method,
         headers: headers,
-        credentials: credentials,
         body: body
     })
     .then(response => {
       if (!response.ok) {
-        alert(`${response.status} ${response.statusText}`);
       }    
       return response.json()})
     .then(data => {

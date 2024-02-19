@@ -1,50 +1,35 @@
-import '../App.css';
-import Header from './Header';
-import Sidemenu from './Sidemenu';
-import SubMenu from './Submenu';
+import './App.css';
+import Header from './Header/Header';
+import Sidemenu from './Sidemenu/Sidemenu';
+import SubMenu from './Submenu/Submenu';
 import Main from './Main';
-import React, { useEffect } from 'react';
+import React, { useContext } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { loadCategory} from '../features/category/categorySlice';
-import { loadQuestions, emptyQuestions} from '../features/question/questionSlice';
-import { fetchData } from '../api/APIutils';
+import { UIContext } from './UIProvider';
+import Login from '../Components/Header/Login';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 function App() {
-    const dispatch = useDispatch();
-
-    useEffect(() => {
-      fetchData('categories', 'GET', loadCategoryData);     
-      fetchData('questions?page=1', 'GET', loadData);
-    }, []);
-
-      function loadData(data){
-        dispatch(emptyQuestions());
-        for (let question of data["hydra:member"]){
-            dispatch(loadQuestions(question));
-        } 
-      }
-
-      function loadCategoryData(data) {
-        for (let categorie of data["hydra:member"]){
-          dispatch(loadCategory(categorie));
-        }
-      }
+  const {darkMode} = useContext(UIContext);
+        
 
   return (
-    <div className="App vh-100">
-      < Router >
-      < Header />
-      
-      <div className='d-flex'>
+    <div className={`App vh-100 ${darkMode ? 'dark' : 'light'}`}>
+      <GoogleOAuthProvider clientId="1047880689996-3jmsj1nv0ekn34ur1h2r1rjonbbvgiuf.apps.googleusercontent.com">
+        < Router >
+        < Header />
         
-        < Sidemenu />
-        <div className='d-flex flex-column w-100 '>
-            < SubMenu />
-            < Main />
+        <div className='d-flex bodySection'>
+          
+          < Sidemenu />
+          <div className='d-flex flex-column col-sm-9 col-lg-10 col-12 '>
+              < SubMenu />
+              < Main />
+          </div>
         </div>
-      </div>
-      </ Router >
+        <Login />
+        </ Router >
+      </GoogleOAuthProvider>
     </div>
   );
 }

@@ -1,0 +1,12 @@
+.profilDescription {
+    padding: 15px;
+    border-radius: 0px 0px 15px 0px;
+    border-bottom: 1px solid var(--dark-with-opacity);
+    border-right: 1px solid var(--dark-with-opacity);
+    box-shadow: 4px 2px 4px var(--dark-with-opacity);
+}
+
+.charts {
+    height: 300px;
+}
+

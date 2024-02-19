@@ -1,0 +1,138 @@
+.headerMain {
+    height: 7vh;
+    background-color: var(--tertiaryColor);
+    position: relative;
+    z-index: 600;
+}
+
+header {
+    box-shadow: 0px 0px 6px var(--dark);
+}
+
+.logo {
+    object-fit: contain;
+}
+
+.logoTitle {
+    font-family: 'Baloo-Regular';
+    height: 20%;
+    margin-top: -10px;
+    color: var(--dark)
+}
+
+.modal-header {
+    border-bottom: none !important;
+}
+
+.modal-footer {
+    border-top : none !important;
+}
+
+.searchElm {
+    height: 100%;
+    max-height: 50px;
+}
+
+.searchInputHeader {
+    border: none;
+    color: var(--dark);
+    background-color: var(--white);
+    border-right: none !important;
+}
+
+.searchInputHeader:focus + .searchSubmitHeader, .searchInputHeader:focus, .searchInputHeader:active{
+    outline: none;
+    border: none;
+}
+
+.searchButtonHeader {
+    cursor: pointer;
+    border-radius: 10px 0px 0px 10px !important;
+    background-color: var(--primaryColor);
+    color: white;
+    border: none;
+}
+
+.searchButtonHeader:hover {
+    filter: brightness(1.2);
+}
+
+.searchSubmitHeader {
+    color: var(--dark);
+    background-color: var(--white);
+    border: none;
+    border-radius: 0px 10px 10px 0px;
+}
+
+.fa-magnifying-glass{
+    color: var(--dark) !important;
+}
+
+.dropdown-menu {
+    background-color: var(--tertiaryColor);
+}
+
+.dropdown-item {
+    cursor: pointer;
+    background-color: var(--tertiaryColor);
+    color: var(--dark) !important;
+}
+
+.dropdown-item:active {
+    background-color: var(--white);
+}
+
+.dropdown-item:hover {
+    background-color: var(--white);
+}
+
+.buttonProfil {
+    border-radius: 15px;
+    background-color: var(--primaryColor);
+    color: white;
+    font-weight: 500;
+    transition: box-shadow 0.3s ease;
+}
+
+.buttonProfil:hover {
+    filter: brightness(1.15);
+}
+
+@media screen and (max-width: 576px){
+    .buttonProfil {
+        padding: 2px 7px 2px 7px;
+    }
+
+    .buttonProfil h5 {
+        font-size: 0.8rem;
+    }
+    .buttonProfil h6 {
+        font-size: 0.6rem;
+    }
+
+    .buttonProfil img {
+        height: 20px;
+    }
+}
+
+@media screen and (min-width: 577px) and (max-width: 1400px){
+    .buttonProfil {
+        padding: 4px 15px 4px 15px;
+        font-size: normal;
+    }
+
+    .buttonProfil img {
+        height: 24px;
+    }
+}
+
+@media screen and (min-width: 1401px){
+    .buttonProfil {
+        padding: 4px 15px 4px 15px;
+        font-size: normal;
+    }
+
+    .buttonProfil img {
+        height: 30px;
+    }
+}

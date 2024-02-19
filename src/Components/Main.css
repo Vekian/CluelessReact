@@ -1,0 +1,18 @@
+
+.mainContent {
+    z-index: 500;
+    height: 93vh;
+    overflow: scroll;
+    margin-top: -85px;
+    padding-top: 85px;
+    transition: padding-top 0.5s ease-in;
+    background-color: var(--white);
+    color: var(--dark);
+}
+
+
+.questions {
+    overflow: scroll;
+    
+}
+

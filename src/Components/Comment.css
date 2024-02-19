@@ -1,0 +1,21 @@
+.commentVote .fa-circle-up {
+    color: var(--secondaryColor);
+    font-size: 1rem;
+    transition: transform 0.3s ease-out;
+}
+
+.commentVote .fa-circle-down {
+    color: red;
+    font-size: 1rem;
+    transition: transform 0.3s ease-out;
+}
+
+.buttonComment {
+    color: white;
+    background-color: var(--primaryColor);
+    border: none;
+    border-radius: 15px;
+    padding: 5px 25px 5px 25px;
+    font-weight: 600;
+    transition: transform 0.3s ease-out;
+}

@@ -1,0 +1,36 @@
+.sideMenu {
+    overflow-y: scroll;
+    height: 93vh;
+    border-right: 1px solid var(--dark-with-opacity);
+    background-color: var(--white);
+    color: var(--dark)
+}
+
+.itemMenu {
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.sideMenu h6:hover, .itemMenu:hover {
+    border-radius: 10px;
+    background-color: var(--tertiaryColor);
+}
+
+.sideMenu li, .listComments li{
+    transition: max-height 0.6s ease-out, opacity 0.5s ease-out;
+    opacity: 0;
+    max-height: 0;
+    overflow: scroll;
+}
+
+.sideMenu li.active, .listComments li.active {
+    opacity: 1;
+    max-height: 200px;
+}
+
+.sideMenu ul {
+    padding-left: 0;
+}
+.sideMenu li, .listComments {
+    list-style-type: none;
+}

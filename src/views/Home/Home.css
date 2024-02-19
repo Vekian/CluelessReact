@@ -1,0 +1,135 @@
+.listOfElms {
+    height: 50vh;
+    overflow: scroll;
+    border-bottom: 1px solid var(--tertiaryColor);
+}
+
+.elmsList li:hover, .elmsList li.active, .cluesList li:hover, .cluesList li.active {
+    background: var(--tertiaryColor);
+    color: var(--primaryColor);
+    font-weight: 500;
+}
+
+.elmsList li, .cluesList li{
+    list-style-type: none;
+    cursor: pointer;
+    padding: 5px 15px 5px 15px;
+    border-radius: 10px;
+}
+
+
+.elmPreviewCard {
+    box-shadow: 1px 0px 1px var(--dark-with-opacity);
+    border-radius: 5px;
+    padding: 5px;
+    background-color: var(--white);
+}
+
+.elmPreviewCard:hover {
+    background-color: var(--tertiaryColor);
+    cursor: pointer;
+}
+
+.elmPreviewCard p {
+    margin: 0;
+    line-height: 1;
+}
+
+.lvlPreviewElm {
+    font-size: 12px;
+}
+
+.timePreviewElm {
+    padding: 2px 5px 2px 5px;
+    border-radius: 10px;
+    height:100%;
+    font-size: 0.6rem;
+    background-color: var(--primaryColor);
+    color: white;
+    font-weight: 500;
+    width: auto;
+}
+
+.timePreviewClue  {
+    padding: 2px 5px 2px 5px;
+    border-radius: 10px;
+    height:100%;
+    font-size: 0.6rem;
+    background-color: var(--primaryColor);
+    color: white;
+    font-weight: 500;
+}
+
+.titlePreviewElm {
+    font-size: 1rem;
+}
+
+.listTagsElmPreview {
+    list-style-type: none;
+    margin-bottom: 0;
+    margin-top: 5px;
+    padding: 0;
+}
+
+.listTagsElmPreview li {
+    font-size: 0.7rem;
+    padding: 2px 10px 2px 10px;
+    border: 1px solid var(--dark);
+    border-radius: 5px;
+    background-color: var(--tertiaryColor);
+}
+
+.numberPopularityPreviewElm {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.textPopularityPreviewElm {
+    font-size: 0.8rem;
+}
+
+.numberPopularityPreviewClue {
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.pageItem {
+    cursor: pointer;
+    padding: 3px 5px 3px 5px;
+    margin: 3px 3px 0px 3px;
+    border: 1px solid var(--dark);
+    border-radius: 5px;
+}
+
+.dark .pageItem:hover {
+    filter: brightness(1.2);
+    background-color: var(--tertiaryColor);
+}
+
+.light .pageItem:hover {
+    background-color: var(--tertiaryColor);
+    color: var(--dark);
+}
+
+.pageItem.active {
+    background-color: var(--primaryColor);
+    border: none;
+    color: white;
+}
+
+.listPages {
+    list-style-type: none;
+    padding-left: 0px !important;
+}
+
+.commentsPreviewElm {
+    font-size: 0.7rem;
+    color: var(--primaryColor);
+    font-weight: 600;
+}
+
+.answersPreviewElm {
+    font-size: 0.7rem;
+    color: var(--secondaryColor);
+    font-weight: 600;
+}
