@@ -11,6 +11,7 @@ function Header () {
     const user = useSelector(state => state.user);
     const {toggleDarkMode, changeFilterQuestion} = useContext(UIContext);
 
+
     useEffect(() => {
         const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
         if (isDarkMode){
@@ -71,7 +72,7 @@ function Header () {
                     </form>
                 </div>
                 <div>
-                    {user.JWBToken.isValid ? 
+                    {user.token ? 
                         < ProfilHeader  user={user.user} />
                          : 
                          <button className="buttonStyle" data-bs-toggle="modal" data-bs-target="#loginModal">

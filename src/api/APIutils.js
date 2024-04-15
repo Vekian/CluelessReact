@@ -32,6 +32,9 @@ export function getDateDetail (dateData) {
 
 
 export function getLvl(popularity) {
+  if (popularity === 0) {
+    return 1;
+  }
   return Math.floor(Math.log(popularity / 100) / Math.log(1.2));
 }
 
@@ -39,7 +42,6 @@ export function getLvl(popularity) {
 export function fetchData(url, method, processData, token = null, bodyData = null) {
   let body = bodyData;
   let headers = "";
-  let credentials = "omit";
 
   if (method === 'POST') {
     body = JSON.stringify(bodyData);
@@ -48,7 +50,6 @@ export function fetchData(url, method, processData, token = null, bodyData = nul
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       };
-      credentials = 'include';
     }
     else {
       headers = {
@@ -67,6 +68,13 @@ export function fetchData(url, method, processData, token = null, bodyData = nul
     headers = {
       'Accept': 'application/ld+json',
       'Content-Type': 'application/ld+json',
+    };
+  }
+  else if (method === 'PATCH') {
+    body = JSON.stringify(bodyData);
+    headers = {
+      'Accept': 'application/ld+json',
+      'Content-Type': 'application/merge-patch+json',
     };
   }
 

@@ -98,6 +98,11 @@ header {
     filter: brightness(1.15);
 }
 
+.linkSigning:hover {
+    cursor: pointer;
+    filter: brightness(3.5);
+}
+
 @media screen and (max-width: 576px){
     .buttonProfil {
         padding: 2px 7px 2px 7px;

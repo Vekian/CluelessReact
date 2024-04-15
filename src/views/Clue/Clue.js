@@ -23,8 +23,8 @@ function Clue() {
     
 
     useEffect(() => {
-        if (user.JWBToken.isValid) {
-            trigger({url: `?clue=${id}`, token: user.JWBToken.token});
+        if (user.token) {
+            trigger({url: `?clue=${id}`, token: user.token});
         }
     }, [user]);
 
@@ -53,7 +53,7 @@ function Clue() {
             user: `/api/users/${user.user.user_id}`,
             clue: `/api/clues/${data.id}`,
         }
-        const token = user.JWBToken.token;
+        const token = user.token;
         const bodyJson = JSON.stringify(body);
         const resultComment = await addComment({body: bodyJson, token: token});
         if (resultComment.data) {

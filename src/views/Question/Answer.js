@@ -29,7 +29,7 @@ function Answer(props) {
             content: content
         }
         const bodyJson = JSON.stringify(body);
-        const token = user.JWBToken.token;
+        const token = user.token;
         const resultAnswer = await editAnswer({id: props.answer.id, token: token, body: bodyJson});
         if (resultAnswer.data) {
             setEditAnswerState(false);
@@ -38,7 +38,7 @@ function Answer(props) {
    }
 
    const deleteAnswerData = async () => {
-        const resultDelete = await deleteAnswer({id: props.answer.id, token: user.JWBToken.token}); 
+        const resultDelete = await deleteAnswer({id: props.answer.id, token: user.token}); 
         if (resultDelete){
             props.refetch(props.idQuestion);
             setContentToSend('y');
@@ -51,7 +51,7 @@ function Answer(props) {
             user: `/api/users/${user.user.user_id}`,
             answer: `/api/answers/${props.answer.id}`,
         }
-        const token = user.JWBToken.token;
+        const token = user.token;
         const bodyJson = JSON.stringify(body);
         const resultComment = await addComment({body: bodyJson, token: token});
         if (resultComment.data) {
@@ -81,7 +81,7 @@ function Answer(props) {
                         : null
                     }
                     { user.user.user_id === props.answer.user.id && <button className='buttonStyle ms-4' onClick={() => setEditAnswerState(!editAnswerState)}>Editer la réponse</button>}
-                    { user.user.user_id === props.answer.user.id && <button className='buttonStyle ms-4 bg-danger' onClick={() => {deleteAnswerData({id: props.answer.id, token: user.JWBToken.token}); props.refetch(props.idQuestion); }}>Effacer la réponse</button>}
+                    { user.user.user_id === props.answer.user.id && <button className='buttonStyle ms-4 bg-danger' onClick={() => {deleteAnswerData({id: props.answer.id, token: user.token}); props.refetch(props.idQuestion); }}>Effacer la réponse</button>}
                     </div>
                     <div>
                         { getDateDetail(props.answer.createdAt)}

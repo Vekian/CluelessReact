@@ -4,6 +4,7 @@ import { useDispatch} from 'react-redux';
 import { deleteUserMe} from '../../features/user/userSlice';
 import { useContext } from "react";
 import { UIContext } from '../UIProvider';
+import { googleLogout } from '@react-oauth/google';
 
 function ProfilHeader (props) {
     const dispatch = useDispatch();
@@ -18,6 +19,7 @@ function ProfilHeader (props) {
     function logOut(){
         dispatch(deleteUserMe());
         deleteCookie();
+        googleLogout();
     }
 
     return (

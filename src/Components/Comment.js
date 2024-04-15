@@ -21,7 +21,7 @@ function Comment(props) {
             content: content
         }
         const bodyJson = JSON.stringify(body);
-        const token = user.JWBToken.token;
+        const token = user.token;
         const resultAnswer = await editComment({id: props.comment.id, token: token, body: bodyJson});
         if (resultAnswer.data) {
             setEditCommentState(false);
@@ -30,7 +30,7 @@ function Comment(props) {
     }
 
     const deleteCommentData = async () => {
-        const resultDelete = await deleteComment({id: props.comment.id, token: user.JWBToken.token}); 
+        const resultDelete = await deleteComment({id: props.comment.id, token: user.token}); 
         if (resultDelete){
             props.refetch(props.idQuestion);
             setContentToSend('y');

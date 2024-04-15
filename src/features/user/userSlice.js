@@ -3,10 +3,7 @@ const initialState = {
     user: {
 
     },
-    JWBToken: {
-        token: "",
-        isValid: false,
-    },
+    token: "",
     userProfil: {
         user: {
 
@@ -23,18 +20,14 @@ export const userSlice = createSlice({
     initialState,
     reducers: {
         loadToken: (state, action) => {
-            state.JWBToken.token = action.payload;
-        },
-        isTokenValid: (state, action) => {
-            state.JWBToken.isValid = action.payload;
+            state.token = action.payload;
         },
         loadUserMe: (state, action) => {
             state.user = action.payload;
         },
         deleteUserMe: (state, action) => {
             state.user = {};
-            state.JWBToken.token = "";
-            state.JWBToken.isValid = false;
+            state.token = "";
         },
         loadUserProfil: (state, action) => {
             state.userProfil.user = action.payload;
@@ -47,4 +40,4 @@ export const userSlice = createSlice({
 
 export default userSlice.reducer;
 
-export const { loadToken, isTokenValid, loadUserMe, loadUserProfil, deleteUserMe, loadQuestionsUserProfil } = userSlice.actions;
+export const { loadToken, loadUserMe, loadUserProfil, deleteUserMe, loadQuestionsUserProfil } = userSlice.actions;

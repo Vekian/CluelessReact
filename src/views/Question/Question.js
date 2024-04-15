@@ -33,8 +33,8 @@ function Question() {
     
 
     useEffect(() => {
-        if (user.JWBToken.isValid) {
-            trigger({url: `?question=${id}`, token: user.JWBToken.token});
+        if (user.token) {
+            trigger({url: `?question=${id}`, token: user.token});
         }
     }, [user]);
 
@@ -66,7 +66,7 @@ function Question() {
             title : title,
             content : content,
         }
-        const token = user.JWBToken.token;
+        const token = user.token;
         const bodyJson = JSON.stringify(body);
         updateQuestion({ id: id, token: token, body: bodyJson});
         setEditQuestionState(false);
@@ -78,7 +78,7 @@ function Question() {
             user: `/api/users/${user.user.user_id}`,
             question: `/api/questions/${data.id}`,
         }
-        const token = user.JWBToken.token;
+        const token = user.token;
         const bodyJson = JSON.stringify(body);
         const resultAnswer = await addAnswer({body: bodyJson, token: token});
         if (resultAnswer.data) {
@@ -93,7 +93,7 @@ function Question() {
             user: `/api/users/${user.user.user_id}`,
             question: `/api/questions/${data.id}`,
         }
-        const token = user.JWBToken.token;
+        const token = user.token;
         const bodyJson = JSON.stringify(body);
         const resultComment = await addComment({body: bodyJson, token: token});
         if (resultComment.data) {
@@ -135,7 +135,7 @@ function Question() {
                         <button className='buttonStyle ms-5' onClick={() => setEditQuestionState(!editQuestionState)}>
                            {editQuestionState ? "Annuler" : 'Editer la question'} 
                         </button>
-                        <button className='buttonStyle ms-5 ms-3 bg-danger' onClick={() => {deleteQuestion({id: id, token: user.JWBToken.token}); navigate('/'); }}>
+                        <button className='buttonStyle ms-5 ms-3 bg-danger' onClick={() => {deleteQuestion({id: id, token: user.token}); navigate('/'); }}>
                             Effacer la question
                         </button>
                     </div>

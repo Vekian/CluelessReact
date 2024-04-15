@@ -6,7 +6,7 @@ import { useDeleteVoteMutation } from '../../features/api/voteSlice';
 
 function VoteElement(props) {
     const user = useSelector(state => state.user);
-    const votes = voteApi.endpoints.getVotes.useQueryState({url: `?${props.typeParent}=${props.idParentElm}`, token: user.JWBToken.token});
+    const votes = voteApi.endpoints.getVotes.useQueryState({url: `?${props.typeParent}=${props.idParentElm}`, token: user.token});
     const [updateVote] = useUpdateVoteMutation();
     const [ addVote ] = useAddVoteMutation();
     const [deleteVote] = useDeleteVoteMutation();
@@ -25,14 +25,14 @@ function VoteElement(props) {
             body.comment = `/api/comments/${props.idComment}`;
         }
         let bodyJson = JSON.stringify(body);
-        const resultVote = await addVote({body: bodyJson, token: user.JWBToken.token});
+        const resultVote = await addVote({body: bodyJson, token: user.token});
         if (resultVote.data) {
             props.refetch(props.idParentElm);
         }
     }
 
     const sendDeleteVote = async (vote) => {
-        const resultVote = await deleteVote({id: vote.id, token: user.JWBToken.token });
+        const resultVote = await deleteVote({id: vote.id, token: user.token });
         if (resultVote) {
             props.refetch(props.idParentElm);
         }
@@ -43,7 +43,7 @@ function VoteElement(props) {
             "amount": amount
         };
         let bodyJson = JSON.stringify(body);
-        const resultVote = await updateVote({id: vote.id, token: user.JWBToken.token, body: bodyJson});
+        const resultVote = await updateVote({id: vote.id, token: user.token, body: bodyJson});
         if (resultVote.data) {
             props.refetch(props.idParentElm);
         }

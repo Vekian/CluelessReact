@@ -75,7 +75,7 @@ function Editor(props) {
             user: `/api/users/${user.user.user_id}`,
             tags: tags
         }
-        const token = user.JWBToken.token;
+        const token = user.token;
         const bodyJson = JSON.stringify(body);
         if (props.type === "question") {
             addQuestion({ body: bodyJson, token: token});
