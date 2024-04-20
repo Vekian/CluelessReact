@@ -8,6 +8,7 @@ import { Doughnut } from 'react-chartjs-2';
 import ElmPreview from "../Home/components/ElmPreview";
 import { Link, useParams, useLocation } from "react-router-dom";
 import EditProfil from "./EditProfil";
+import EditPicture from "./EditPicture";
 
 function Profil() {
     const dispatch = useDispatch();
@@ -16,6 +17,7 @@ function Profil() {
     const user = useSelector(state => state.user.user);
     const token = useSelector(state => state.user.token);
     const [editProfilState, setEditProfilState] = useState(false);
+    const [editPictureState, setEditPictureState] = useState(false);
     const { id } = useParams();
 
     const options = {
@@ -106,67 +108,75 @@ function Profil() {
 
     return (
         <div>
-           
-                {
-                    editProfilState ?
+            {
+                editProfilState ?
+                <div className="d-flex flex-column offset-1 col-10 profilDescription">
+                    < EditProfil user={user} userProfil={userProfil} editProfilState= {editProfilState} setEditProfilState={setEditProfilState} token={token} />
+                </div>
+                    : 
                     <div className="d-flex flex-column offset-1 col-10 profilDescription">
-                        < EditProfil user={user} userProfil={userProfil} editProfilState= {editProfilState} setEditProfilState={setEditProfilState} token={token} />
-                    </div>
-                     : 
-                     <div className="d-flex flex-column offset-1 col-10 profilDescription">
-                        <div className="d-flex" >
-                            <div  className="col-1 text-center">
+                    <div className="d-flex" >
+                        <div className="d-flex flex-column align-items-center">
+                            <div  className="text-center mb-1">
                                 <img  src={ process.env.REACT_APP_URL + userProfil.user.avatar} alt="avatar" height="80px" width="80px"/>
                             </div>
-                            
-                            <div className="d-flex align-items-end  justify-content-between w-100 ">
-                                <div className="d-flex align-items-end">
-                                    <h3 className="ms-4 me-3 mb-0">
-                                        {userProfil.user.username}
-                                    </h3>
-                                    <h5 className="mb-1">
-                                        lvl {getLvl(userProfil.user.popularity)}
-                                    </h5>
-                                </div>
-                                <div>
-                                    <button className="buttonStyle" onClick={() => setEditProfilState(!editProfilState)}>
-                                        Éditer le profil
-                                    </button>
-                                </div>
-                            </div>
+                            {
+                                editPictureState ?
+                                < EditPicture editPictureState= {editPictureState} setEditPictureState={setEditPictureState} token={token} />
+                                :
+                                <button className="buttonStyle buttonPicture text-center" onClick={() => setEditPictureState(!editPictureState)}>
+                                    Changer avatar
+                                </button>
+                            }
                         </div>
-                        <div className="d-flex mt-2">
-                            <div className="d-flex flex-column align-items-center justify-content-center col-1">
-                                <h6>
-                                    {userProfil.user.sex}, <br />{userProfil.user.age} ans
-                                </h6>
-                                <h6>
-                                    {userProfil.user.country}
-                                </h6>
-                            </div>
-                            <div className="ms-4 w-100">
-                                <h5 className="fw-normal">
-                                    {userProfil.user.firstname} {userProfil.user.lastname}
+                        <div className="d-flex align-items-end  justify-content-between w-100 ">
+                            <div className="d-flex align-items-end">
+                                <h3 className="ms-4 me-3 mb-0">
+                                    {userProfil.user.username}
+                                </h3>
+                                <h5 className="mb-1">
+                                    lvl {getLvl(userProfil.user.popularity)}
                                 </h5>
-                                <div className="separator mt-2 mb-3 ms-3"></div>
-                                <div className="d-flex  justify-content-between">
-                                    <h5 className="fw-normal">
-                                        {userProfil.user.description}
-                                    </h5>
-                                    <ul className=" listTagsElmPreview d-flex align-items-center">
-                                        { userProfil.user.tags ?
-                                            userProfil.user.tags.map( tag => 
-                                                <li key={tag.id ? tag.id : "general"} className="me-3">
-                                                    {tag.category.name}
-                                                </li>
-                                            ) :null
-                                        }
-                                    </ul>
-                                </div> 
+                            </div>
+                            <div>
+                                <button className="buttonStyle" onClick={() => setEditProfilState(!editProfilState)}>
+                                    Éditer le profil
+                                </button>
                             </div>
                         </div>
                     </div>
-                }
+                    <div className="d-flex mt-2">
+                        <div className="d-flex flex-column align-items-center justify-content-center col-1">
+                            <h6>
+                                {userProfil.user.sex}, <br />{userProfil.user.age} ans
+                            </h6>
+                            <h6>
+                                {userProfil.user.country}
+                            </h6>
+                        </div>
+                        <div className="ms-4 w-100">
+                            <h5 className="fw-normal">
+                                {userProfil.user.firstname} {userProfil.user.lastname}
+                            </h5>
+                            <div className="separator mt-2 mb-3 ms-3"></div>
+                            <div className="d-flex  justify-content-between">
+                                <h5 className="fw-normal">
+                                    {userProfil.user.description}
+                                </h5>
+                                <ul className=" listTagsElmPreview d-flex align-items-center">
+                                    { userProfil.user.tags ?
+                                        userProfil.user.tags.map( tag => 
+                                            <li key={tag.id ? tag.id : "general"} className="me-3">
+                                                {tag.category.name}
+                                            </li>
+                                        ) :null
+                                    }
+                                </ul>
+                            </div> 
+                        </div>
+                    </div>
+                </div>
+            }
             <div className="offset-1 col-10 mt-4">
                 <h4 className="mb-3">
                     Scores
