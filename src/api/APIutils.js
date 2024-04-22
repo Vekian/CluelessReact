@@ -90,6 +90,7 @@ export function fetchData(url, method, processData, token = null, bodyData = nul
     })
     .then(response => {
       if (!response.ok) {
+        console.log(response);
       }    
       return response.json()})
     .then(data => {

@@ -1,7 +1,6 @@
 import { useForm } from "react-hook-form";
-import { fetchData, getLvl } from "../../api/APIutils";
 import { useDispatch } from 'react-redux';
-import { loadUserProfil } from "../../features/user/userSlice";
+import { loadUserProfil, loadUserMe } from "../../features/user/userSlice";
 
 
 function EditPicture(props) {
@@ -9,7 +8,7 @@ function EditPicture(props) {
     const { register, formState: { errors }, handleSubmit } = useForm();
     const onSubmit = (data) => {
         const formData = new FormData();
-        formData.append("avatar", data.file[0]);
+        formData.append("avatar", data.avatar[0]);
         fetch(`http://clueless.dvl.to/api/picture`, 
         {
             method: 'POST',
@@ -25,24 +24,37 @@ function EditPicture(props) {
         return response.json()})
         .then(data => {
         loadData(data);
+
         })
     }
     
     function loadData(data) {
         dispatch(loadUserProfil(data));
-        props.setEditPictureState(!props.editPictureState)
+        let newData = {...data, 'user_id': data.id};
+        dispatch(loadUserMe(newData));
+        props.setEditPictureState(!props.editPictureState);
     }
 
     return (
-        <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
+        <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data" className="text-center">
             <div className="mb-3">
                 {errors.avatar?.type === "required" && (
                     <p className='mb-1 text-danger' role="alert">Avatar obligatoire pour l'upload</p>
                 )}
                 <label htmlFor="avatar" className="form-label">Votre avatar</label>
-                <input type="file" {...register("file", { required: true })} />
+                <input onInput={(e) => {
+                    let reader = new FileReader();
+                    reader.onload = function(event) {
+                        props.setSourceState(event.target.result)
+                    };
+                    
+                    reader.readAsDataURL(e.target.files[0]);
+                    } } type="file" {...register("avatar", { required: true })} id="avatar"/>
             </div>
-            <input type="submit" className="buttonStyle mt-3" />
+            <input type="submit" className="buttonStyle" />
+            <button onClick={() => {
+                props.setSourceState(process.env.REACT_APP_URL + props.userProfil.user.avatar);
+                props.setEditPictureState(!props.editPictureState)}} className="buttonDanger ms-2">Annuler</button>
         </form>
     )
 }

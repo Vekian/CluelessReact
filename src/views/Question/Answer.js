@@ -75,7 +75,7 @@ function Answer(props) {
                     </Link>
                     {props.answer.status === "Pending" ? 
                         <span className='d-flex align-items-end'>
-                            <img src={process.env.REACT_APP_URL + "assets/images/valide.png"} alt="validée" height="25px" width="25px" className="ms-4" />
+                            <img src={process.env.REACT_APP_URL + "valide.png"} alt="validée" height="25px" width="25px" className="ms-4" />
                             <span className="ms-2">Validée par l'auteur</span>
                         </span>
                         : null
@@ -103,18 +103,18 @@ function Answer(props) {
                         <div className='d-flex justify-content-between mt-2'>
                             {props.isLoading ? 
                                 <button className="me-5 buttonComment" >
-                                    <img src={ process.env.REACT_APP_URL + "assets/images/commentIcon.png"} alt="répondre" height="20px" className="me-2" />
+                                    <img src={ process.env.REACT_APP_URL + "commentIcon.png"} alt="répondre" height="20px" className="me-2" />
                                     Commenter
                                 </button> 
                                 :
                                 user.user.user_id ?
                                     <button className="me-5 buttonComment" onClick={event => props.displayTextEditor(`answerComment`, props.answer.id)}>
-                                        <img src={ process.env.REACT_APP_URL + "assets/images/commentIcon.png"} alt="répondre" height="20px" className="me-2" />
+                                        <img src={ process.env.REACT_APP_URL + "commentIcon.png"} alt="répondre" height="20px" className="me-2" />
                                         Commenter
                                     </button> 
                                     :
                                     <button className="me-5 buttonComment" data-bs-toggle="modal" data-bs-target="#loginModal">
-                                        <img src={ process.env.REACT_APP_URL + "assets/images/commentIcon.png"} alt="répondre" height="20px" className="me-2" />
+                                        <img src={ process.env.REACT_APP_URL + "commentIcon.png"} alt="répondre" height="20px" className="me-2" />
                                         Commenter
                                     </button> 
                             }

@@ -133,7 +133,7 @@ function Clue() {
                     :
                     <div>
                     <button  className="me-5 buttonComment"  onClick={event => displayTextEditor("comment", data.id)}>
-                        <img src={ process.env.REACT_APP_URL + "assets/images/commentIcon.png"} alt="répondre" height="20px" className="me-2"/>
+                        <img src={ process.env.REACT_APP_URL + "commentIcon.png"} alt="répondre" height="20px" className="me-2"/>
                             Commenter
                         </button>
                     </div>

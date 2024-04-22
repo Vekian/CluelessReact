@@ -18,6 +18,7 @@ function Profil() {
     const token = useSelector(state => state.user.token);
     const [editProfilState, setEditProfilState] = useState(false);
     const [editPictureState, setEditPictureState] = useState(false);
+    const [sourceState, setSourceState] = useState();
     const { id } = useParams();
 
     const options = {
@@ -39,6 +40,12 @@ function Profil() {
       };
 
     ChartJS.register(ArcElement, Tooltip, Legend);
+
+    useEffect(() => {
+        if(userProfil?.user?.avatar && sourceState == null){
+            setSourceState(process.env.REACT_APP_URL + userProfil.user.avatar);
+        }
+    }, [sourceState, userProfil]);
 
     useEffect(() => {
         if (id && location !== "/profils") {
@@ -117,12 +124,14 @@ function Profil() {
                     <div className="d-flex flex-column offset-1 col-10 profilDescription">
                     <div className="d-flex" >
                         <div className="d-flex flex-column align-items-center">
-                            <div  className="text-center mb-1">
-                                <img  src={ process.env.REACT_APP_URL + userProfil.user.avatar} alt="avatar" height="80px" width="80px"/>
-                            </div>
+                            {userProfil.user.avatar && 
+                                <div  className="text-center mb-1">
+                                    <img  src={sourceState} id="avatarPicture" alt="avatar" height="80px" width="80px"/>
+                                </div>
+                            }
                             {
                                 editPictureState ?
-                                < EditPicture editPictureState= {editPictureState} setEditPictureState={setEditPictureState} token={token} />
+                                < EditPicture editPictureState= {editPictureState} setEditPictureState={setEditPictureState} token={token} setSourceState={setSourceState} userProfil={userProfil} />
                                 :
                                 <button className="buttonStyle buttonPicture text-center" onClick={() => setEditPictureState(!editPictureState)}>
                                     Changer avatar
