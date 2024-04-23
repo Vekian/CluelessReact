@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { fetchData, getLvl } from "../../api/APIutils";
 import { useDispatch } from 'react-redux';
 import { loadUserProfil } from "../../features/user/userSlice";
+import AddCategories from "./AddCategories";
 
 
 function EditProfil(props) {
@@ -9,14 +10,24 @@ function EditProfil(props) {
     const { register, formState: { errors }, handleSubmit } = useForm();
     const user = props.user;
     const userProfil = props.userProfil;
-    const onSubmit = (data) => {
-        data.age = parseInt(data.age);
-        fetchData(`users/${user.user_id}`, 'PATCH', loadData, props.token, data);
-    }
+    const onSubmit = (data) => { sendData(data)};
     
     function loadData(data) {
         dispatch(loadUserProfil(data));
         props.setEditProfilState(!props.editProfilState)
+    }
+
+    function sendData(data) {
+        data.age = parseInt(data.age);
+        let tags = [];
+        for (let category of userProfil.categories) {
+            let tag = {
+                category: `/api/categories/${category.id}`
+            };
+            tags.push(tag);
+        }
+        data.tags = tags;
+        fetchData(`users/${user.user_id}`, 'PATCH', loadData, props.token, data);
     }
 
     return (
@@ -48,7 +59,7 @@ function EditProfil(props) {
                                 </h5>
                             </div>
                             <div>
-                                <button className="buttonStyle" onClick={() => props.setEditProfilState(!props.editProfilState)}>
+                                <button className="bg-danger buttonStyle" onClick={() => props.setEditProfilState(!props.editProfilState)}>
                                     Annuler
                                 </button>
                             </div>
@@ -63,13 +74,13 @@ function EditProfil(props) {
                                 <select {...register("sex")}>
                                     { userProfil.user.sex === "homme" ? 
                                         <>
-                                            <option value="homme" defaultValue >Homme</option>
-                                            <option value="femme">Femme</option>
+                                            <option key="homme" value="homme" defaultValue >Homme</option>
+                                            <option key="femme" value="femme">Femme</option>
                                         </> 
                                         :
                                         <>
-                                            <option value="homme" >Homme</option>
-                                            <option value="femme" defaultValue>Femme</option>
+                                            <option key="homme" value="homme" >Homme</option>
+                                            <option key="femme" value="femme" defaultValue>Femme</option>
                                         </> 
                                     }
                                 </select>
@@ -115,6 +126,9 @@ function EditProfil(props) {
                                 aria-invalid={errors.description ? "true" : "false"} defaultValue={userProfil.user.description} />
                             </div> 
                         </div>
+                    </div>
+                    <div>
+                        < AddCategories />
                     </div>
                     <input type="submit" className="buttonStyle mt-3" />
                 </form>

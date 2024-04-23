@@ -67,3 +67,11 @@ input[type=file]::file-selector-button:hover {
     filter: brightness(1.3);
     border: none;
 }
+
+ul {
+    list-style-type: none;
+}
+
+.fa-trash-can {
+    cursor: pointer;
+}
