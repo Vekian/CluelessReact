@@ -3,12 +3,11 @@ import { fetchData, getLvl } from "../../api/APIutils";
 import { loadUserProfil, loadQuestionsUserProfil } from "../../features/user/userSlice";
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect, useState } from 'react';
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { Doughnut } from 'react-chartjs-2';
 import ElmPreview from "../Home/components/ElmPreview";
 import { Link, useParams, useLocation } from "react-router-dom";
 import EditProfil from "./EditProfil";
 import EditPicture from "./EditPicture";
+import ScoreProfil from "./ScoreProfil";
 
 function Profil() {
     const dispatch = useDispatch();
@@ -21,41 +20,25 @@ function Profil() {
     const [sourceState, setSourceState] = useState();
     const { id } = useParams();
 
-    const options = {
-        responsive: true,
-        plugins: {
-          legend: {
-            display: true,
-            position: "bottom"
-          },
-          tooltip: {
-            boxPadding: 6,
-            callbacks: {
-                afterLabel: function () {
-                    return ("points")
-                }
-            }
-          }
-        },
-      };
-
-    ChartJS.register(ArcElement, Tooltip, Legend);
-
     useEffect(() => {
-        if(userProfil?.user?.avatar && sourceState == null){
+        if(userProfil?.user?.avatar && (userProfil?.user?.id !== user.id || !sourceState)){
             setSourceState(process.env.REACT_APP_URL + userProfil.user.avatar);
         }
     }, [sourceState, userProfil]);
 
     useEffect(() => {
-        if (id && location !== "/profils") {
+        if (id && location.pathname !== "/profil") {
             if (userProfil.user.id !== id){
                 fetchData(`users/${id}`, 'GET', loadData);
                 fetchData(`questions?page=1&user=${id}&order[createdAt]=desc`, 'GET', loadQuestionsData);
         }}
-        else if (userProfil.user.id !== user.user_id){
-            fetchData(`users/${user.user_id}`, 'GET', loadData);
-            fetchData(`questions?page=1&user=${user.user_id}&order[createdAt]=desc`, 'GET', loadQuestionsData);
+        else if (user?.id){
+            dispatch(loadUserProfil(user));
+            fetchData(`questions?page=1&user=${user.id}&order[createdAt]=desc`, 'GET', loadQuestionsData);
+        }
+        else {
+            fetchData(`users/${user.id}`, 'GET', loadData);
+            fetchData(`questions?page=1&user=${user.id}&order[createdAt]=desc`, 'GET', loadQuestionsData);
         }
         
     }, [])
@@ -68,49 +51,6 @@ function Profil() {
         let arrayData = data['hydra:member'].slice(0, 5);
         dispatch(loadQuestionsUserProfil(arrayData));
         
-    }
-
-    function parseScoreDataset(categoryMain= undefined) {
-        let scores= userProfil.user.scores;
-        let labels = []
-        let data = [];
-        let backgroundColor = [];
-
-
-        for (let i=0; i<scores.length; i++) {
-            if (scores[i].category) {
-                if (JSON.stringify(scores[i].category.category) === JSON.stringify(categoryMain)){
-                    labels.push(scores[i].category.name);
-                    data.push(scores[i].points);
-                    const randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
-                    backgroundColor.push(randomColor);
-                }
-            }
-        }
-
-        let dataset = {
-            labels: labels,
-            datasets: [
-                {
-                    data: data,
-                    backgroundColor: backgroundColor,
-                },
-            ],
-        }
-        return dataset;
-    }
-
-    function getBestCategory(){
-        let scores = userProfil.user.scores;
-
-        let bestScore = scores[0];
-
-        // Parcourir la liste des scores pour trouver le score le plus élevé
-        for (let i = 1; i < scores.length; i++) {
-            if (scores[i] > bestScore) {
-                bestScore = scores[i];
-            }
-}       return bestScore.category;
     }
 
     return (
@@ -126,17 +66,22 @@ function Profil() {
                         <div className="d-flex flex-column align-items-center">
                             {userProfil.user.avatar && 
                                 <div  className="text-center mb-1">
-                                    <img  src={sourceState} id="avatarPicture" alt="avatar" height="80px" width="80px"/>
+                                    <img  src={sourceState} className="avatar" id="avatarPicture" alt="avatar" height="80px" width="80px"/>
                                 </div>
                             }
                             {
-                                editPictureState ?
-                                < EditPicture editPictureState= {editPictureState} setEditPictureState={setEditPictureState} token={token} setSourceState={setSourceState} userProfil={userProfil} />
-                                :
-                                <button className="buttonStyle buttonPicture text-center" onClick={() => setEditPictureState(!editPictureState)}>
-                                    Changer avatar
-                                </button>
-                            }
+                                userProfil.user.id === user.id &&
+                                <>
+                                {
+                                    editPictureState ?
+                                    < EditPicture editPictureState= {editPictureState} setEditPictureState={setEditPictureState} token={token} setSourceState={setSourceState} userProfil={userProfil} />
+                                    :
+                                    <button className="buttonStyle buttonPicture text-center" onClick={() => setEditPictureState(!editPictureState)}>
+                                        Changer avatar
+                                    </button>
+                                }
+                                </>
+                            } 
                         </div>
                         <div className="d-flex align-items-end  justify-content-between w-100 ">
                             <div className="d-flex align-items-end">
@@ -147,11 +92,16 @@ function Profil() {
                                     lvl {getLvl(userProfil.user.popularity)}
                                 </h5>
                             </div>
-                            <div>
-                                <button className="buttonStyle" onClick={() => setEditProfilState(!editProfilState)}>
-                                    Éditer le profil
-                                </button>
-                            </div>
+                            {
+                                userProfil.user.id === user.id &&
+                                <>
+                                <div>
+                                    <button className="buttonStyle" onClick={() => setEditProfilState(!editProfilState)}>
+                                        Éditer le profil
+                                    </button>
+                                </div>
+                                </>
+                            }
                         </div>
                     </div>
                     <div className="d-flex mt-2">
@@ -190,32 +140,7 @@ function Profil() {
                 <h4 className="mb-3">
                     Scores
                 </h4>
-                <div className="d-flex justify-content-around">
-                    <div className="charts d-flex flex-column align-items-center">
-                        <h5 className="mb-2">
-                            Scores globaux
-                        </h5>
-                        {
-                            userProfil.user.scores && userProfil.user.scores.length > 0 ?
-                            <Doughnut
-                                data={parseScoreDataset()} 
-                                options={options}
-                            /> : null
-                        }
-                    </div>
-                    <div className="charts d-flex flex-column align-items-center">
-                        <h5 className="mb-2">
-                            Scores de votre section préférée
-                        </h5>
-                        {
-                            userProfil.user.scores && userProfil.user.scores.length > 0 ?
-                            <Doughnut
-                                data={parseScoreDataset(getBestCategory())} 
-                                options={options}
-                            /> : null
-                        }
-                    </div>
-                </div>
+                < ScoreProfil userProfil={userProfil} />
             </div>
             <div className="offset-1 col-10 mt-4">
                 <h4>

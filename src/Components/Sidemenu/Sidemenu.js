@@ -1,13 +1,17 @@
 import './Sidemenu.css';
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom'
 import { useGetCategoriesQuery } from '../../features/api/categorySlice';
 import { UIContext } from '../UIProvider';
 import { loadingElm, displayElement } from '../../ui/UIutils';
+import { Link, useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
 
 function Sidemenu() {
     const {data, error, isFetching} = useGetCategoriesQuery();
     const {changeFilterQuestion} = useContext(UIContext);
+    const location = useLocation();
+    const user = useSelector(state => state.user.user);
 
     function searchQuestions(event){
         event.stopPropagation();
@@ -101,6 +105,15 @@ function Sidemenu() {
                             <h5 className='ps-2 ps-xxl-0'>Devenir premium</h5>
                         </div>
                     </li>
+                    {
+                        user?.id &&
+                        <li className='active itemMenu ps-1'>
+                            <Link to="/settings" className={location.pathname === "/settings" ? "item-active d-flex align-items-center pt-1 pb-1" : "d-flex align-items-center pt-1 pb-1"}  style={{ color: 'inherit', textDecoration: 'inherit'}} >
+                                <i className="fa-solid fa-wrench me-xxl-3"></i>
+                                <h5 className='ps-2 ps-xxl-0'>Paramètres de compte</h5>
+                            </Link>
+                        </li>
+                    }
                 </ul>
             </div>
             

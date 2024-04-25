@@ -27,7 +27,7 @@ function EditProfil(props) {
             tags.push(tag);
         }
         data.tags = tags;
-        fetchData(`users/${user.user_id}`, 'PATCH', loadData, props.token, data);
+        fetchData(`users/${user.id}`, 'PATCH', loadData, props.token, data);
     }
 
     return (

@@ -27,7 +27,6 @@ function Editor(props) {
                 refreshQuestion(dataQuestion, "question");
                 dispatch(removeQuestionToSend());
             }
-            
         }
     }, [successClue, successQuestion]);
 
@@ -61,7 +60,7 @@ function Editor(props) {
         const body = {
             title : title,
             content : content,
-            user: `/api/users/${user.user.user_id}`,
+            user: `/api/users/${user.user.id}`,
             tags: tags
         }
         const token = user.token;

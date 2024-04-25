@@ -11,7 +11,6 @@ function Header () {
     const user = useSelector(state => state.user);
     const {toggleDarkMode, changeFilterQuestion} = useContext(UIContext);
 
-
     useEffect(() => {
         const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
         if (isDarkMode){

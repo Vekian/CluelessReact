@@ -75,7 +75,7 @@ function Question() {
     const addAnswerData = async () => {
         const body = {
             content: contentToSend,
-            user: `/api/users/${user.user.user_id}`,
+            user: `/api/users/${user.user.id}`,
             question: `/api/questions/${data.id}`,
         }
         const token = user.token;
@@ -90,7 +90,7 @@ function Question() {
     const addCommentData = async () => {
         const body = {
             content: contentToSend,
-            user: `/api/users/${user.user.user_id}`,
+            user: `/api/users/${user.user.id}`,
             question: `/api/questions/${data.id}`,
         }
         const token = user.token;
@@ -120,7 +120,7 @@ function Question() {
                     :
                     <div className='d-flex align-items-center'>
                     <Link to={`/profils/${data.user.id}`} className="d-flex  linkToProfil" style={{ color: 'inherit', textDecoration: 'inherit'}}>
-                        <img src={ process.env.REACT_APP_URL + data.user.avatar} alt="avatar" height="50px" width="50px" />
+                        <img src={ process.env.REACT_APP_URL + data.user.avatar} className='avatar' alt="avatar" height="50px" width="50px" />
                         <div className="ps-3 pe-3">
                             <h4>
                                 { data.user.username }
@@ -130,7 +130,7 @@ function Question() {
                             </h6>
                         </div>
                     </Link>
-                    {(data.user.id === user.user.user_id) &&
+                    {(data.user.id === user.user.id) &&
                     <div>
                         <button className='buttonStyle ms-5' onClick={() => setEditQuestionState(!editQuestionState)}>
                            {editQuestionState ? "Annuler" : 'Editer la question'} 
@@ -203,8 +203,8 @@ function Question() {
                             Répondre
                         </button>
                         :
-                        user.user.user_id ?
-                            data.user.id !== user.user.user_id ?
+                        user.user.id ?
+                            data.user.id !== user.user.id ?
                                 <button className="me-5 buttonAnswer"  onClick={event => displayTextEditor("answer", data.id)} >
                                     <img src={ process.env.REACT_APP_URL + "answerIcon.png"} alt="répondre" height="20px" className="me-2"/>
                                     Répondre
@@ -222,7 +222,7 @@ function Question() {
                             Commenter
                         </button>
                         :
-                        user.user.user_id ?
+                        user.user.id ?
                             <button  className="me-5 buttonComment"  onClick={event => displayTextEditor("comment", data.id)}>
                                 <img src={ process.env.REACT_APP_URL + "commentIcon.png"} alt="répondre" height="20px" className="me-2"/>
                                 Commenter

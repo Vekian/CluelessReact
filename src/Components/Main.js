@@ -5,6 +5,9 @@ import Profil from '../views/Profil/Profil';
 import Editor from '../views/WriteNew/Editor';
 import Home from '../views/Home/Home';
 import Clue from '../views/Clue/Clue';
+import Settings from '../views/Settings/Settings';
+import Rankings from '../views/Rankings/Rankings';
+import Helpers from '../views/Helpers/Helpers';
 
 function Main() {
     return(
@@ -15,6 +18,9 @@ function Main() {
                 <Route path="/clue/:id" element={< Clue />} />
                 <Route path="/profils/:id" element={< Profil />} />
                 <Route path="/profil" element={< Profil />} />
+                <Route path="/settings" element={< Settings />} />
+                <Route path="/rankings" element={< Rankings />} />
+                <Route path="/helpers" element={< Helpers />} />
                 <Route path="/create/question" element={< Editor type={"question"} />} />
                 <Route path="/create/clue" element={< Editor type={"clue"} />} />
             </Routes>

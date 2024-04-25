@@ -30,12 +30,12 @@ function SubMenu() {
                     <Link to="/create/clue" className={location.pathname === "/create/clue" ? "active" : ""}>
                         <i className="fa-solid fa-lightbulb"></i>
                     </Link>
-                    <a >
+                    <Link to="/helpers" className={location.pathname === "/helpers" ? "active" : ""}>
                         <i className="fa-solid fa-users"></i>
-                    </a>
-                    <a >
-                        <i className="fa-solid fa-trophy"></i>
-                    </a>
+                    </Link>
+                    <Link to="/rankings" className={location.pathname === "/rankings" ? "active" : ""}>
+                    <i className="fa-solid fa-trophy"></i>
+                    </Link>
                 </div>
                 <span className="containerButtonSubMenuHeader">
                     <div className="buttonSubMenuHeader text-center" onClick={(event) => displayMenu(event)}>

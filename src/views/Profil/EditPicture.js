@@ -30,7 +30,7 @@ function EditPicture(props) {
     
     function loadData(data) {
         dispatch(loadUserProfil(data));
-        let newData = {...data, 'user_id': data.id};
+        let newData = {...data, 'id': data.id};
         dispatch(loadUserMe(newData));
         props.setEditPictureState(!props.editPictureState);
     }

@@ -7,7 +7,7 @@ function ElmPreview(props) {
             <div className="d-flex flex-column align-items-center col-2">
                 { props.elm.user ? 
                     <>
-                        < img src={ process.env.REACT_APP_URL + props.elm.user.avatar} alt="avatar" height="30px" width="30px"/>
+                        < img src={ process.env.REACT_APP_URL + props.elm.user.avatar} className='avatar' alt="avatar" height="30px" width="30px"/>
                         <p className="userPreviewElm">
                             {props.elm.user.username}
                         </p>

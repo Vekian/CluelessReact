@@ -14,7 +14,7 @@ function VoteElement(props) {
     const sendNewVote = async (amount) => {
         let body = {
             "amount": amount,
-            "user": `/api/users/${user.user.user_id}`
+            "user": `/api/users/${user.user.id}`
         };
 
         body[props.typeParent] = `/api/${props.typeParent}s/${props.idParentElm}`;
@@ -90,10 +90,10 @@ function VoteElement(props) {
     return(
         <div className={`col-1 d-flex flex-column justify-content-center align-items-center ${props.class1}Vote ${props.class2}`}>
             <div className='text-center'>
-                {user.user.username && user.user.user_id !== props.idAuthor ? <i className={ checkVote() > 0 ? "fa-solid fa-circle-up display-6" : "fa-solid fa-circle-up "} onClick={event => sendVote(2)}></i>
+                {user.user.username && user.user.id !== props.idAuthor ? <i className={ checkVote() > 0 ? "fa-solid fa-circle-up display-6" : "fa-solid fa-circle-up "} onClick={event => sendVote(2)}></i>
                 : null}
                     <h5 className={props.class2}>{props.popularity} <i className="fa-solid fa-star" style={{color: "#FFD43B",}}></i></h5>
-                {user.user.username && user.user.user_id !== props.idAuthor ? <i className={ checkVote() < 0 ? "fa-solid fa-circle-down display-6" : "fa-solid fa-circle-down "} onClick={event => sendVote(-2)}></i>
+                {user.user.username && user.user.id !== props.idAuthor ? <i className={ checkVote() < 0 ? "fa-solid fa-circle-down display-6" : "fa-solid fa-circle-down "} onClick={event => sendVote(-2)}></i>
                 : null }
             </div> 
         </div>

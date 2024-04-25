@@ -48,7 +48,7 @@ function Answer(props) {
     const addCommentData = async () => {
         const body = {
             content: contentToSend,
-            user: `/api/users/${user.user.user_id}`,
+            user: `/api/users/${user.user.id}`,
             answer: `/api/answers/${props.answer.id}`,
         }
         const token = user.token;
@@ -65,7 +65,7 @@ function Answer(props) {
                 <div className="d-flex justify-content-between pb-2 align-items-end">
                     <div className='d-flex'>
                     <Link to={`/profils/${props.answer.user.id}`} className="d-flex align-items-end linkToProfil" style={{ color: 'inherit', textDecoration: 'inherit'}}>
-                        <img src={ process.env.REACT_APP_URL + props.answer.user.avatar} alt="avatar" height="25px" width="25px" />
+                        <img src={ process.env.REACT_APP_URL + props.answer.user.avatar} className='avatar' alt="avatar" height="25px" width="25px" />
                         <h6 className="ms-2 mb-0">
                             {props.answer.user.username}
                         </h6>
@@ -80,8 +80,8 @@ function Answer(props) {
                         </span>
                         : null
                     }
-                    { user.user.user_id === props.answer.user.id && <button className='buttonStyle ms-4' onClick={() => setEditAnswerState(!editAnswerState)}>Editer la réponse</button>}
-                    { user.user.user_id === props.answer.user.id && <button className='buttonStyle ms-4 bg-danger' onClick={() => {deleteAnswerData({id: props.answer.id, token: user.token}); props.refetch(props.idQuestion); }}>Effacer la réponse</button>}
+                    { user.user.id === props.answer.user.id && <button className='buttonStyle ms-4' onClick={() => setEditAnswerState(!editAnswerState)}>Editer la réponse</button>}
+                    { user.user.id === props.answer.user.id && <button className='buttonStyle ms-4 bg-danger' onClick={() => {deleteAnswerData({id: props.answer.id, token: user.token}); props.refetch(props.idQuestion); }}>Effacer la réponse</button>}
                     </div>
                     <div>
                         { getDateDetail(props.answer.createdAt)}
@@ -107,7 +107,7 @@ function Answer(props) {
                                     Commenter
                                 </button> 
                                 :
-                                user.user.user_id ?
+                                user.user.id ?
                                     <button className="me-5 buttonComment" onClick={event => props.displayTextEditor(`answerComment`, props.answer.id)}>
                                         <img src={ process.env.REACT_APP_URL + "commentIcon.png"} alt="répondre" height="20px" className="me-2" />
                                         Commenter

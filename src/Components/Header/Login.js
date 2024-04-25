@@ -37,12 +37,14 @@ function Login() {
                 .then(response => {
                     if (!response.ok) {
                         console.log(response)
-                }    
-                return response.json()})
+                    }    
+                    return response.json()
+                })
                 .then(data => {
                     if (data.token) {
                         dispatch(loadToken(data.token));
-                        dispatch(loadUserMe(data.user));
+                        const userJson = JSON.parse(data.user);
+                        dispatch(loadUserMe(userJson));
                     }
                 })
         }
@@ -73,7 +75,8 @@ function Login() {
     function loadData(data) {
         if (data.token) {
             dispatch(loadToken(data.token));
-            dispatch(loadUserMe(data.user));
+            const userJson = JSON.parse(data.user);
+            dispatch(loadUserMe(userJson));
 
             const cookie = `refresh_token=${data['refresh_token']}`;
             document.cookie = cookie;

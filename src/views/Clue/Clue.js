@@ -50,7 +50,7 @@ function Clue() {
     const addCommentData = async () => {
         const body = {
             content: contentToSend,
-            user: `/api/users/${user.user.user_id}`,
+            user: `/api/users/${user.user.id}`,
             clue: `/api/clues/${data.id}`,
         }
         const token = user.token;
@@ -70,7 +70,7 @@ function Clue() {
                     loadingElm()
                     :
                     <Link to={`/profils/${data.user.id}`} className="d-flex  linkToProfil" style={{ color: 'inherit', textDecoration: 'inherit'}}>
-                        <img src={ process.env.REACT_APP_URL + data.user.avatar} alt="avatar" height="50px" width="50px" />
+                        <img src={ process.env.REACT_APP_URL + data.user.avatar} className='avatar' alt="avatar" height="50px" width="50px" />
                         <div className="ps-3">
                             <h4>
                                 { data.user.username }

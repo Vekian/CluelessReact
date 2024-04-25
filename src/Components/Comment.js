@@ -44,7 +44,7 @@ function Comment(props) {
                     <div className="d-flex justify-content-between mb-2 me-3">
                         <div className='d-flex'>
                             <Link to={`/profils/${props.comment.user.id}`} className="d-flex align-items-end linkToProfil" style={{ color: 'inherit', textDecoration: 'inherit'}}>
-                                <img src={ process.env.REACT_APP_URL + props.comment.user.avatar} alt="avatar" height="15px" width="15px" />
+                                <img src={ process.env.REACT_APP_URL + props.comment.user.avatar} className='avatar' alt="avatar" height="15px" width="15px" />
                                 <span className='ms-2'>
                                     {props.comment.user.username}
                                 </span>
@@ -52,7 +52,7 @@ function Comment(props) {
                                     lvl { getLvl(props.comment.user.popularity)}
                                 </span>
                             </Link>
-                            {user.user.user_id === props.comment.user.id && 
+                            {user.user.id === props.comment.user.id && 
                             <div>
                                 <button className='buttonStyle-xs ms-3' onClick={() => setEditCommentState(!editCommentState)}>Editer le commentaire</button>
                                 <button className='buttonStyle-xs bg-danger ms-4' onClick={() => { deleteCommentData()}}>Effacer le commentaire</button>

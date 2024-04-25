@@ -1,0 +1,14 @@
+.settingsItem {
+    border: 1px solid var(--dark-with-opacity);
+    border-radius: 5px;
+    padding: 15px 30px 15px 30px;
+}
+
+input[type="password"] {
+    border-radius: 10px;
+    border: 1px solid var(--dark-with-opacity);
+}
+
+input[type="password"]:focus {
+    outline: solid var(--dark-with-opacity);
+}
