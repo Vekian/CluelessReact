@@ -39,7 +39,7 @@ export function getLvl(popularity) {
 }
 
 
-export function fetchData(url, method, processData, token = null, bodyData = null) {
+export function fetchData(url, method, processData, token = null, bodyData = null, errorData = null) {
   let body = bodyData;
   let headers = "";
 
@@ -82,19 +82,30 @@ export function fetchData(url, method, processData, token = null, bodyData = nul
     headers.Authorization = `Bearer ${token}`;
   }
 
-  fetch(`http://clueless.dvl.to/api/${url}`, 
+  fetch(`${process.env.REACT_APP_URL}api/${url}`, 
     {
         method: method,
         headers: headers,
         body: body
     })
-    .then(response => {
+    .then((response) => {
       if (!response.ok) {
-        console.log(response);
-      }    
-      return response.json()})
+        return response.text().then(text => {
+            throw new Error(text);
+        })
+      }
+      else {
+          return response.json()
+      }
+      })
     .then(data => {
       processData(data);
     })
-  
+    .catch(error =>{
+      if( errorData){
+        const errorMessage = error.message.replace(/[\\"]/g, '').replace(/"/g, '');
+        errorData(errorMessage)
+      }
+    }
+  );
 }

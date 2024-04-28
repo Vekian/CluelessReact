@@ -6,11 +6,20 @@ import React, { useState } from 'react';
 function ChangePassword(){
     const { register, formState: { errors }, watch, handleSubmit } = useForm();
     const [errorState, setErrorState] = useState("");
-    const onSubmit = (data) => fetchData(`change_password`, 'POST', loadData, token, data);
+    const [successState, setSuccessState] = useState("");
+    const [pendingState, setPendingState] = useState(false);
+    const onSubmit = (data) => { setPendingState(true);
+        fetchData(`change_password`, 'POST', loadData, token, data, errorData)};
     const password = watch("newPassword", "");
     const token = useSelector(state => state.user.token);
     
     function loadData(data) {
+        setErrorState("");
+        setSuccessState(JSON.stringify(data));
+    }
+
+    function errorData(data) {
+        setSuccessState("");
         setErrorState(JSON.stringify(data));
     }
 
@@ -57,7 +66,17 @@ function ChangePassword(){
                 <p className="text-danger fw-bold mt-3">
                     { errorState }
                 </p>
-                < input type="submit" className="buttonStyle mt-3" />
+                <p className="text-success fw-bold mt-3">
+                    { successState }
+                </p>
+                {
+                    pendingState ?
+                    <div>
+
+                    </div>
+                    :
+                    < input type="submit" className="buttonStyle mt-3" />
+                }
             </form>
         </div>
     )

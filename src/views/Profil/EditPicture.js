@@ -9,7 +9,7 @@ function EditPicture(props) {
     const onSubmit = (data) => {
         const formData = new FormData();
         formData.append("avatar", data.avatar[0]);
-        fetch(`http://clueless.dvl.to/api/picture`, 
+        fetch(`${process.env.REACT_APP_URL}api/picture`, 
         {
             method: 'POST',
             headers: {
@@ -53,7 +53,7 @@ function EditPicture(props) {
             </div>
             <input type="submit" className="buttonStyle" />
             <button onClick={() => {
-                props.setSourceState(process.env.REACT_APP_URL + props.userProfil.user.avatar);
+                props.setSourceState(process.env.REACT_APP_URL_IMG + props.userProfil.user.avatar);
                 props.setEditPictureState(!props.editPictureState)}} className="buttonDanger ms-2">Annuler</button>
         </form>
     )

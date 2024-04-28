@@ -65,7 +65,7 @@ function Answer(props) {
                 <div className="d-flex justify-content-between pb-2 align-items-end">
                     <div className='d-flex'>
                     <Link to={`/profils/${props.answer.user.id}`} className="d-flex align-items-end linkToProfil" style={{ color: 'inherit', textDecoration: 'inherit'}}>
-                        <img src={ process.env.REACT_APP_URL + props.answer.user.avatar} className='avatar' alt="avatar" height="25px" width="25px" />
+                        <img src={ process.env.REACT_APP_URL_IMG + props.answer.user.avatar} className='avatar' alt="avatar" height="25px" width="25px" />
                         <h6 className="ms-2 mb-0">
                             {props.answer.user.username}
                         </h6>
@@ -75,7 +75,7 @@ function Answer(props) {
                     </Link>
                     {props.answer.status === "Pending" ? 
                         <span className='d-flex align-items-end'>
-                            <img src={process.env.REACT_APP_URL + "valide.png"} alt="validée" height="25px" width="25px" className="ms-4" />
+                            <img src={process.env.REACT_APP_URL_IMG + "Checkmark.svg.png"} alt="validée" height="25px" width="25px" className="ms-4" />
                             <span className="ms-2">Validée par l'auteur</span>
                         </span>
                         : null
@@ -103,18 +103,18 @@ function Answer(props) {
                         <div className='d-flex justify-content-between mt-2'>
                             {props.isLoading ? 
                                 <button className="me-5 buttonComment" >
-                                    <img src={ process.env.REACT_APP_URL + "commentIcon.png"} alt="répondre" height="20px" className="me-2" />
+                                    <img src={ process.env.REACT_APP_URL_IMG + "commentIcon.png"} alt="répondre" height="20px" className="me-2" />
                                     Commenter
                                 </button> 
                                 :
                                 user.user.id ?
                                     <button className="me-5 buttonComment" onClick={event => props.displayTextEditor(`answerComment`, props.answer.id)}>
-                                        <img src={ process.env.REACT_APP_URL + "commentIcon.png"} alt="répondre" height="20px" className="me-2" />
+                                        <img src={ process.env.REACT_APP_URL_IMG + "commentIcon.png"} alt="répondre" height="20px" className="me-2" />
                                         Commenter
                                     </button> 
                                     :
                                     <button className="me-5 buttonComment" data-bs-toggle="modal" data-bs-target="#loginModal">
-                                        <img src={ process.env.REACT_APP_URL + "commentIcon.png"} alt="répondre" height="20px" className="me-2" />
+                                        <img src={ process.env.REACT_APP_URL_IMG + "commentIcon.png"} alt="répondre" height="20px" className="me-2" />
                                         Commenter
                                     </button> 
                             }

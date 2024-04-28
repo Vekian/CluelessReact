@@ -26,7 +26,7 @@ function ProfilHeader (props) {
         <div className="d-flex align-items-center w-100">
             <div className="btn-group w-100">
                 <div type="button" className="buttonProfil d-flex align-items-center dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src={ process.env.REACT_APP_URL + props.user.avatar} alt="avatar"  className='me-2 avatar' />
+                    <img src={ process.env.REACT_APP_URL_IMG + props.user.avatar} alt="avatar"  className='me-2 avatar' />
                     <div className='me-2'>
                        <h5>{props.user.username}</h5> 
                        <h6 >

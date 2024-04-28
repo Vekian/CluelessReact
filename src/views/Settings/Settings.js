@@ -1,5 +1,6 @@
 import './Settings.css';
 import ChangePassword from './ChangePassword';
+import ForgottenPassword from './ForgottenPassword';
 
 function Settings() {
     
@@ -13,6 +14,12 @@ function Settings() {
                     Changer de mot de passe
                 </h4>
                 < ChangePassword />
+            </div>
+            <div className='settingsItem mt-3'>
+                <h4>
+                    Mot de passe oublié
+                </h4>
+                < ForgottenPassword />
             </div>
         </div>
     )

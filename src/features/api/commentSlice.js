@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 // Define a service using a base URL and expected endpoints
 export const commentApi = createApi({
   reducerPath: 'commentApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://clueless.dvl.to/api/comments' }),
+  baseQuery: fetchBaseQuery({ baseUrl: `${process.env.REACT_APP_URL}api/comments` }),
   endpoints: (builder) => ({
     addComment: builder.mutation({
       query(arg) {

@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 // Define a service using a base URL and expected endpoints
 export const voteApi = createApi({
   reducerPath: 'voteApi',
-  baseQuery: fetchBaseQuery({ baseUrl: 'http://clueless.dvl.to/api/votes' }),
+  baseQuery: fetchBaseQuery({ baseUrl: `${process.env.REACT_APP_URL}api/votes` }),
   endpoints: (builder) => ({
     getVotes: builder.query({
         query(parameters) {

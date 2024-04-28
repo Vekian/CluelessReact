@@ -6,7 +6,7 @@ import Main from './Main';
 import React, { useContext } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { UIContext } from './UIProvider';
-import Login from '../Components/Header/Login';
+import Login from '../Components/Header/Login/Login';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
 function App() {

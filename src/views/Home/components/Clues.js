@@ -5,6 +5,7 @@ import { useGetCluesQuery } from '../../../features/api/clueSlice';
 import { UIContext } from '../../../Components/UIProvider';
 import { activeElm } from '../../../ui/UIutils';
 import Paginator from './Paginator';
+import { Comment } from 'react-loader-spinner';
 
 function Clues() {
     const {filterClue, changeFilterClue} = useContext(UIContext);
@@ -39,7 +40,18 @@ function Clues() {
             </div>
             <div className='listOfElms '>
                 { isFetching ?
-                    <div>Is loading...</div> 
+                    <div className='d-flex justify-content-center align-items-center h-100'>
+                        <Comment
+                            visible={true}
+                            height="120"
+                            width="120"
+                            ariaLabel="comment-loading"
+                            wrapperStyle={{}}
+                            wrapperClass="comment-wrapper"
+                            color="#fff"
+                            backgroundColor="var(--primaryColor)"
+                        />
+                    </div>
                     : 
                     error ?
                         <div>

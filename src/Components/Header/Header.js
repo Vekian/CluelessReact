@@ -34,7 +34,7 @@ function Header () {
                     <i className="fa-solid fa-bars"></i>
                 </button>
                 <div className="d-flex flex-column justify-content-center h-100 ms-lg-1 ms-sm-4">
-                    <img src={ process.env.REACT_APP_URL + "logo.png"} alt="logo" className="logo"/>
+                    <img src={ process.env.REACT_APP_URL_IMG + "logo.png"} alt="logo" className="logo"/>
                     <h1 className="logoTitle">
                         Clueless
                     </h1>

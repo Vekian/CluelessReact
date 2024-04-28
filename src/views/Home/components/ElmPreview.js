@@ -7,7 +7,7 @@ function ElmPreview(props) {
             <div className="d-flex flex-column align-items-center col-2">
                 { props.elm.user ? 
                     <>
-                        < img src={ process.env.REACT_APP_URL + props.elm.user.avatar} className='avatar' alt="avatar" height="30px" width="30px"/>
+                        < img src={ process.env.REACT_APP_URL_IMG + props.elm.user.avatar} className='avatar' alt="avatar" height="30px" width="30px"/>
                         <p className="userPreviewElm">
                             {props.elm.user.username}
                         </p>
@@ -17,7 +17,7 @@ function ElmPreview(props) {
                     </>
                     :
                     <>
-                        < img src={ process.env.REACT_APP_URL + props.user.avatar} alt="avatar" height="30px" width="30px"/>
+                        < img src={ process.env.REACT_APP_URL_IMG + props.user.avatar} alt="avatar" height="30px" width="30px"/>
                         <p className="userPreviewElm">
                             {props.user.username}
                         </p>
@@ -50,13 +50,13 @@ function ElmPreview(props) {
             </div>
             <div className="d-flex flex-column col-4">
                 <div className="d-flex align-items-center justify-content-center">
-                    <div className="d-flex align-items-center text-center me-4">
+                    <div className="d-flex align-items-center justify-content-end me-4 col-4">
                         <p className="numberPopularityPreviewElm">
                             {props.elm.popularity}
                         </p>
                         <i className="fa-solid fa-star ms-1" style={{color: "#FFD43B",}}></i>
                     </div>
-                    <img src="assets/images/valide.png" height="40px" alt="checkmark"/>
+                    <img src={process.env.REACT_APP_URL_IMG + "Checkmark.svg.png"} height="40px" alt="checkmark"/>
                 </div>
                 <div className="d-flex justify-content-center">
                     <p className="commentsPreviewElm me-3">

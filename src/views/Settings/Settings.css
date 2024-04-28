@@ -4,11 +4,25 @@
     padding: 15px 30px 15px 30px;
 }
 
-input[type="password"] {
+input[type="password"], input[type="email"], input[type="text"] {
     border-radius: 10px;
     border: 1px solid var(--dark-with-opacity);
 }
 
 input[type="password"]:focus {
     outline: solid var(--dark-with-opacity);
+}
+
+.shine {
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0)); /* Dégradé de transparent à semi-transparent à transparent */
+    animation: shineAnimation 2s linear infinite; /* Animation de brillance */
+}
+
+@keyframes shineAnimation {
+    0% {
+        left: -100%; /* Commence à l'extérieur de la boîte */
+    }
+    100% {
+        left: 100%; /* Termine à l'extérieur de la boîte après avoir traversé */
+    }
 }

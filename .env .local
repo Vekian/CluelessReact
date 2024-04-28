@@ -1,1 +1,2 @@
-REACT_APP_URL=http://localhost:3000/
+REACT_APP_URL_IMG=http://clueless.dvl.to/uploads/
+REACT_APP_URL=http://clueless.dvl.to/

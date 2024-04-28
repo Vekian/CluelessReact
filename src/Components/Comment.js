@@ -44,7 +44,7 @@ function Comment(props) {
                     <div className="d-flex justify-content-between mb-2 me-3">
                         <div className='d-flex'>
                             <Link to={`/profils/${props.comment.user.id}`} className="d-flex align-items-end linkToProfil" style={{ color: 'inherit', textDecoration: 'inherit'}}>
-                                <img src={ process.env.REACT_APP_URL + props.comment.user.avatar} className='avatar' alt="avatar" height="15px" width="15px" />
+                                <img src={ process.env.REACT_APP_URL_IMG + props.comment.user.avatar} className='avatar' alt="avatar" height="15px" width="15px" />
                                 <span className='ms-2'>
                                     {props.comment.user.username}
                                 </span>

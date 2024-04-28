@@ -34,15 +34,16 @@ header {
 }
 
 .searchInputHeader {
-    border: none;
+    border: none !important;
     color: var(--dark);
     background-color: var(--white);
     border-right: none !important;
+    border-radius: 0px !important;
 }
 
 .searchInputHeader:focus + .searchSubmitHeader, .searchInputHeader:focus, .searchInputHeader:active{
-    outline: none;
-    border: none;
+    outline: none !important;
+    border: none !important;
 }
 
 .searchButtonHeader {

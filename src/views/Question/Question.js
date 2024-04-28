@@ -120,7 +120,7 @@ function Question() {
                     :
                     <div className='d-flex align-items-center'>
                     <Link to={`/profils/${data.user.id}`} className="d-flex  linkToProfil" style={{ color: 'inherit', textDecoration: 'inherit'}}>
-                        <img src={ process.env.REACT_APP_URL + data.user.avatar} className='avatar' alt="avatar" height="50px" width="50px" />
+                        <img src={ process.env.REACT_APP_URL_IMG + data.user.avatar} className='avatar' alt="avatar" height="50px" width="50px" />
                         <div className="ps-3 pe-3">
                             <h4>
                                 { data.user.username }
@@ -199,37 +199,37 @@ function Question() {
                 <div>
                     {isLoading ? 
                         <button className="me-5 buttonAnswer" >
-                            <img src={ process.env.REACT_APP_URL + "answerIcon.png"} alt="répondre" height="20px" className="me-2"/>
+                            <img src={ process.env.REACT_APP_URL_IMG + "answerIcon.png"} alt="répondre" height="20px" className="me-2"/>
                             Répondre
                         </button>
                         :
                         user.user.id ?
                             data.user.id !== user.user.id ?
                                 <button className="me-5 buttonAnswer"  onClick={event => displayTextEditor("answer", data.id)} >
-                                    <img src={ process.env.REACT_APP_URL + "answerIcon.png"} alt="répondre" height="20px" className="me-2"/>
+                                    <img src={ process.env.REACT_APP_URL_IMG + "answerIcon.png"} alt="répondre" height="20px" className="me-2"/>
                                     Répondre
                                 </button>
                                 : null
                             : 
                             <button className="me-5 buttonAnswer"  data-bs-toggle="modal" data-bs-target="#loginModal" >
-                                <img src={ process.env.REACT_APP_URL + "answerIcon.png"} alt="répondre" height="20px" className="me-2"/>
+                                <img src={ process.env.REACT_APP_URL_IMG + "answerIcon.png"} alt="répondre" height="20px" className="me-2"/>
                                 Répondre
                             </button>
                     }
                     {isLoading ? 
                         <button  className="me-5 buttonComment">
-                            <img src={ process.env.REACT_APP_URL + "commentIcon.png"} alt="répondre" height="20px" className="me-2"/>
+                            <img src={ process.env.REACT_APP_URL_IMG + "commentIcon.png"} alt="répondre" height="20px" className="me-2"/>
                             Commenter
                         </button>
                         :
                         user.user.id ?
                             <button  className="me-5 buttonComment"  onClick={event => displayTextEditor("comment", data.id)}>
-                                <img src={ process.env.REACT_APP_URL + "commentIcon.png"} alt="répondre" height="20px" className="me-2"/>
+                                <img src={ process.env.REACT_APP_URL_IMG + "commentIcon.png"} alt="répondre" height="20px" className="me-2"/>
                                 Commenter
                             </button>
                             :
                             <button  className="me-5 buttonComment" data-bs-toggle="modal" data-bs-target="#loginModal" >
-                                <img src={ process.env.REACT_APP_URL + "commentIcon.png"} alt="répondre" height="20px" className="me-2"/>
+                                <img src={ process.env.REACT_APP_URL_IMG + "commentIcon.png"} alt="répondre" height="20px" className="me-2"/>
                                 Commenter
                             </button>
                     }

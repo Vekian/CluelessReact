@@ -36,7 +36,7 @@ function EditProfil(props) {
                 <form onSubmit={handleSubmit(onSubmit)} className="w-100">
                     <div className=" d-flex align-items-end">
                         <div  className="col-1 text-center">
-                            <img  src={ process.env.REACT_APP_URL + userProfil.user.avatar} alt="avatar" height="80px" width="80px"/>
+                            <img  src={ process.env.REACT_APP_URL_IMG + userProfil.user.avatar} alt="avatar" height="80px" width="80px"/>
                         </div>
                         <div className="d-flex align-items-center  justify-content-between w-100 ms-3">
                             {errors.username?.type === "maxLength" && (

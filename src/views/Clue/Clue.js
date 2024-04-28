@@ -70,7 +70,7 @@ function Clue() {
                     loadingElm()
                     :
                     <Link to={`/profils/${data.user.id}`} className="d-flex  linkToProfil" style={{ color: 'inherit', textDecoration: 'inherit'}}>
-                        <img src={ process.env.REACT_APP_URL + data.user.avatar} className='avatar' alt="avatar" height="50px" width="50px" />
+                        <img src={ process.env.REACT_APP_URL_IMG + data.user.avatar} className='avatar' alt="avatar" height="50px" width="50px" />
                         <div className="ps-3">
                             <h4>
                                 { data.user.username }
@@ -133,7 +133,7 @@ function Clue() {
                     :
                     <div>
                     <button  className="me-5 buttonComment"  onClick={event => displayTextEditor("comment", data.id)}>
-                        <img src={ process.env.REACT_APP_URL + "commentIcon.png"} alt="répondre" height="20px" className="me-2"/>
+                        <img src={ process.env.REACT_APP_URL_IMG + "commentIcon.png"} alt="répondre" height="20px" className="me-2"/>
                             Commenter
                         </button>
                     </div>
