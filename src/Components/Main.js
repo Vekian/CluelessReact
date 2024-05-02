@@ -8,6 +8,8 @@ import Clue from '../views/Clue/Clue';
 import Settings from '../views/Settings/Settings';
 import Rankings from '../views/Rankings/Rankings';
 import Helpers from '../views/Helpers/Helpers';
+import Help from '../views/Help/Help';
+import Premium from '../views/Premium/Premium';
 
 function Main() {
     return(
@@ -21,6 +23,8 @@ function Main() {
                 <Route path="/settings" element={< Settings />} />
                 <Route path="/rankings" element={< Rankings />} />
                 <Route path="/helpers" element={< Helpers />} />
+                <Route path="/help" element={< Help />} />
+                <Route path="/premium" element={< Premium />} />
                 <Route path="/create/question" element={< Editor type={"question"} />} />
                 <Route path="/create/clue" element={< Editor type={"clue"} />} />
             </Routes>

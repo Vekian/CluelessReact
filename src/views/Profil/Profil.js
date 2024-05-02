@@ -62,6 +62,8 @@ function Profil() {
         setQuestionsFetchingState(false);
     }
 
+    console.log(userProfil)
+
     return (
         <div>
             {

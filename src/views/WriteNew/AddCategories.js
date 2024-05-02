@@ -87,7 +87,7 @@ function AddCategories() {
                 <button className="buttonStyle" id="addCategory" onClick={event => addCategory()}>
                     Ajouter
                 </button>
-                <ul className="d-flex align-items-center mb-0">
+                <ul className="d-flex flex-wrap align-items-center mb-0">
                     { writeQuestion.categoriesToSend.map(categoryToSend => 
                     <div className="d-flex align-items-center">
                         <li key={categoryToSend.id + "categoryToSend"} className="ms-2 mt-1">

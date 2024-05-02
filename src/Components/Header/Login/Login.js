@@ -112,7 +112,7 @@ function Login() {
                                         wrapperStyle={{}}
                                         wrapperClass="comment-wrapper"
                                         color="#fff"
-                                        backgroundColor="var(--primaryColor)"
+                                        backgroundColor="var(--tertiaryColor)"
                                     />
                                 :
                                 isSigning ? 
@@ -121,7 +121,7 @@ function Login() {
                                             Inscrivez-vous avec google
                                         </h4>       
                                         < GoogleLogin loadData={loadData} text={"Inscrivez vous avec Google"} />
-                                        < Register loadData= {loadData} isSending={isSending} />
+                                        < Register loadData= {loadData} setIsSending={setIsSending} />
                                         <h5 className="modal-title" id="loginModalLabel">Se connecter ? C'est par <u className='linkSigning' onClick={() => setIsSigning(false)}>ici</u></h5>
                                     </div>
                                     :

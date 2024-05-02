@@ -8,7 +8,6 @@
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
     opacity: 1;
 
-    border-radius: 0px 0px 50px 50px;
 }
 
 .subMenuHeaderContainer {
@@ -22,6 +21,7 @@
 }
 
 .subMenuHeader a {
+    margin-top: 2px;
     padding-bottom: 3px;
     margin-bottom: 2px;
 }
@@ -32,6 +32,7 @@
     height: auto;
     width: 45px;
     text-align: center;
+    font-size: 18px;
 }
 
 .subMenuHeader i:hover {
@@ -88,9 +89,9 @@
 
 @media screen and (min-width: 1401px){
     .subMenuHeader {
-        height: 50px;
+        height: 40px;
     }
     .subMenuHeaderContainer {
-        height: 75px;
+        height: 65px;
     }
 }

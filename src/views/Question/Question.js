@@ -48,6 +48,7 @@ function Question() {
         }
     }, [idEditor]);
 
+    console.log(getLvl(2));
 
 
     function displayTextEditor (type, id) {
@@ -157,7 +158,7 @@ function Question() {
                         {isLoading ? 
                             loadingElm()
                             :
-                            <p className="text-end mb-1 pt-2">
+                            <p className="text-end mt-2 timePreview">
                                 {getDateDetail(data.createdAt)}
                             </p>
                         }

@@ -53,7 +53,7 @@ function Questions() {
                             wrapperStyle={{}}
                             wrapperClass="comment-wrapper"
                             color="#fff"
-                            backgroundColor="var(--primaryColor)"
+                            backgroundColor="var(--tertiaryColor)"
                         />
                     </div>
                     : 

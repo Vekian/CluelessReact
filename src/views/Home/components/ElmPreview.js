@@ -38,10 +38,10 @@ function ElmPreview(props) {
                 <p className="titlePreviewElm">
                     {props.elm.title}
                 </p>
-                <ul className="d-flex listTagsElmPreview">
+                <ul className="d-flex flex-wrap listTagsElmPreview">
                     {props.elm.tags.map(tag => {
                         return (
-                            <li key={props.type ? (tag.id + props.type) : (tag.id + "profil")}  className="me-3">
+                            <li key={props.type ? (tag.id + props.type) : (tag.id + "profil")}  className="me-3 mb-1">
                                 {tag.category.name}
                             </li>
                         )

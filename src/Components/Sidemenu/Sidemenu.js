@@ -22,17 +22,17 @@ function Sidemenu() {
     }
 
     return(
-        <div className="sideMenu pt-4 ps-sm-3 ps-xl-5 ps-1 col-sm-3 col-lg-2 col-6 d-flex flex-column align-items-start d-sm-block d-none">
+        <div className="sideMenu  ps-sm-3 ps-xl-5 ps-1 col-sm-3 col-lg-2 col-6 d-flex flex-column align-items-start d-sm-block d-none">
             <div className="d-flex text-center align-items-center mb-2 pt-1 pb-1 ps-2 itemMenu col-11 ms-1">
                 <i className="fa-solid fa-question col-1 me-2" style={{ color: "#000000" }}></i> 
                 <h5>
-                    Populaires
+                    Questions
                 </h5>
             </div>
             <div className="d-flex text-center align-items-center mb-2 pt-1 pb-1 ps-2 itemMenu col-11 ms-1">
                 <i className="fa-solid fa-exclamation col-1 me-2" style={{ color: "#000000" }}></i> 
                 <h5>
-                    Populaires
+                    Astuces
                 </h5>
             </div>
             <span className="separator d-block"></span>
@@ -94,16 +94,16 @@ function Sidemenu() {
                         </div>
                     </div>
                     <li className='active itemMenu ps-1'>
-                        <div className="d-flex align-items-center pt-1 pb-1">
+                        <Link to="/help" className={location.pathname === "/help" ? "item-active d-flex align-items-center pt-1 pb-1" : "d-flex align-items-center pt-1 pb-1"}  style={{ color: 'inherit', textDecoration: 'inherit'}} >
                             <i className="fa-regular fa-circle-question me-3"></i>
-                            <h5>Aide</h5>
-                        </div>
+                            <h5 className='ps-2 ps-xxl-0'>Aide</h5>
+                        </Link>
                     </li>
                     <li className='active itemMenu ps-1'>
-                        <div className="d-flex align-items-center pt-1 pb-1">
+                        <Link to="/premium" className={location.pathname === "/premium" ? "item-active d-flex align-items-center pt-1 pb-1" : "d-flex align-items-center pt-1 pb-1"}  style={{ color: 'inherit', textDecoration: 'inherit'}} >
                             <i className="fa-solid fa-crown me-xxl-3"></i>
                             <h5 className='ps-2 ps-xxl-0'>Devenir premium</h5>
-                        </div>
+                        </Link>
                     </li>
                     {
                         user?.id &&

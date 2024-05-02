@@ -19,11 +19,11 @@ function App() {
         < Router >
         < Header />
         
+              < SubMenu />
         <div className='d-flex bodySection'>
           
           < Sidemenu />
-          <div className='d-flex flex-column col-sm-9 col-lg-10 col-12 '>
-              < SubMenu />
+          <div className='d-flex flex-column col-sm-9 col-lg-10 col-12 mainContener'>
               < Main />
           </div>
         </div>

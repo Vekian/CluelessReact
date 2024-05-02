@@ -15,10 +15,10 @@ function Home() {
                 </p>
             </div>
             <div className="d-flex flex-row flex-wrap h-100">
-                <div className="elmComponent col-xxl-7 offset-xxl-0 offset-1 col-10">
+                <div className="elmComponent col-xxl-6 offset-xxl-0 offset-1 col-10">
                     < Questions />
                 </div>
-                <div className="elmComponent col-xxl-5 offset-xxl-0 offset-1 col-10">
+                <div className="elmComponent col-xxl-6 offset-xxl-0 offset-1 col-10">
                     < Clues />
                 </div>
                 

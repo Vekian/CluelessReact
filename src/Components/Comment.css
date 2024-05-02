@@ -12,7 +12,7 @@
 
 .buttonComment {
     color: white;
-    background-color: var(--primaryColor);
+    background-color: var(--tertiaryColor);
     border: none;
     border-radius: 15px;
     padding: 5px 25px 5px 25px;

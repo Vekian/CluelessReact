@@ -5,6 +5,7 @@ import React, { useEffect, useContext } from 'react';
 import { UIContext } from '../UIProvider';
 import { categoryApi } from '../../features/api/categorySlice';
 import { displaySideMenu } from '../../ui/UIutils';
+import Notifications from './Notifications';
 
 function Header () {
     const categories = categoryApi.endpoints.getCategories.useQueryState();
@@ -70,11 +71,12 @@ function Header () {
                         </button>
                     </form>
                 </div>
-                <div>
+                <div className='d-flex'>
+                    < Notifications user={user} />
                     {user.token ? 
                         < ProfilHeader  user={user.user} />
                          : 
-                         <button className="buttonStyle" data-bs-toggle="modal" data-bs-target="#loginModal">
+                         <button className="buttonLogin" data-bs-toggle="modal" data-bs-target="#loginModal">
                             Se connecter
                         </button>
                     }

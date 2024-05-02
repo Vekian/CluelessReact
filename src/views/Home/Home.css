@@ -5,8 +5,8 @@
 }
 
 .elmsList li:hover, .elmsList li.active, .cluesList li:hover, .cluesList li.active {
-    background: var(--tertiaryColor);
-    color: var(--primaryColor);
+    background: var(--primaryColor-with-opacity);
+    color: var(--tertiaryColor);
     font-weight: 500;
 }
 
@@ -17,17 +17,25 @@
     border-radius: 10px;
 }
 
-
 .elmPreviewCard {
-    box-shadow: 1px 0px 1px var(--dark-with-opacity);
+    box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.233);
     border-radius: 5px;
     padding: 5px;
     background-color: var(--white);
 }
 
+.dark .elmPreviewCard {
+    background-color: var(--dark-with-opacity-xl);
+}
+
 .elmPreviewCard:hover {
-    background-color: var(--tertiaryColor);
+    background-color: var(--primaryColor-with-opacity);
     cursor: pointer;
+    color: white;
+}
+
+.elmPreviewCard:hover .commentsPreviewElm {
+    color: var(--tertiaryColor);
 }
 
 .elmPreviewCard p {
@@ -74,9 +82,11 @@
 .listTagsElmPreview li {
     font-size: 0.7rem;
     padding: 2px 10px 2px 10px;
-    border: 1px solid var(--dark);
+    border: 2px solid var(--dark);
     border-radius: 5px;
     background-color: var(--tertiaryColor);
+    color: white;
+    font-weight:500;
 }
 
 .numberPopularityPreviewElm {
@@ -104,11 +114,12 @@
 .dark .pageItem:hover {
     filter: brightness(1.2);
     background-color: var(--tertiaryColor);
+    color: white;
 }
 
 .light .pageItem:hover {
     background-color: var(--tertiaryColor);
-    color: var(--dark);
+    color: white;
 }
 
 .pageItem.active {

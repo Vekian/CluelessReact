@@ -32,10 +32,14 @@ export function getDateDetail (dateData) {
 
 
 export function getLvl(popularity) {
-  if (popularity === 0) {
-    return 1;
+  let lvl = 1;
+  let basePop = 15;
+  while (popularity >= basePop) {
+    lvl ++;
+    popularity -= basePop;
+    basePop += 10;
   }
-  return Math.floor(Math.log(popularity / 100) / Math.log(1.2));
+  return lvl;
 }
 
 

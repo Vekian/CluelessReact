@@ -1,7 +1,6 @@
 :root {
-    --primaryColor: #1E52FF;
-    --secondaryColor: #00BF63;
-    --primaryColor-with-opacity: hsla(226, 100%, 56%, 0.3);
+    --primaryColor: #5f84fc;
+    --secondaryColor: #0e8383;
     --bs-body-line-height: 1 !important;
 }
 
@@ -13,16 +12,19 @@
 .App {
     --white: white;
     --dark: black;
-    --tertiaryColor: #d7f7fa;
-    --dark-with-opacity: rgba(0, 0, 0, 0.30);
+    --tertiaryColor: #173e6b;
+    --primaryColor-with-opacity: hsla(226, 100%, 67%, 0.637);
+    --dark-with-opacity: rgba(0, 0, 0, 0.089);
     font-size: 100%;
 }
 
 .App.dark {
     --dark: white;
-    --dark-with-opacity: rgb(211, 211, 211);
+    --dark-with-opacity: rgb(53, 53, 53);
+    --dark-with-opacity-xl: rgba(53, 53, 53, 0.253);
+    --primaryColor-with-opacity: hsla(226, 96%, 68%);
     --white: rgb(20, 20, 20);
-    --tertiaryColor: #00263b;
+    --tertiaryColor: #173e6b;
 }
 
 
@@ -56,7 +58,7 @@ h4, h5, h6 {
     padding: 7px 25px 7px 25px;
     border: none;
     border-radius: 15px;
-    background-color: var(--primaryColor);
+    background-color: var(--tertiaryColor);
     color: white;
     font-weight: 500;
     font-size: normal;
@@ -66,7 +68,7 @@ h4, h5, h6 {
     padding: 3px 15px 3px 15px;
     border: none;
     border-radius: 15px;
-    background-color: var(--primaryColor);
+    background-color: var(--tertiaryColor);
     color: white;
     font-weight: 500;
     font-size: small;
@@ -89,6 +91,10 @@ h4, h5, h6 {
 
 .avatar {
     border-radius: 40px;
+}
+
+.mainContener {
+    background-color: var(--white);
 }
 
 .googleButton {
@@ -273,7 +279,7 @@ h4, h5, h6 {
 
     .subMenuHeader i {
         font-size: 25px;
-        padding: 8px;
+        padding: 4px;
     }
 
     .burgerSideMenu {
@@ -302,7 +308,7 @@ h4, h5, h6 {
     }
 
     .moveUp {
-        transform: translateY(-49px);
+        transform: translateY(-35px);
     }
 
     .logo {

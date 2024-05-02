@@ -3,7 +3,7 @@ import { fetchData } from '../../../api/APIutils';
 
 function Register(props) {
     const { register, watch, formState: { errors }, handleSubmit } = useForm();
-    const onSubmitSignIn = (data) => { props.isSending(true)
+    const onSubmitSignIn = (data) => { props.setIsSending(true)
         fetchData('register', 'POST', props.loadData, '', data)};
     
     return(

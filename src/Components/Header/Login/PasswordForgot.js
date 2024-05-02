@@ -49,7 +49,7 @@ function PasswordForgot(props) {
                     wrapperStyle={{}}
                     wrapperClass="comment-wrapper"
                     color="#fff"
-                    backgroundColor="var(--primaryColor)"
+                    backgroundColor="var(--tertiaryColor)"
                 />
                 :
                 <form onSubmit={handleSubmit(onSubmit)} className="d-flex flex-column align-items-center justify-content-center">
