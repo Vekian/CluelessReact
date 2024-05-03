@@ -4,6 +4,7 @@
     border-right: 1px solid var(--dark-with-opacity);
     background-color: var(--white);
     color: var(--dark);
+    transition: background-color 0.6s ease;
 }
 
 .itemMenu {
@@ -38,4 +39,24 @@
 }
 .sideMenu li, .listComments {
     list-style-type: none;
+}
+
+.itemQuestions {
+    cursor: pointer;
+    overflow: hidden;
+}
+
+.itemQuestions:hover {
+    border-radius: 10px;
+    background-color: var(--dark-with-opacity);
+}
+
+.itemQuestions.active i {
+    color: white !important;
+}
+
+.itemQuestions.active{
+    border-radius: 10px;
+    color: white;
+    background-color: var(--primaryColor) !important;
 }

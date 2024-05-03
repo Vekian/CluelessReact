@@ -92,7 +92,7 @@ function VoteElement(props) {
             <div className='text-center'>
                 {user.user.username && user.user.id !== props.idAuthor ? <i className={ checkVote() > 0 ? "fa-solid fa-circle-up display-6" : "fa-solid fa-circle-up "} onClick={event => sendVote(2)}></i>
                 : null}
-                    <h5 className={props.class2}>{props.popularity} <i className="fa-solid fa-star" style={{color: "#FFD43B",}}></i></h5>
+                    <h5 className={props.class2}>{props.popularity} <img src={process.env.REACT_APP_URL_IMG + "reputation.png"} height="25px" alt="popularity"/></h5>
                 {user.user.username && user.user.id !== props.idAuthor ? <i className={ checkVote() < 0 ? "fa-solid fa-circle-down display-6" : "fa-solid fa-circle-down "} onClick={event => sendVote(-2)}></i>
                 : null }
             </div> 

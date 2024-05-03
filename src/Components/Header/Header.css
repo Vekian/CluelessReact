@@ -39,6 +39,7 @@ header {
     background-color: var(--white);
     border-right: none !important;
     border-radius: 0px !important;
+    transition: background-color 0.6s ease;
 }
 
 .searchInputHeader:focus + .searchSubmitHeader, .searchInputHeader:focus, .searchInputHeader:active{
@@ -63,6 +64,7 @@ header {
     background-color: var(--white);
     border: none;
     border-radius: 0px 10px 10px 0px;
+    transition: background-color 0.6s ease;
 }
 
 .fa-magnifying-glass{
@@ -77,6 +79,10 @@ header {
     cursor: pointer;
     background-color: var(--tertiaryColor);
     color: white !important;
+}
+
+.notifsContener .dropdown-item {
+    border-top: 1px solid rgba(255, 255, 255, 0.253);
 }
 
 .dropdown-item:active {
@@ -140,6 +146,8 @@ header {
 
 }
 
+
+
 @media screen and (max-width: 576px){
     .buttonProfil {
         padding: 2px 7px 2px 7px;
@@ -156,6 +164,8 @@ header {
         height: 20px;
     }
 }
+
+
 
 @media screen and (min-width: 577px) and (max-width: 1400px){
     .buttonProfil {

@@ -2,13 +2,10 @@ import { getLvl } from '../../api/APIutils' ;
 import { Link } from 'react-router-dom';
 import { useDispatch} from 'react-redux';
 import { deleteUserMe} from '../../features/user/userSlice';
-import { useContext } from "react";
-import { UIContext } from '../UIProvider';
 import { googleLogout } from '@react-oauth/google';
 
 function ProfilHeader (props) {
     const dispatch = useDispatch();
-    const {toggleDarkMode} = useContext(UIContext);
 
 
     function deleteCookie() {
@@ -36,7 +33,6 @@ function ProfilHeader (props) {
                 </div>
                 <ul className="dropdown-menu">
                     <li><Link className="dropdown-item" to={`/profil`} style={{ color: 'inherit', textDecoration: 'inherit'}}>Voir profil</Link></li>
-                    <li className="dropdown-item" onClick={toggleDarkMode}>DarkMode</li>
                     <li><Link className="dropdown-item" to={`/settings`} style={{ color: 'inherit', textDecoration: 'inherit'}}>Paramètres</Link></li>
                     <li className='dropdown-item' onClick={event => logOut()}>
                         Se déconnecter

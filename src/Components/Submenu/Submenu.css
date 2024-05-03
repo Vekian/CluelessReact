@@ -1,5 +1,6 @@
 .subMenuMain {
     background-color: var(--white);
+    transition: background-color 0.6s ease;
 }
 
 .subMenuHeader {
@@ -52,7 +53,16 @@
     color: white;
 }
 
-
+.clue .buttonSubMenuHeader {
+    background-image: url('../../../public/assets/images/buttonSubmenuClue.png');
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 100px;
+    cursor: pointer;
+    font-size: 25px;
+    color: white;
+}
 
 .arrowMenu {
     transform: translateY(-5px);

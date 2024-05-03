@@ -52,7 +52,7 @@ function AddCategories() {
             <label htmlFor="category" className="mb-3">
                 Sélectionnez une catégorie ou sous-catégorie pour augmenter vos chances de réponses (maximum 5)
             </label>
-            <div className="d-flex ms-2">
+            <div className="d-flex ms-2 mt-3 mb-2">
                 <select id="category" name="tags" className="me-5" onChange={event => displayCategories(event)}>
                     <option value="" hidden>
                         Catégories

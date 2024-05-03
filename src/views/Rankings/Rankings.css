@@ -62,6 +62,15 @@
     border: 1px solid white;
 }
 
+.statsContener {
+    width: 600px;
+    height: 300px;
+}
+
+.infosStats {
+    font-size: 12px;
+}
+
 
 @keyframes heightAnimationFirst {
     0% {

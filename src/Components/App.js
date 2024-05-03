@@ -10,11 +10,11 @@ import Login from '../Components/Header/Login/Login';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
 function App() {
-  const {darkMode} = useContext(UIContext);
+  const {darkMode, clueMode} = useContext(UIContext);
         
 
   return (
-    <div className={`App vh-100 ${darkMode ? 'dark' : 'light'}`}>
+    <div className={`App vh-100 ${darkMode ? 'dark' : 'light'} ${clueMode && "clue"}`}>
       <GoogleOAuthProvider clientId="1047880689996-3jmsj1nv0ekn34ur1h2r1rjonbbvgiuf.apps.googleusercontent.com">
         < Router >
         < Header />

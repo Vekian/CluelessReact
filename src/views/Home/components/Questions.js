@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import ElmPreview from './ElmPreview';
 import { useGetQuestionsQuery } from '../../../features/api/questionSlice';
 import { UIContext } from '../../../Components/UIProvider';
-import { activeElm } from '../../../ui/UIutils';
 import Paginator from './Paginator';
 import { Comment } from 'react-loader-spinner';
 
@@ -15,33 +14,6 @@ function Questions() {
 
     return (
         <div className="elms d-flex flex-column pe-3">
-            <div className='mb-2'>
-                <ul className="d-flex align-items-center elmsList mb-2">
-                    <h4>
-                        Questions
-                    </h4>
-                    <li className="ms-4 active" onClick={(event) => {
-                            activeElm(event, "elmsList");
-                            changeFilterQuestion(['?page=1', '']);
-                            
-                        }}>
-                        Toutes
-                    </li>
-                    <li className="ms-4" onClick={(event) => {
-                            activeElm(event, "elmsList");
-                            changeFilterQuestion(['&page=1','?order[popularity]=desc']);
-                        }}>
-                        Populaires
-                    </li>
-                    <li className="ms-4" onClick={(event) => {
-                            activeElm(event, "elmsList");
-                            changeFilterQuestion(['&page=1', '?order[createdAt]=desc']);
-                            
-                        }}>
-                        Récentes
-                    </li>
-                </ul>
-            </div>
             <div className='ps-2 listOfElms'>
                 {isFetching ? 
                     <div className='d-flex justify-content-center align-items-center h-100'>
@@ -63,7 +35,7 @@ function Questions() {
                         </div> 
                         :
                         currentData && currentData['hydra:member'].map(question => 
-                            <Link to={`/question/${question.id}`} style={{ color: 'inherit', textDecoration: 'inherit'}}  key={question.id + "question"}>
+                            <Link  to={`/question/${question.id}`} style={{ color: 'inherit', textDecoration: 'inherit'}}  key={question.id + "question"}>
                                 < ElmPreview elm={question} type={"question"}/>
                             </Link>
                         )

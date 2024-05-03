@@ -43,7 +43,7 @@ function CluePreview(props) {
                         <p className="numberPopularityPreviewElm">
                             {props.elm.popularity}
                         </p>
-                        <i className="fa-solid fa-star ms-1" style={{color: "#FFD43B",}}></i>
+                        <img src={process.env.REACT_APP_URL_IMG + "reputation.png"} height="25px" alt="popularity"/>
                 </div>
                 <p className="commentsPreviewElm">
                     {props.elm.comments.length} commentaire{props.elm.comments.length > 1 ? "s" : null}

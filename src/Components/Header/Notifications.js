@@ -9,24 +9,24 @@ function Notifications(props){
     const [editNotification] = useUpdateNotificationMutation();
     const dispatch = useDispatch();
 
-    console.log(props.user.user.notifications)
-
-    const readNotif = async (e) => {
-        const body = {
-            seen: true
-        };
-        const bodyJson = JSON.stringify(body);
-        const token = props.user.token;
-
-        const resultNotification = await editNotification({id: e.target.dataset.id, token: token, body: bodyJson});
-        
-
-            for (let notification of props.user.user.notifications){
-                if (notification.id == e.target.dataset.id){
-                    dispatch(changeNotification(notification.id));
-                    break;
+    const readNotif = async (e, oldNotification) => {
+        if(!oldNotification.seen){
+            const body = {
+                seen: true
+            };
+            const bodyJson = JSON.stringify(body);
+            const token = props.user.token;
+            const resultNotification = await editNotification({id: e.target.dataset.id, token: token, body: bodyJson});
+            
+            if(resultNotification) {
+                for (let notification of props.user.user.notifications){
+                    if (notification.id == e.target.dataset.id){
+                        dispatch(changeNotification(notification.id));
+                        break;
+                    }
                 }
             }
+        }
         
     }
     return(
@@ -50,8 +50,8 @@ function Notifications(props){
                     props.user.user.notifications &&
                     props.user.user.notifications.map((notification, index) => (
                         (index < 5 || !notification.seen) &&
-                        <li key={notification.id + "notification"} className={`dropdown-item border-top text-wrap ${notification.seen ? "" : "fw-bold"}`}>
-                            <Link to={getRoute(notification)} style={{ color: 'inherit', textDecoration: 'inherit'}} data-id={notification.id} onClick={(e) => readNotif(e)}>
+                        <li key={notification.id + "notification"} className={`dropdown-item text-wrap ${notification.seen ? "" : "fw-bold"}`}>
+                            <Link to={getRoute(notification)} style={{ color: 'inherit', textDecoration: 'inherit'}} data-id={notification.id} onClick={(e) => readNotif(e, notification)}>
                                  {getDateDetail(notification.createdAt)}<br/>{notification.content}
                             </Link>
                         </li>

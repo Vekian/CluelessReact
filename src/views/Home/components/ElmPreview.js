@@ -3,7 +3,7 @@ import { getDateDetail, getLvl } from '../../../api/APIutils' ;
 function ElmPreview(props) {
 
     return(
-        <div className="d-flex elmPreviewCard mb-2 me-3">
+        <div className="d-flex elmPreviewCard mb-2  me-3">
             <div className="d-flex flex-column align-items-center col-2">
                 { props.elm.user ? 
                     <>
@@ -54,12 +54,14 @@ function ElmPreview(props) {
                         <p className="numberPopularityPreviewElm">
                             {props.elm.popularity}
                         </p>
-                        <i className="fa-solid fa-star ms-1" style={{color: "#FFD43B",}}></i>
+                        <img src={process.env.REACT_APP_URL_IMG + "reputation.png"} height="25px" alt="popularity"/>
                     </div>
-                    {
-                        props.elm.status === "Validated" &&
-                        <img src={process.env.REACT_APP_URL_IMG + "Checkmark.svg.png"} height="40px" alt="checkmark"/>
-                    }
+                    <div className='col-4'>
+                        {
+                            props.elm.status === "Validated" &&
+                            <img src={process.env.REACT_APP_URL_IMG + "Checkmark.svg.png"} height="40px" alt="checkmark"/>
+                        }
+                    </div>
                 </div>
                 <div className="d-flex justify-content-center">
                     <p className="commentsPreviewElm me-3">

@@ -6,6 +6,7 @@ import { UIContext } from '../UIProvider';
 import { categoryApi } from '../../features/api/categorySlice';
 import { displaySideMenu } from '../../ui/UIutils';
 import Notifications from './Notifications';
+import DarkModeButton from './DarkModeButton';
 
 function Header () {
     const categories = categoryApi.endpoints.getCategories.useQueryState();
@@ -34,11 +35,16 @@ function Header () {
                 <button className="burgerSideMenu" onClick={event => displaySideMenu(event)}>
                     <i className="fa-solid fa-bars"></i>
                 </button>
-                <div className="d-flex flex-column justify-content-center h-100 ms-lg-1 ms-sm-4">
-                    <img src={ process.env.REACT_APP_URL_IMG + "logo.png"} alt="logo" className="logo"/>
-                    <h1 className="logoTitle">
-                        Clueless
-                    </h1>
+                <div className='d-flex h-100'>
+                    <div className="d-flex flex-column align-items-center justify-content-center ms-lg-1 ms-sm-4">
+                        <img src={ process.env.REACT_APP_URL_IMG + "logo.png"} alt="logo" className="logo"/>
+                        <h1 className="logoTitle">
+                            Clueless
+                        </h1>
+                    </div>
+                    <div className='ms-5 d-flex align-items-center'>
+                        < DarkModeButton />
+                    </div>
                 </div>
                 
                 <div className="pt-xxl-2 pt-1 pb-1 pb-xxl-2 d-flex searchElm">
@@ -71,7 +77,7 @@ function Header () {
                         </button>
                     </form>
                 </div>
-                <div className='d-flex'>
+                <div className='d-flex align-items-center'>
                     < Notifications user={user} />
                     {user.token ? 
                         < ProfilHeader  user={user.user} />

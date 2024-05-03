@@ -28,7 +28,7 @@ function SubMenu() {
                         <i className="fa-solid fa-question"></i>
                     </Link>
                     <Link to="/create/clue" className={location.pathname === "/create/clue" ? "active" : ""}>
-                        <i className="fa-solid fa-lightbulb"></i>
+                        <i className="fa-regular fa-lightbulb"></i>
                     </Link>
                     <Link to="/helpers" className={location.pathname === "/helpers" ? "active" : ""}>
                         <i className="fa-solid fa-users"></i>

@@ -144,3 +144,94 @@
     color: var(--secondaryColor);
     font-weight: 600;
 }
+
+
+.toggleMode .switch {
+    position: relative;
+    display: inline-block;
+    width: 150px;
+    height: 34px;
+  }
+  
+  .toggleMode .switch input {display:none;}
+  
+  .toggleMode .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--primaryColor);
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .toggleMode .slider:before {
+    position: absolute;
+    color: white;
+    text-align: center;
+    line-height: 23px;
+    font-size: 20px;
+    font-weight: 500;
+    content: "?";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: var(--tertiaryColor);
+    -webkit-transition: .4s;
+    transition: .4s;
+  }
+  
+  .toggleMode  input:checked + .slider {
+    background-color: var(--primaryColor);
+  }
+
+  .toggleMode  input:checked + .slider:before {
+    content: "\f0eb";
+    font-family: "Font Awesome 5 Free";
+    font-size: 16px;
+  }
+  
+  .toggleMode input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+  }
+  
+  .toggleMode input:checked + .slider:before {
+    -webkit-transform: translateX(115px);
+    -ms-transform: translateX(115px);
+    transform: translateX(115px);
+  }
+  
+  .toggleMode  .on
+  {
+    display: none;
+  }
+  
+  .toggleMode .on, .off
+  {
+    color: white;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    top: 50%;
+    left: 50%;
+    font-size: 14px;
+    font-family: Verdana, sans-serif;
+  }
+  
+  .toggleMode input:checked+ .slider .on
+  {display: block;}
+  
+  .toggleMode input:checked + .slider .off
+  {display: none;}
+  
+  /*--------- END --------*/
+  
+  /* Rounded sliders */
+  .toggleMode .slider.round {
+    border-radius: 34px;
+  }
+  
+  .toggleMode .slider.round:before {
+    border-radius: 50%;}

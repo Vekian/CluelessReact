@@ -86,7 +86,7 @@ function Editor(props) {
 
     return (
         <div>
-            <div className="d-flex flex-column ">
+            <div className="d-flex flex-column pb-3">
                 {props.type === 'question' ?
                     <h1 className="mb-4">
                         Poser une question publique
