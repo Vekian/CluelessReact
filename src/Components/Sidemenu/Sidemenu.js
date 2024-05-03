@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 
 function Sidemenu() {
     const {data, error, isFetching} = useGetCategoriesQuery();
-    const {changeFilterQuestion, clueMode, toggleClueMode } = useContext(UIContext);
+    const {changeFilterQuestion, changeFilterClue, clueMode, toggleClueMode } = useContext(UIContext);
     const location = useLocation();
     const user = useSelector(state => state.user.user);
 
@@ -18,7 +18,8 @@ function Sidemenu() {
         const idCategory = event.currentTarget.dataset.categoryId;
         let filter = "?tags.category.id=" + idCategory;
         let page = "&page=1";
-        changeFilterQuestion([page, filter]);
+        clueMode ? changeFilterClue([page, filter]) : changeFilterQuestion([page, filter]);
+        
     }
 
     return(

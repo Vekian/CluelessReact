@@ -11,7 +11,7 @@ import DarkModeButton from './DarkModeButton';
 function Header () {
     const categories = categoryApi.endpoints.getCategories.useQueryState();
     const user = useSelector(state => state.user);
-    const {toggleDarkMode, changeFilterQuestion} = useContext(UIContext);
+    const {toggleDarkMode, clueMode, changeFilterQuestion, changeFilterClue} = useContext(UIContext);
 
     useEffect(() => {
         const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -24,9 +24,9 @@ function Header () {
         event.preventDefault();
         const idCategory = document.getElementById('categories').value;
         const inputSearch = document.getElementById('searchInput').value;
-        let filter = "?page=1&tags.category.id=" + idCategory + "&content=" + inputSearch;
+        let filter = "?search=" + inputSearch + "&tags.category.id=" + idCategory;
         let page = "&page=1";
-        changeFilterQuestion([page, filter]);
+        clueMode ? changeFilterClue([page, filter]) : changeFilterQuestion([page, filter]);
     }
 
     return (
