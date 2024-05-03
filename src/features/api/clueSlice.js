@@ -16,6 +16,7 @@ export const clueApi = createApi({
             url: `${filter}${page}`,
           }
       },
+      providesTags: (result, error) => [{ type: 'Clues', id: 'LIST' }] 
     }),
     addClue: builder.mutation({
       query(arg) {
@@ -30,7 +31,7 @@ export const clueApi = createApi({
           }
         }
       },
-      invalidatesTags: (result, error, { id }) => [{ type: 'Clues', id }],
+      invalidatesTags: (result, error, { id }) => [{ type: 'Clues', id: id }, { type: 'Clues', id: 'LIST' }],
     }),
     updateClue: builder.mutation({
       query(data) {
@@ -46,7 +47,7 @@ export const clueApi = createApi({
           }
         }
       },
-      invalidatesTags: (result, error, { id }) => [{ type: 'Clues', id }],
+      invalidatesTags: (result, error, { id }) => [{ type: 'Clues', id: id }, { type: 'Clues', id: 'LIST' }],
     }),
     deleteClue: builder.mutation({
       query(data) {
@@ -60,7 +61,7 @@ export const clueApi = createApi({
         }
       },
       // Invalidates all queries that subscribe to this Post `id` only.
-      invalidatesTags: (result, error, id) => [{ type: 'Clues', id }],
+      invalidatesTags: (result, error, id) => [{ type: 'Clues', id: id }, { type: 'Clues', id: 'LIST' }],
     }),
   }),
 })

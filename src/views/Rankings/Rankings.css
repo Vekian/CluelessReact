@@ -18,6 +18,11 @@
     border-radius: 5px 5px 0px 0px;
 }
 
+.mainPodium .linkToProfil:hover  {
+    background-color: var(--dark-with-opacity);
+    color: var(--dark) !important;
+}
+
 .podiumThird {
     height: 30%;
     background-color: #0e8383;

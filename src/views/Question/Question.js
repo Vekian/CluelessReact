@@ -30,6 +30,7 @@ function Question() {
     const [deleteQuestion] = useDeleteQuestionMutation();
     const [addAnswer] = useAddAnswerMutation();
     const [addComment] = useAddCommentMutation();
+
     
 
     useEffect(() => {
@@ -47,8 +48,6 @@ function Question() {
             }
         }
     }, [idEditor]);
-
-    console.log(getLvl(2));
 
 
     function displayTextEditor (type, id) {
@@ -102,6 +101,8 @@ function Question() {
             refetch(id);
         }
     }
+
+    
 
     if (error) {
         return (
@@ -291,9 +292,16 @@ function Question() {
                 {isLoading ? 
                     loadingElm()
                     :
-                    data.answers.map( answer => 
-                     < Answer  key= {answer.id + answer.status} answer={answer} idQuestion={data.id} refetch={refetch} displayTextEditor={displayTextEditor} idEditor={idEditor} isLoading={isLoading}/>
-                    )
+                    <>
+                    {data.answers.map( answer => answer.status === "Validated" &&
+                        < Answer question={data}  key= {answer.id + answer.status} answer={answer} idQuestion={data.id} refetch={refetch} displayTextEditor={displayTextEditor} idEditor={idEditor} isLoading={isLoading}/>
+                       )}
+                    {
+                       data.answers.map( answer => answer.status !== "Validated" &&
+                     < Answer question={data}  key= {answer.id + answer.status} answer={answer} idQuestion={data.id} refetch={refetch} displayTextEditor={displayTextEditor} idEditor={idEditor} isLoading={isLoading}/>
+                    ) 
+                    }
+                    </>
                 }
             </div>
         </div>

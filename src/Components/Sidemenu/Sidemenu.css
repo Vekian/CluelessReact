@@ -1,6 +1,6 @@
 .sideMenu {
     overflow-y: scroll;
-    height: 93vh;
+    height: 83vh;
     border-right: 1px solid var(--dark-with-opacity);
     background-color: var(--white);
     color: var(--dark);

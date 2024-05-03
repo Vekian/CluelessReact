@@ -78,7 +78,7 @@ function VoteElement(props) {
     
     function checkVote() {
         if (votes.isSuccess){
-            if (votes.currentData['hydra:member'].length > 0){
+            if (votes.currentData && votes.currentData['hydra:member'].length > 0){
             for (let vote of votes.currentData['hydra:member']){
                 if (vote.question === props.idElm || vote.clue === props.idElm || vote.answer === props.idElm || vote.comment === props.idElm) {
                     return vote.amount;

@@ -62,8 +62,6 @@ function Profil() {
         setQuestionsFetchingState(false);
     }
 
-    console.log(userProfil)
-
     return (
         <div>
             {
@@ -183,7 +181,7 @@ function Profil() {
                     < ScoreProfil userProfil={userProfil} />
                 }
             </div>
-            <div className="offset-1 col-10 mt-4">
+            <div className="offset-1 col-10 mt-5">
                 <h4>
                     Dernières questions posées
                 </h4>

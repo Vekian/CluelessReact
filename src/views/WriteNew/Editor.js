@@ -14,6 +14,7 @@ function Editor(props) {
     const [contentToSend, setContentToSend] = useState();
     const writeQuestion = useSelector(state => state.editor.writeQuestion);
     const user = useSelector(state => state.user);
+    const [errorState, setErrorState] = useState("");
     const [addQuestion, {data: dataQuestion, isSuccess: successQuestion} ] = useAddQuestionMutation();
     const [addClue, {data: dataClue, isSuccess: successClue} ] = useAddClueMutation();
 
@@ -46,9 +47,18 @@ function Editor(props) {
     }
 
     function sendQuestion(){
+        setErrorState("");
         const title = document.getElementById('title').value;
+        if (!title) {
+            setErrorState("Un titre est requis");
+            return;
+        }
         const categoriesData = writeQuestion.categoriesToSend;
         const content = writeQuestion.content;
+        if (!content) {
+            setErrorState("Une description est requise");
+            return;
+        }
         let tags = [];
 
         for (let categoryData of categoriesData) {
@@ -129,6 +139,14 @@ function Editor(props) {
                     <div>
                         <TextArea setContent={setContentToSend} content={writeQuestion.content}/>
                     </div>
+                </div>
+                <div className="text-center fw-bold mt-2">
+                    {
+                        errorState !== "" &&
+                        <span className="text-danger">
+                            { errorState }
+                        </span>
+                    }
                 </div>
                 <div className="text-center pt-3">
                     <button className="buttonStyle" onClick={event => sendQuestion()}>

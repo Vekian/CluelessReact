@@ -35,6 +35,10 @@ export const userSlice = createSlice({
             state.user = {};
             state.token = "";
         },
+        changeNotification: (state, action) => {
+            const notificationIndex = state.user.notifications.findIndex(notification => notification.id === action.payload);
+            state.user.notifications[notificationIndex].seen = true;
+        },
         loadUserProfil: (state, action) => {
             state.userProfil.user = action.payload;
         },
@@ -55,4 +59,4 @@ export const userSlice = createSlice({
 
 export default userSlice.reducer;
 
-export const { loadToken, loadUserMe, loadUserProfil, deleteUserMe, loadQuestionsUserProfil, loadCategories, removeCategories, loadSubCategories } = userSlice.actions;
+export const { loadToken, loadUserMe, changeNotification, loadUserProfil, deleteUserMe, loadQuestionsUserProfil, loadCategories, removeCategories, loadSubCategories } = userSlice.actions;

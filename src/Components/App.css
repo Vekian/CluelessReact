@@ -16,6 +16,7 @@
     --primaryColor-with-opacity: hsla(226, 100%, 67%, 0.637);
     --dark-with-opacity: rgba(0, 0, 0, 0.089);
     font-size: 100%;
+    background-color: var(--white);
 }
 
 .App.dark {
@@ -29,7 +30,7 @@
 
 
 .bodySection {
-    height: 93vh;
+    height: 83vh;
 }
 
 h6 {

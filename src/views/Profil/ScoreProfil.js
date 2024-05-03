@@ -6,8 +6,9 @@ function ScoreProfil(props) {
         responsive: true,
         plugins: {
             legend: {
-            display: true,
-            position: "bottom"
+            display: false,
+            position: "bottom",
+            width: "100%"
             },
             tooltip: {
             boxPadding: 6,
@@ -22,7 +23,7 @@ function ScoreProfil(props) {
     
     ChartJS.register(ArcElement, Tooltip, Legend);
 
-    function parseScoreDataset(categoryMain= undefined) {
+    function parseScoreDataset(categoryMain= null) {
         let scores= props.userProfil.user.scores;
         
         let labels = []
@@ -31,7 +32,13 @@ function ScoreProfil(props) {
 
         for (let i=0; i<scores.length; i++) {
             if (scores[i].category) {
-                if (scores[i].category.category?.id === categoryMain?.id){
+                if (categoryMain && scores[i].category.category?.id === categoryMain?.id){
+                    labels.push(scores[i].category.name);
+                    data.push(scores[i].points);
+                    const randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
+                    backgroundColor.push(randomColor);
+                }
+                else if (!categoryMain) {
                     labels.push(scores[i].category.name);
                     data.push(scores[i].points);
                     const randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
@@ -78,18 +85,19 @@ function ScoreProfil(props) {
                     /> : null
                 }
             </div>
-            <div className="charts d-flex flex-column align-items-center">
-                <h5 className="mb-2">
-                    Scores de votre section préférée
-                </h5>
-                {
-                    props.userProfil.user.scores && props.userProfil.user.scores.length > 0 ?
+            {
+                props.userProfil.user.scores && props.userProfil.user.scores.length > 0 ?
+                <div className="charts d-flex flex-column align-items-center">
+                    <h5 className="mb-2">
+                        Scores de votre section préférée: {getBestCategory().name}
+                    </h5>
                     <Doughnut
                         data={parseScoreDataset(getBestCategory())} 
                         options={options}
-                    /> : null
-                }
-            </div>
+                    />
+                </div>
+                    : null
+            }
         </div>
     )
 }

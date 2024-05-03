@@ -24,13 +24,13 @@ function Sidemenu() {
     return(
         <div className="sideMenu  ps-sm-3 ps-xl-5 ps-1 col-sm-3 col-lg-2 col-6 d-flex flex-column align-items-start d-sm-block d-none">
             <div className="d-flex text-center align-items-center mb-2 pt-1 pb-1 ps-2 itemMenu col-11 ms-1">
-                <i className="fa-solid fa-question col-1 me-2" style={{ color: "#000000" }}></i> 
+                <i className="fa-solid fa-question col-1 me-2" style={{ color: "var(--dark)" }}></i> 
                 <h5>
                     Questions
                 </h5>
             </div>
             <div className="d-flex text-center align-items-center mb-2 pt-1 pb-1 ps-2 itemMenu col-11 ms-1">
-                <i className="fa-solid fa-exclamation col-1 me-2" style={{ color: "#000000" }}></i> 
+                <i className="fa-solid fa-exclamation col-1 me-2" style={{ color: "var(--dark)" }}></i> 
                 <h5>
                     Astuces
                 </h5>

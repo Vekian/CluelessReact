@@ -113,3 +113,14 @@ export function fetchData(url, method, processData, token = null, bodyData = nul
     }
   );
 }
+
+export function getRoute(notification){
+    let route= "";
+    if (notification.question){
+      route = `/question/${notification.question.id}`;
+    }
+    else if (notification.clue){
+      route = `/clue/${notification.clue.id}`;
+    }
+    return route
+}

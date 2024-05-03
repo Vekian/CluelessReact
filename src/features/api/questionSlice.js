@@ -7,7 +7,7 @@ export const questionApi = createApi({
   endpoints: (builder) => ({
     getQuestion: builder.query({
       query: (id) => `/${id}`,
-      providesTags: (result, error, id) => [{ type: 'Questions', id }] 
+      providesTags: (result, error, id) => [{ type: 'Questions', id: id }] 
     }),
     getQuestions: builder.query({
       query(parameters) {
@@ -16,6 +16,7 @@ export const questionApi = createApi({
           url: `${filter}${page}`,
         }
       },
+      providesTags: (result, error) => [{ type: 'Questions', id: 'LIST' }] 
     }),
     addQuestion: builder.mutation({
       query(arg) {
@@ -30,7 +31,7 @@ export const questionApi = createApi({
           }
         }
       },
-      invalidatesTags: (result, error, { id }) => [{ type: 'Questions', id }],
+      invalidatesTags: (result, error, { id }) => [{ type: 'Questions', id: id }, { type: 'Questions', id: 'LIST' }],
     }),
     updateQuestion: builder.mutation({
       query(data) {
@@ -46,7 +47,7 @@ export const questionApi = createApi({
           }
         }
       },
-      invalidatesTags: (result, error, { id }) => [{ type: 'Questions', id }],
+      invalidatesTags: (result, error, { id }) => [{ type: 'Questions', id: id }, { type: 'Questions', id: 'LIST' }],
     }),
     deleteQuestion: builder.mutation({
       query(data) {
@@ -60,7 +61,7 @@ export const questionApi = createApi({
         }
       },
       // Invalidates all queries that subscribe to this Post `id` only.
-      invalidatesTags: (result, error, id) => [{ type: 'Questions', id }],
+      invalidatesTags: (result, error, id) => [{ type: 'Questions', id }, { type: 'Questions', id: 'LIST' }],
     }),
   }),
 })

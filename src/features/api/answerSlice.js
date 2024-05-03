@@ -18,7 +18,7 @@ export const answerApi = createApi({
           }
         }
       },
-      invalidatesTags: (result, error) => [{ type: 'Questions', id: result.question.id }],
+      invalidatesTags: (result, error) => [{ type: 'Questions', id: result.question.id }, { type: 'Questions', id: 'LIST' }],
     }),
     updateAnswer: builder.mutation({
       query(args){
@@ -30,6 +30,22 @@ export const answerApi = createApi({
           headers: {
             'Accept': 'application/ld+json',
             'Content-Type': 'application/merge-patch+json',
+            'Authorization': `bearer ${token}`
+          }
+        }
+      },
+      invalidatesTags: (result, error) => [{ type: 'Questions', id: result.question.id }],
+    }),
+    validateAnswer: builder.mutation({
+      query(args){
+        const { id, token, body } = args
+        return {
+          url: `/${id}/validation`,
+          method: 'PUT',
+          body: body,
+          headers: {
+            'Accept': 'application/ld+json',
+            'Content-Type': 'application/ld+json',
             'Authorization': `bearer ${token}`
           }
         }
@@ -55,4 +71,4 @@ export const answerApi = createApi({
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useAddAnswerMutation, useUpdateAnswerMutation, useDeleteAnswerMutation } = answerApi
+export const { useAddAnswerMutation, useUpdateAnswerMutation, useDeleteAnswerMutation, useValidateAnswerMutation } = answerApi

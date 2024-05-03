@@ -21,60 +21,67 @@ function Podium(props) {
         <div className='mainPodium mt-4 d-flex flex-wrap'>
             {
                 props.scores ?
-                <div className='h-100 col-3 d-flex align-items-end'>
-                    <div className='h-100 col-4 d-flex flex-column justify-content-end'>
-                        {
-                            props.scores.length > 1 && 
-                            <div className='text-center'>
-                                <h5>
-                                    { props.scores[1].user.username} <i className="fa-solid fa-trophy fa-lg" style={{ color: "#9a9996" }}></i> 
-                                </h5>
-                                <h6 className="mb-1">
-                                    ({props.scores[1].points} points)
-                                </h6>
-                                <img className="mb-1" src={ process.env.REACT_APP_URL_IMG + props.scores[1].user.avatar } alt="" height="50px" />
+                <div className='d-flex flex-column col-3'>
+                    <div className='h-100 col-12 d-flex align-items-end'>
+                        <div className='h-100 col-4 d-flex flex-column justify-content-end'>
+                            {
+                                props.scores.length > 1 && 
+                                <Link to={`/profils/${props.scores[1].user.id}`} className="text-center linkToProfil" style={{ color: 'inherit', textDecoration: 'inherit'}}>
+                                    <h5>
+                                        { props.scores[1].user.username} <i className="fa-solid fa-trophy fa-lg" style={{ color: "#9a9996" }}></i> 
+                                    </h5>
+                                    <h6 className="mb-1">
+                                        ({props.scores[1].points} points)
+                                    </h6>
+                                    <img className="mb-1" src={ process.env.REACT_APP_URL_IMG + props.scores[1].user.avatar } alt="" height="50px" />
+                                </Link>
+                            }
+                            <div className='podiumSecond'>
+                                <span className='text-light d-flex align-items-end pb-3 justify-content-center h-100'>
+                                    2
+                                </span>
                             </div>
-                        }
-                        <div className='podiumSecond'>
-                            <span className='text-light d-flex align-items-end pb-3 justify-content-center h-100'>
-                                2
-                            </span>
                         </div>
-                    </div>
-                    <div className='h-100 col-4 d-flex flex-column justify-content-end'>
-                        <div className='text-center'>
-                            <h5>
-                                { props.scores[0].user.username} <i className="fa-solid fa-trophy fa-xl mb-2" style={{ color: "#FFD43B" }}></i> 
-                            </h5>
-                            <h6 className="mb-1">
-                                ({props.scores[0].points} points)
-                            </h6>
-                            <img className="mb-1 imgFirst" src={ process.env.REACT_APP_URL_IMG + props.scores[0].user.avatar } alt="" height="50px" />
-                        </div>
-                        <div className='podiumFirst'>
-                            <span className='text-light d-flex align-items-end pb-3 justify-content-center h-100'>
-                                1
-                            </span>
-                        </div>
-                    </div>
-                    <div className='h-100 col-4 d-flex flex-column justify-content-end'>
-                        {
-                            props.scores.length > 2 && 
-                            <Link to={`/profils/${props.scores[2].user.id}`} className="text-center linkToProfil" style={{ color: 'inherit', textDecoration: 'inherit'}}>
+                        <div className='h-100 col-4 d-flex flex-column justify-content-end'>
+                            <Link to={`/profils/${props.scores[0].user.id}`} className="text-center linkToProfil" style={{ color: 'inherit', textDecoration: 'inherit'}}>
                                 <h5>
-                                    { props.scores[2].user.username}<i className="fa-solid fa-trophy" style={{ color: "#865e3c" }}></i> 
+                                    { props.scores[0].user.username} <i className="fa-solid fa-trophy fa-xl mb-2" style={{ color: "#FFD43B" }}></i> 
                                 </h5>
                                 <h6 className="mb-1">
-                                    ({props.scores[2].points} points)
+                                    ({props.scores[0].points} points)
                                 </h6>
-                                <img className="mb-1" src={ process.env.REACT_APP_URL_IMG + props.scores[2].user.avatar } alt="" height="50px" />
+                                <img className="mb-1 imgFirst" src={ process.env.REACT_APP_URL_IMG + props.scores[0].user.avatar } alt="" height="50px" />
                             </Link>
-                        }
-                        <div className='podiumThird'>
-                            <span className='text-light d-flex align-items-end pb-3 justify-content-center h-100'>
-                                3
-                            </span>
+                            <div className='podiumFirst'>
+                                <span className='text-light d-flex align-items-end pb-3 justify-content-center h-100'>
+                                    1
+                                </span>
+                            </div>
                         </div>
+                        <div className='h-100 col-4 d-flex flex-column justify-content-end'>
+                            {
+                                props.scores.length > 2 && 
+                                <Link to={`/profils/${props.scores[2].user.id}`} className="text-center linkToProfil" style={{ color: 'inherit', textDecoration: 'inherit'}}>
+                                    <h5>
+                                        { props.scores[2].user.username}<i className="fa-solid fa-trophy" style={{ color: "#865e3c" }}></i> 
+                                    </h5>
+                                    <h6 className="mb-1">
+                                        ({props.scores[2].points} points)
+                                    </h6>
+                                    <img className="mb-1" src={ process.env.REACT_APP_URL_IMG + props.scores[2].user.avatar } alt="" height="50px" />
+                                </Link>
+                            }
+                            <div className='podiumThird'>
+                                <span className='text-light d-flex align-items-end pb-3 justify-content-center h-100'>
+                                    3
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className='text-center pt-2'>
+                        <p>
+                            Félicitations à { props.scores[0].user.username} qui atteint la tête du classement !
+                        </p>
                     </div>
                 </div>
                 :
@@ -123,7 +130,9 @@ function Podium(props) {
                                     {index + 1}
                                 </h5>
                                 <h5 className='col-4 fw-normal'>
+                                    <Link to={`/profils/${score.user.id}`} className="text-center fw-bold linkToProfil" style={{ color: 'inherit', textDecoration: 'inherit'}}>
                                     { score.user.username}
+                                    </Link>
                                 </h5>
                                 <h5 className='col-5 fw-normal'>
                                     {score.points} points

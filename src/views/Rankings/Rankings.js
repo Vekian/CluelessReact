@@ -36,10 +36,13 @@ function Rankings() {
     return (
         <div>
           <div>
-            <div className='text-center'>
+            <div className='text-center d-flex flex-column'>
                 <h2>
                     Classements
                 </h2>
+                <p>
+                  Ici est affiché le classement des membres les plus actifs de la communauté, félicitations à eux !  
+                </p>
             </div>
             <div>
               < Podium setFilterScores={setFilterScores} scores={currentData ? currentData['hydra:member'] : null} />

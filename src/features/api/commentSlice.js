@@ -18,7 +18,7 @@ export const commentApi = createApi({
           }
         }
       },
-      invalidatesTags: (result, error, id) => [{ type: 'Comments', id }],
+      invalidatesTags: (result, error, id) => [{ type: 'Questions', id: 'LIST' }],
     }),
     updateComment: builder.mutation({
       query(args){
@@ -34,7 +34,7 @@ export const commentApi = createApi({
           }
         }
       },
-      invalidatesTags: (result, error, id) => [{ type: 'Comments', id }],
+      invalidatesTags: (result, error, id) => [{ type: 'Questions', id: result.answer ? result.answer.question.id : result.question.id }],
     }),
     deleteComment: builder.mutation({
       query(args) {

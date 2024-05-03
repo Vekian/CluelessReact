@@ -6,7 +6,7 @@ import TextArea from '../../Components/TextArea';
 import VoteElement from './VoteElement';
 import { Link } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
-import { useDeleteAnswerMutation, useUpdateAnswerMutation } from '../../features/api/answerSlice';
+import { useDeleteAnswerMutation, useUpdateAnswerMutation, useValidateAnswerMutation } from '../../features/api/answerSlice';
 import { useAddCommentMutation } from '../../features/api/commentSlice';
 
 function Answer(props) {
@@ -16,6 +16,7 @@ function Answer(props) {
     const [editAnswer] = useUpdateAnswerMutation();
     const [deleteAnswer] = useDeleteAnswerMutation();
     const [addComment] = useAddCommentMutation();
+    const [validateAnswer] = useValidateAnswerMutation();
 
    useEffect(() => {
     if (props.idEditor === `answerElm${props.answer.id}`){
@@ -45,6 +46,18 @@ function Answer(props) {
         }
    }
 
+   const validateAnswerData = async() => {
+        const body = {
+            status: "Validated",
+        };
+        const bodyJson = JSON.stringify(body);
+        const resultValidate = await validateAnswer({id: props.answer.id, token: user.token, body: bodyJson});
+        if (resultValidate.data){
+            props.refetch(props.idQuestion);
+            props.displayTextEditor("0", "0");
+        }
+   }
+
     const addCommentData = async () => {
         const body = {
             content: contentToSend,
@@ -59,6 +72,30 @@ function Answer(props) {
             props.displayTextEditor("0", "0");
         }
     }
+    function checkScoreBeValid() {
+        const question = props.question;
+        if (question) {
+            if (user.user.id !== question.user.id  || props.answer.status === "Validated") {
+                
+                return false;
+            }
+            else {
+                const answers = question.answers;
+                let alreadyAnswered = false;
+                for (let answer of answers) {
+                    if (answer.status === "Validated") {
+                        alreadyAnswered = true;
+                        break;
+                    }
+                }
+                if (alreadyAnswered){
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+ 
     return (
         <div className='answerDetail' id={`answerElm${props.answer.id}`}>
             <div className={props.answer.status === "Accepted" ? "d-flex flex-column col-10  p-2 colorAnswerContainer mb-2" : "d-flex flex-column col-10 answerContainer p-2 mb-2"} >
@@ -73,7 +110,7 @@ function Answer(props) {
                             lvl {getLvl(props.answer.user.popularity)}
                         </p>
                     </Link>
-                    {props.answer.status === "Pending" ? 
+                    {props.answer.status === "Validated" ? 
                         <span className='d-flex align-items-end'>
                             <img src={process.env.REACT_APP_URL_IMG + "Checkmark.svg.png"} alt="validée" height="25px" width="25px" className="ms-4" />
                             <span className="ms-2">Validée par l'auteur</span>
@@ -81,7 +118,8 @@ function Answer(props) {
                         : null
                     }
                     { user.user.id === props.answer.user.id && <button className='buttonStyle ms-4' onClick={() => setEditAnswerState(!editAnswerState)}>Editer la réponse</button>}
-                    { user.user.id === props.answer.user.id && <button className='buttonStyle ms-4 bg-danger' onClick={() => {deleteAnswerData({id: props.answer.id, token: user.token}); props.refetch(props.idQuestion); }}>Effacer la réponse</button>}
+                    { user.user.id === props.answer.user.id && <button className='buttonStyle ms-4 bg-danger' onClick={() => {deleteAnswerData({id: props.answer.id, token: user.token})}}>Effacer la réponse</button>}
+                    { checkScoreBeValid() && <button className='buttonStyle ms-4 bg-success' onClick={() => {validateAnswerData() }}>Valider la réponse</button>}
                     </div>
                     <div>
                         { getDateDetail(props.answer.createdAt)}

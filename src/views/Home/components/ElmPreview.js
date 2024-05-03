@@ -56,7 +56,10 @@ function ElmPreview(props) {
                         </p>
                         <i className="fa-solid fa-star ms-1" style={{color: "#FFD43B",}}></i>
                     </div>
-                    <img src={process.env.REACT_APP_URL_IMG + "Checkmark.svg.png"} height="40px" alt="checkmark"/>
+                    {
+                        props.elm.status === "Validated" &&
+                        <img src={process.env.REACT_APP_URL_IMG + "Checkmark.svg.png"} height="40px" alt="checkmark"/>
+                    }
                 </div>
                 <div className="d-flex justify-content-center">
                     <p className="commentsPreviewElm me-3">

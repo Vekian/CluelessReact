@@ -5,24 +5,25 @@ export const notificationApi = createApi({
   reducerPath: 'notificationApi',
   baseQuery: fetchBaseQuery({ baseUrl: `${process.env.REACT_APP_URL}api/notifications` }),
   endpoints: (builder) => ({
-    getNotification: builder.query({
-      query: (id) => `/${id}`,
-      providesTags: (result, error, id) => [{ type: 'Notification', id }] 
-    }),
-    getNotifications: builder.query({
-      query(parameters) {
-        const { filter, token} = parameters;
-        return {
-          url: `${filter}`,
-          headers: {
-            'Authorization': `bearer ${token}`
+    updateNotification: builder.mutation({
+        query(args){
+          const { id, token, body } = args
+          return {
+            url: `/${id}`,
+            method: 'PATCH',
+            body: body,
+            headers: {
+              'Accept': 'application/ld+json',
+              'Content-Type': 'application/merge-patch+json',
+              'Authorization': `bearer ${token}`
+            }
           }
-        }
-      },
-    }),
+        },
+        invalidatesTags: (result, error, id) => [{ type: 'Comments', id }],
+      }),
   }),
 })
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetNotificationQuery, useGetNotificationsQuery } = notificationApi
+export const { useUpdateNotificationMutation } = notificationApi
