@@ -1,9 +1,13 @@
 import getStripe from '../../lib/getStripe';
 import { useSelector } from 'react-redux';
+import { useState } from 'react';
 import './Premium.css';
+import { Comment } from 'react-loader-spinner';
 
 export default function Premium() {
     const user = useSelector(state => state.user);
+    const [isFetchingMensuel, setIsFetchingMensuel] = useState(false);
+    const [isFetchingAnnuel, setIsFetchingAnnuel] = useState(false);
 
     async function handleCheckout(sessionId) {
         const stripe = await getStripe();
@@ -14,6 +18,7 @@ export default function Premium() {
       }
     
     function fetchSession(type){
+        type === "mensuel" ? setIsFetchingMensuel(true) : setIsFetchingAnnuel(true);
         let bodyJson = JSON.stringify({
             id: user.user.id,
             months: type === "mensuel" ? 1 : 12,
@@ -104,7 +109,23 @@ export default function Premium() {
                                     10€ par mois
                                 </p>
                             </div>
-                            <button className="buttonPremium col-6 offset-3" onClick={() => fetchSession('mensuel')}>S'abonner</button>
+                            {
+                                isFetchingMensuel ? 
+                                <div className='d-flex justify-content-center'>
+                                    <Comment
+                                        visible={true}
+                                        height="120"
+                                        width="120"
+                                        ariaLabel="comment-loading"
+                                        wrapperStyle={{}}
+                                        wrapperClass="comment-wrapper"
+                                        color="#fff"
+                                        backgroundColor="var(--tertiaryColor)"
+                                    />
+                                </div>
+                                :
+                                <button className="buttonPremium col-6 offset-3" onClick={() => fetchSession('mensuel')}>S'abonner</button>
+                            }
                         </div>
                     </div>
                     <div className='col-6'>
@@ -117,7 +138,23 @@ export default function Premium() {
                                     100€ par an
                                 </p>
                             </div>
-                            <button className="buttonPremium col-6 offset-3" onClick={() => fetchSession('annuel')}>S'abonner</button>
+                            {
+                                isFetchingAnnuel ? 
+                                <div className='d-flex justify-content-center'>
+                                   <Comment
+                                        visible={true}
+                                        height="120"
+                                        width="120"
+                                        ariaLabel="comment-loading"
+                                        wrapperStyle={{}}
+                                        wrapperClass="comment-wrapper"
+                                        color="#fff"
+                                        backgroundColor="var(--tertiaryColor)"
+                                    /> 
+                                </div>
+                                :
+                                <button className="buttonPremium col-6 offset-3" onClick={() => fetchSession('annuel')}>S'abonner</button>
+                            }
                         </div> 
                     </div>
                 </div>

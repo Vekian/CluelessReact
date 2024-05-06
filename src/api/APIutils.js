@@ -1,4 +1,5 @@
 import moment from 'moment-timezone';
+import 'moment/locale/fr'; 
 
 
 export function getDateDetail (dateData) {
@@ -30,6 +31,11 @@ export function getDateDetail (dateData) {
     return resultString;
 }
 
+export function getFormatDatePremium(date) {
+  moment.locale('fr');
+  const formatedDate = moment(date).format('LL');
+  return formatedDate
+}
 
 export function getLvl(popularity) {
   let lvl = 1;

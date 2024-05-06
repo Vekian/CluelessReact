@@ -10,6 +10,7 @@ import Rankings from '../views/Rankings/Rankings';
 import Helpers from '../views/Helpers/Helpers';
 import Help from '../views/Help/Help';
 import Premium from '../views/Premium/Premium';
+import Success from '../views/Premium/Success';
 
 export default function Main() {
     return(
@@ -25,6 +26,7 @@ export default function Main() {
                 <Route path="/helpers" element={< Helpers />} />
                 <Route path="/help" element={< Help />} />
                 <Route path="/premium" element={< Premium />} />
+                <Route path="/success" element={< Success />} />
                 <Route path="/create/question" element={< Editor type={"question"} />} />
                 <Route path="/create/clue" element={< Editor type={"clue"} />} />
             </Routes>
