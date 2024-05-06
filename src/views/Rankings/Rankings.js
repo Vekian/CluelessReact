@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Podium from './Podium';
 import Statistiques from './Statistiques';
 
-function Rankings() {
+export default function Rankings() {
   const [filterScores, setFilterScores] = useState(["&page=1", "?order[points]=desc&exists[category]=false"]);
   const {currentData, error, isFetching, isSuccess} =  useGetScoresQuery({ page: filterScores[0], filter: filterScores[1]});
     /*const options = {
@@ -54,5 +54,3 @@ function Rankings() {
         </div>
     )
 }
-
-export default Rankings;

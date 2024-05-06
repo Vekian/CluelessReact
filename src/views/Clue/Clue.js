@@ -3,15 +3,15 @@ import { useParams, Link } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { getDateDetail, getLvl } from '../../api/APIutils' ;
-import Comment from '../../Components/Comment';
-import TextArea from '../../Components/TextArea';
+import Comment from '../Comment';
+import TextArea from '../WriteNew/TextArea';
 import VoteElement from '../Question/VoteElement';
 import { useGetClueQuery } from '../../features/api/clueSlice';
 import { useAddCommentMutation } from '../../features/api/commentSlice';
 import { loadingElm } from '../../ui/UIutils';
 import { voteApi } from '../../features/api/voteSlice';
 
-function Clue() {
+export default function Clue() {
     const user = useSelector(state => state.user);
     const [idEditor, setIdEditor] = useState();
     const [contentToSend, setContentToSend] = useState();
@@ -166,5 +166,3 @@ function Clue() {
         </div>
     )
 }
-
-export default Clue;

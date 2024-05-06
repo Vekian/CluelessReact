@@ -13,7 +13,7 @@ import { ThreeDots } from 'react-loader-spinner';
 import { useContext } from "react";
 import { UIContext } from "../../Components/UIProvider";
 
-function Statistiques() {
+export default function Statistiques() {
     const {currentData, error, isFetching} = useGetStatsQuery();
     const { clueMode } = useContext(UIContext);
 
@@ -143,5 +143,3 @@ function Statistiques() {
     )
 
 }
-
-export default Statistiques;

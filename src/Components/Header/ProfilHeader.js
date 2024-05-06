@@ -4,7 +4,7 @@ import { useDispatch} from 'react-redux';
 import { deleteUserMe} from '../../features/user/userSlice';
 import { googleLogout } from '@react-oauth/google';
 
-function ProfilHeader (props) {
+export default function ProfilHeader (props) {
     const dispatch = useDispatch();
 
 
@@ -42,5 +42,3 @@ function ProfilHeader (props) {
         </div>
     )
 }
-
-export default ProfilHeader;

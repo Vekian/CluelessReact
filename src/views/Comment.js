@@ -1,14 +1,14 @@
 import './Comment.css';
 import { getDateDetail, getLvl } from '../api/APIutils' ;
-import VoteElement from '../views/Question/VoteElement';
+import VoteElement from './Question/VoteElement';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import React, { useState } from 'react';
 import { useUpdateCommentMutation } from '../features/api/commentSlice';
 import { useDeleteCommentMutation } from '../features/api/commentSlice';
-import TextArea from './TextArea';
+import TextArea from './WriteNew/TextArea';
 
-function Comment(props) {
+export default function Comment(props) {
     const user = useSelector(state => state.user);
     const [editCommentState, setEditCommentState] = useState(false);
     const [contentToSend, setContentToSend] = useState();
@@ -78,5 +78,3 @@ function Comment(props) {
         
     )
 }
-
-export default Comment;

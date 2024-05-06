@@ -1,11 +1,9 @@
 import './Helpers.css';
 
-function Helpers() {
+export default function Helpers() {
     return (
         <div>
             
         </div>
     )
 }
-
-export default Helpers;

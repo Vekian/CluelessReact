@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { loadUserProfil, loadUserMe } from "../../features/user/userSlice";
 
 
-function EditPicture(props) {
+export default function EditPicture(props) {
     const dispatch = useDispatch();
     const { register, formState: { errors }, handleSubmit } = useForm();
     const onSubmit = (data) => {
@@ -58,5 +58,3 @@ function EditPicture(props) {
         </form>
     )
 }
-
-export default EditPicture;

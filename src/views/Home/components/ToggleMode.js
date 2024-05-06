@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { UIContext } from "../../../Components/UIProvider";
 
-function ToggleMode() {
+export default function ToggleMode() {
     const {clueMode, toggleClueMode} = useContext(UIContext);
 
     return(
@@ -16,5 +16,3 @@ function ToggleMode() {
         </div>
     )
 }
-
-export default ToggleMode;

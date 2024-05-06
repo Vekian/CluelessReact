@@ -7,7 +7,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 
-function Sidemenu() {
+export default function Sidemenu() {
     const {data, error, isFetching} = useGetCategoriesQuery();
     const {changeFilterQuestion, changeFilterClue, clueMode, toggleClueMode } = useContext(UIContext);
     const location = useLocation();
@@ -104,7 +104,7 @@ function Sidemenu() {
                             <h5 className='ps-2 ps-xxl-0'>Aide</h5>
                         </Link>
                     </li>
-                    <li className='active itemMenu ps-1'>
+                    <li className='active itemPremium ps-1'>
                         <Link to="/premium" className={location.pathname === "/premium" ? "item-active d-flex align-items-center pt-1 pb-1" : "d-flex align-items-center pt-1 pb-1"}  style={{ color: 'inherit', textDecoration: 'inherit'}} >
                             <i className="fa-solid fa-crown me-xxl-3"></i>
                             <h5 className='ps-2 ps-xxl-0'>Devenir premium</h5>
@@ -125,5 +125,3 @@ function Sidemenu() {
         </div>
     );
 }
-
-export default Sidemenu;

@@ -9,7 +9,7 @@ import { UIContext } from './UIProvider';
 import Login from '../Components/Header/Login/Login';
 import { GoogleOAuthProvider } from '@react-oauth/google';
 
-function App() {
+export default function App() {
   const {darkMode, clueMode} = useContext(UIContext);
         
 
@@ -33,5 +33,3 @@ function App() {
     </div>
   );
 }
-
-export default App;

@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { loadSubCategories, loadCategories, removeCategories} from '../../features/user/userSlice';
 
 
-function AddCategories() {
+export default function AddCategories() {
     const userProfil = useSelector(state => state.user.userProfil);
     const categories = categoryApi.endpoints.getCategories.useQueryState();
     const dispatch = useDispatch();
@@ -115,4 +115,3 @@ function AddCategories() {
         </div>
     )
 }
-export default AddCategories;

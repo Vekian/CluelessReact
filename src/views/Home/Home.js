@@ -6,7 +6,7 @@ import { UIContext } from "../../Components/UIProvider";
 import Select from "./components/Select";
 import ToggleMode from "./components/ToggleMode";
 
-function Home() {
+export default function Home() {
     const { clueMode } = useContext(UIContext);
 
     return (
@@ -41,5 +41,3 @@ function Home() {
         </div>
     )
 }
-
-export default Home;

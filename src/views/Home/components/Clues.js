@@ -6,7 +6,7 @@ import { UIContext } from '../../../Components/UIProvider';
 import Paginator from './Paginator';
 import { Comment } from 'react-loader-spinner';
 
-function Clues() {
+export default function Clues() {
     const {filterClue, changeFilterClue} = useContext(UIContext);
     const {currentData, error, isFetching, isSuccess} = useGetCluesQuery({ page: filterClue[0], filter: filterClue[1]});
 
@@ -32,10 +32,17 @@ function Clues() {
                             Problème de chargement des questions
                         </div> 
                         :
-                        currentData['hydra:member'].map(clue => 
-                        <Link to={`/clue/${clue.id}`} style={{ color: 'inherit', textDecoration: 'inherit'}}  key={clue.id + "clue"}>
-                            < CluePreview elm={clue} type={"clue"}/>
-                        </Link>
+                        currentData && currentData['hydra:member'].length === 0 ?
+                            <div className='d-flex align-items-center justify-content-center mt-5'>
+                                <p>
+                                    Aucune actuce ne correspond à vos critères de recherche
+                                </p>
+                            </div>
+                            :
+                            currentData['hydra:member'].map(clue => 
+                            <Link to={`/clue/${clue.id}`} style={{ color: 'inherit', textDecoration: 'inherit'}}  key={clue.id + "clue"}>
+                                < CluePreview elm={clue} type={"clue"}/>
+                            </Link>
                 )}
             </div>
             {
@@ -56,4 +63,3 @@ function Clues() {
         </div>
     )
 }
-export default Clues;

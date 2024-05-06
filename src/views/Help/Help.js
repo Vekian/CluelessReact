@@ -1,6 +1,4 @@
 
-function Help(){
+export default function Help(){
 
 }
-
-export default Help;

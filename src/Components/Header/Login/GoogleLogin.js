@@ -1,6 +1,6 @@
 import { useGoogleLogin } from '@react-oauth/google';
 
-function GoogleLogin(props) {
+export default function GoogleLogin(props) {
     const loginGoogle = useGoogleLogin({
         onSuccess: (codeResponse) => sendAccesTokenGoogle(codeResponse),
         onError: (error) => console.log('Login Failed:', error)
@@ -34,5 +34,3 @@ function GoogleLogin(props) {
     )
 
 }
-
-export default GoogleLogin;

@@ -8,7 +8,7 @@ import Register from './Register';
 import PasswordForgot from './PasswordForgot';
 import { Comment } from 'react-loader-spinner';
 
-function Login() {
+export default function Login() {
     const dispatch = useDispatch();
     const [isSigning, setIsSigning] = useState( false );
     const [isPasswordForgot, setIsPasswordForgot] = useState( false );
@@ -176,5 +176,3 @@ function Login() {
     )
     
 }
-
-export default Login;

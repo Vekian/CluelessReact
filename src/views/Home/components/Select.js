@@ -2,7 +2,7 @@ import { activeElm } from '../../../ui/UIutils';
 import { useContext } from "react";
 import { UIContext } from '../../../Components/UIProvider';
 
-function Select() {
+export default function Select() {
     const { changeFilterQuestion, clueMode, changeFilterClue} = useContext(UIContext);
 
     return (
@@ -31,5 +31,3 @@ function Select() {
     )
 
 }
-
-export default Select;

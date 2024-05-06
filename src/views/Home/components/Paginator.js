@@ -1,4 +1,4 @@
-function Paginator(props) {
+export default function Paginator(props) {
 
     function getPageNumber (props) {
         let string= props.pagination['hydra:last'];
@@ -48,7 +48,7 @@ function Paginator(props) {
 
     return( 
         <ul className='d-flex listPages mt-1 ms-2'>
-            {getPages(props).map(page => 
+            {props.pagination && getPages(props).map(page => 
                 page !== "..." ? 
                 <li key={page + "page"} className={`pageItem ${ (encodeArg(props.pagination['@id']) ===`/api/questions${props.filter[1] === "" ? "?" : `${props.filter[1]}&` }page=${page}` || encodeArg(props.pagination['@id']) ===`/api/clues${props.filter[1] === "" ? "?" : `${props.filter[1]}&` }page=${page}`) && "active"}`} onClick={(event) => changeFilterData(page)}>{page}</li>
                 : 
@@ -56,5 +56,3 @@ function Paginator(props) {
         </ul>
     )
 }
-
-export default Paginator;

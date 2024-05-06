@@ -5,7 +5,7 @@ import { loadUserProfil } from "../../features/user/userSlice";
 import AddCategories from "./AddCategories";
 
 
-function EditProfil(props) {
+export default function EditProfil(props) {
     const dispatch = useDispatch();
     const { register, formState: { errors }, handleSubmit } = useForm();
     const user = props.user;
@@ -137,5 +137,3 @@ function EditProfil(props) {
         </div>
     )
 }
-
-export default EditProfil;

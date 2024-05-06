@@ -1,6 +1,6 @@
 import { getDateDetail, getLvl } from '../../../api/APIutils' ;
 
-function ElmPreview(props) {
+export default function ElmPreview(props) {
 
     return(
         <div className="d-flex elmPreviewCard mb-2  me-3">
@@ -77,5 +77,3 @@ function ElmPreview(props) {
         </div>
     )
 }
-
-export default ElmPreview;

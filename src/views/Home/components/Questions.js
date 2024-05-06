@@ -7,7 +7,7 @@ import { UIContext } from '../../../Components/UIProvider';
 import Paginator from './Paginator';
 import { Comment } from 'react-loader-spinner';
 
-function Questions() {
+export default function Questions() {
     const {filterQuestion, changeFilterQuestion} = useContext(UIContext);
     const {currentData, error, isFetching, isSuccess} =  useGetQuestionsQuery({ page: filterQuestion[0], filter: filterQuestion[1]});
 
@@ -34,11 +34,18 @@ function Questions() {
                             Problème de chargement des questions
                         </div> 
                         :
-                        currentData && currentData['hydra:member'].map(question => 
-                            <Link  to={`/question/${question.id}`} style={{ color: 'inherit', textDecoration: 'inherit'}}  key={question.id + "question"}>
-                                < ElmPreview elm={question} type={"question"}/>
-                            </Link>
-                        )
+                        currentData && currentData['hydra:member'].length === 0 ?
+                            <div className='d-flex align-items-center justify-content-center mt-5'>
+                                <p>
+                                    Aucune question ne correspond à vos critères de recherche
+                                </p>
+                            </div>
+                            :
+                            currentData['hydra:member'].map(question => 
+                                <Link  to={`/question/${question.id}`} style={{ color: 'inherit', textDecoration: 'inherit'}}  key={question.id + "question"}>
+                                    < ElmPreview elm={question} type={"question"}/>
+                                </Link>
+                            )
                 }
             </div>
             {
@@ -59,5 +66,3 @@ function Questions() {
         </div>
     )
 }
-
-export default Questions;

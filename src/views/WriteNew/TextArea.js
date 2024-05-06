@@ -2,7 +2,7 @@ import React from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
-function TextArea(props) {
+export default function TextArea(props) {
 
   const modules = {
       toolbar: [
@@ -36,5 +36,3 @@ function TextArea(props) {
       </div>
   );
 }
-
-export default TextArea;

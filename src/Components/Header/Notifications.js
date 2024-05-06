@@ -5,7 +5,7 @@ import { getRoute } from '../../api/APIutils';
 import { changeNotification } from '../../features/user/userSlice';
 import { useUpdateNotificationMutation } from '../../features/api/notificationSlice';
 
-function Notifications(props){
+export default function Notifications(props){
     const [editNotification] = useUpdateNotificationMutation();
     const dispatch = useDispatch();
 
@@ -62,5 +62,3 @@ function Notifications(props){
         
     )
 }
-
-export default Notifications;

@@ -4,7 +4,7 @@ import { useAddVoteMutation } from '../../features/api/voteSlice';
 import { useUpdateVoteMutation } from '../../features/api/voteSlice';
 import { useDeleteVoteMutation } from '../../features/api/voteSlice';
 
-function VoteElement(props) {
+export default function VoteElement(props) {
     const user = useSelector(state => state.user);
     const votes = voteApi.endpoints.getVotes.useQueryState({url: `?${props.typeParent}=${props.idParentElm}`, token: user.token});
     const [updateVote] = useUpdateVoteMutation();
@@ -99,5 +99,3 @@ function VoteElement(props) {
         </div>
     )
 }
-
-export default VoteElement;

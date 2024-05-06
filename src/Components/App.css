@@ -30,10 +30,14 @@
 }
 
 .App.clue {
-    --primaryColor: #0e8383;
+    --primaryColor: #10a3a3;
     --secondaryColor: #5f84fc;
-    --tertiaryColor: #054141;
-    --primaryColor-with-opacity: #0e83836b;
+    --tertiaryColor: #086464;
+    --primaryColor-with-opacity: #158b8b62;
+}
+
+.App.dark.clue {
+    --primaryColor-with-opacity: #3b66664d;
 }
 
 

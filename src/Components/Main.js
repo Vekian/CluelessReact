@@ -11,7 +11,7 @@ import Helpers from '../views/Helpers/Helpers';
 import Help from '../views/Help/Help';
 import Premium from '../views/Premium/Premium';
 
-function Main() {
+export default function Main() {
     return(
         <div className='mainContent ps-xxl-5 ps-1 pe-xxl-5 pe-1'>
             <Routes>
@@ -31,5 +31,3 @@ function Main() {
         </div>
     );
 }
-
-export default Main;

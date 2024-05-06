@@ -10,12 +10,12 @@ import { useAddCommentMutation } from '../../features/api/commentSlice';
 import { useGetQuestionQuery } from '../../features/api/questionSlice';
 import { voteApi } from '../../features/api/voteSlice';
 import Answer from './Answer';
-import Comment from '../../Components/Comment';
-import TextArea from '../../Components/TextArea';
+import Comment from '../Comment';
+import TextArea from '../WriteNew/TextArea';
 import VoteElement from './VoteElement';
 import { loadingElm, displayElement } from '../../ui/UIutils';
 
-function Question() {
+export default function Question() {
     const navigate = useNavigate();
     const [editQuestionState, setEditQuestionState] = useState(false);
     const [contentToSend, setContentToSend] = useState();
@@ -307,5 +307,3 @@ function Question() {
         </div>
     )
 }
-
-export default Question;

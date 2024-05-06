@@ -1,5 +1,5 @@
 import "./Editor.css"
-import TextArea from "../../Components/TextArea";
+import TextArea from "./TextArea";
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useAddQuestionMutation } from "../../features/api/questionSlice";
@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { loadContentToSend, loadTitleToSend, removeQuestionToSend } from '../../features/editor/editorSlice';
 import AddCategories from "./AddCategories";
 
-function Editor(props) {
+export default function Editor(props) {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [contentToSend, setContentToSend] = useState();
@@ -157,5 +157,3 @@ function Editor(props) {
         </div>
     )
 }
-
-export default Editor;

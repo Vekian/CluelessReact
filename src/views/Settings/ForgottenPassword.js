@@ -3,7 +3,7 @@ import { fetchData } from "../../api/APIutils";
 import { useSelector } from 'react-redux';
 import React, { useState } from 'react';
 
-function ForgottenPassword() {
+export default function ForgottenPassword() {
     const { register, formState: { errors }, handleSubmit } = useForm();
     const [errorState, setErrorState] = useState("");
     const [successState, setSuccessState] = useState("");
@@ -54,5 +54,3 @@ function ForgottenPassword() {
         </div>
     )
 }
-
-export default ForgottenPassword;

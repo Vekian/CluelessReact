@@ -12,6 +12,21 @@
     overflow: hidden;
 }
 
+.itemPremium {
+    background-color: var(--tertiaryColor);
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+}
+
+.itemPremium:hover .item-active, .itemPremium:hover{
+    background-color: var(--primaryColor);
+}
+
+.itemPremium  .item-active, .itemPremium {
+    background-color: var(--tertiaryColor);
+}
+
 .sideMenu h6:hover, .itemMenu:hover {
     border-radius: 10px;
     background-color: var(--dark-with-opacity);

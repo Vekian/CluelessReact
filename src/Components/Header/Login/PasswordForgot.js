@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { useState } from 'react';
 import { Comment } from 'react-loader-spinner';
 
-function PasswordForgot(props) {
+export default function PasswordForgot(props) {
     const { register, formState: { errors }, handleSubmit } = useForm()
     const onSubmit = (data) => fetchData(data);
     const [isSent, setIsSent] = useState( "" );
@@ -95,5 +95,3 @@ function PasswordForgot(props) {
         </div>
     )
 }
-
-export default PasswordForgot;

@@ -2,7 +2,7 @@ import { ThreeDots } from 'react-loader-spinner';
 import { useGetCategoriesQuery } from '../../features/api/categorySlice';
 import { Link } from 'react-router-dom';
 
-function Podium(props) {
+export default function Podium(props) {
     const {currentData} =  useGetCategoriesQuery();
 
     function getCategoryScore(e){
@@ -147,5 +147,3 @@ function Podium(props) {
         </div>
     )
 }
-
-export default Podium;

@@ -1,7 +1,7 @@
 import './Submenu.css';
 import { Link, useLocation } from 'react-router-dom';
 
-function SubMenu() {
+export default function SubMenu() {
     const location = useLocation();
 
     function displayMenu(event) {
@@ -47,5 +47,3 @@ function SubMenu() {
         </div>
     )
 }
-
-export default SubMenu;

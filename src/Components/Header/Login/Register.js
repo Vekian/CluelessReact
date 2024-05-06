@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { fetchData } from '../../../api/APIutils';
 
-function Register(props) {
+export default function Register(props) {
     const { register, watch, formState: { errors }, handleSubmit } = useForm();
     const onSubmitSignIn = (data) => { props.setIsSending(true)
         fetchData('register', 'POST', props.loadData, '', data)};
@@ -76,5 +76,3 @@ function Register(props) {
         </div>
     )
 }
-
-export default Register;

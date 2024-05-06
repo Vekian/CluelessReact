@@ -10,7 +10,7 @@ import EditPicture from "./EditPicture";
 import ScoreProfil from "./ScoreProfil";
 import { ThreeDots } from 'react-loader-spinner';
 
-function Profil() {
+export default function Profil() {
     const dispatch = useDispatch();
     const location = useLocation();
     const userProfil= useSelector(state => state.user.userProfil);
@@ -218,5 +218,3 @@ function Profil() {
         </div>
     )
 }
-
-export default Profil;

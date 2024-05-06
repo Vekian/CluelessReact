@@ -3,7 +3,7 @@ import {  useDispatch, useSelector } from 'react-redux';
 import { loadSubCategories, loadCategoriesToSend, removeCategoriesToSend} from '../../features/editor/editorSlice';
 
 
-function AddCategories() {
+export default function AddCategories() {
     const writeQuestion = useSelector(state => state.editor.writeQuestion);
     const categories = categoryApi.endpoints.getCategories.useQueryState();
     const dispatch = useDispatch();
@@ -101,4 +101,3 @@ function AddCategories() {
         </div>
     )
 }
-export default AddCategories;

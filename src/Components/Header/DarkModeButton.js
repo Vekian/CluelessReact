@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { UIContext } from '../UIProvider';
 import DarkModeToggle from "react-dark-mode-toggle";
 
-function DarkModeButton(){
+export default function DarkModeButton(){
     const {darkMode, toggleDarkMode} = useContext(UIContext);
 
     return (
@@ -13,5 +13,3 @@ function DarkModeButton(){
         />
     )
 }
-
-export default DarkModeButton;

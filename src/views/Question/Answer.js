@@ -1,15 +1,15 @@
 import { getDateDetail, getLvl } from '../../api/APIutils' ;
 import { displayElement } from '../../ui/UIutils';
 import { useSelector } from 'react-redux';
-import Comment from '../../Components/Comment';
-import TextArea from '../../Components/TextArea';
+import Comment from '../Comment';
+import TextArea from '../WriteNew/TextArea';
 import VoteElement from './VoteElement';
 import { Link } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { useDeleteAnswerMutation, useUpdateAnswerMutation, useValidateAnswerMutation } from '../../features/api/answerSlice';
 import { useAddCommentMutation } from '../../features/api/commentSlice';
 
-function Answer(props) {
+export default function Answer(props) {
     const user = useSelector(state => state.user);
     const [editAnswerState, setEditAnswerState] = useState(false);
     const [contentToSend, setContentToSend] = useState();
@@ -184,5 +184,3 @@ function Answer(props) {
         </div>
     )
 }
-
-export default Answer;

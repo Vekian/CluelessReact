@@ -2,7 +2,7 @@ import './Settings.css';
 import ChangePassword from './ChangePassword';
 import ForgottenPassword from './ForgottenPassword';
 
-function Settings() {
+export default function Settings() {
     
     return (
         <div className="ms-3 mt-3">
@@ -24,5 +24,3 @@ function Settings() {
         </div>
     )
 }
-
-export default Settings;

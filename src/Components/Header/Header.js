@@ -8,7 +8,7 @@ import { displaySideMenu } from '../../ui/UIutils';
 import Notifications from './Notifications';
 import DarkModeButton from './DarkModeButton';
 
-function Header () {
+export default function Header () {
     const categories = categoryApi.endpoints.getCategories.useQueryState();
     const user = useSelector(state => state.user);
     const {toggleDarkMode, clueMode, changeFilterQuestion, changeFilterClue} = useContext(UIContext);
@@ -24,7 +24,13 @@ function Header () {
         event.preventDefault();
         const idCategory = document.getElementById('categories').value;
         const inputSearch = document.getElementById('searchInput').value;
-        let filter = "?search=" + inputSearch + "&tags.category.id=" + idCategory;
+        let filter = "";
+        if (idCategory && !inputSearch){
+            filter = "?tags.category.id=" + idCategory;
+        }
+        else {
+            filter = "?search=" + inputSearch + "&tags.category.id=" + idCategory;
+        }
         let page = "&page=1";
         clueMode ? changeFilterClue([page, filter]) : changeFilterQuestion([page, filter]);
     }
@@ -91,5 +97,3 @@ function Header () {
         </header>
     );
 };
-
-export default Header;
