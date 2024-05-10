@@ -8,6 +8,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { UIContext } from './UIProvider';
 import Login from '../Components/Header/Login/Login';
 import { GoogleOAuthProvider } from '@react-oauth/google';
+import Admin from '../views/Admin/Admin';
 
 export default function App() {
   const {darkMode, clueMode} = useContext(UIContext);
@@ -16,7 +17,10 @@ export default function App() {
   return (
     <div className={`App vh-100 ${darkMode ? 'dark' : 'light'} ${clueMode && "clue"}`}>
       <GoogleOAuthProvider clientId="1047880689996-3jmsj1nv0ekn34ur1h2r1rjonbbvgiuf.apps.googleusercontent.com">
-        < Router >
+      <Router basename="/admin">
+        <Admin />
+      </Router>
+        < Router basename='/app'>
         < Header />
         
               < SubMenu />

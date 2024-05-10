@@ -5,6 +5,7 @@ import { UIContext } from '../UIProvider';
 import { loadingElm, displayElement } from '../../ui/UIutils';
 import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { jwtDecode } from "jwt-decode";
 
 
 export default function Sidemenu() {
@@ -12,6 +13,7 @@ export default function Sidemenu() {
     const {changeFilterQuestion, changeFilterClue, clueMode, toggleClueMode } = useContext(UIContext);
     const location = useLocation();
     const user = useSelector(state => state.user.user);
+    const token = useSelector(state => state.user.token)
 
     function searchQuestions(event){
         event.stopPropagation();
@@ -59,7 +61,7 @@ export default function Sidemenu() {
                 </div>
                 :
                 data['hydra:member'].map(category => 
-                    category.categories.length > 0 ? 
+                    category.categories.length > 0 && category.main ? 
                         <li key={category.id + category.name} className='active categoryContainer'>
                             <ul  className="listCategories" >
                                 <div className="d-flex align-items-center">
@@ -84,7 +86,15 @@ export default function Sidemenu() {
                             </ul>
                         </li> 
                         : 
-                        null
+                        category.main &&
+                        <li key={category.id + category.name} className='active categoryContainer'>
+                            <Link to="/"  className="d-flex col-10 align-items-center ps-2 pt-1 pb-1 itemMenu" data-category-id={category.id} onClick={(event) => searchQuestions(event)} style={{ color: 'inherit', textDecoration: 'inherit'}}>
+                                <i className={category.icon + " me-xxl-3 pe-1 col-3 col-xxl-2 "}></i> 
+                                <h5 className="col-9 col-xxl-10">
+                                    {category.name}
+                                </h5>
+                            </Link>
+                        </li> 
                     )}
             </ul>
             <span className="separator d-block"></span>
@@ -117,6 +127,15 @@ export default function Sidemenu() {
                                 <i className="fa-solid fa-wrench me-xxl-3"></i>
                                 <h5 className='ps-2 ps-xxl-0'>Paramètres de compte</h5>
                             </Link>
+                        </li>
+                    }
+                    {
+                        (token !== "" && jwtDecode(token).roles.includes("ROLE_ADMIN")) &&
+                        <li className='active itemMenu ps-1'>
+                            <a href="http://localhost:3000/admin" className='d-flex align-items-center pt-1 pb-1' style={{ color: 'inherit', textDecoration: 'inherit'}} >
+                            <i className="fa-solid fa-screwdriver-wrench me-xxl-3"></i>
+                                <h5 className='ps-2 ps-xxl-0'>Administration</h5>
+                            </a>
                         </li>
                     }
                 </ul>

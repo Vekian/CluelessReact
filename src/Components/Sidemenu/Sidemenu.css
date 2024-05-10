@@ -46,7 +46,7 @@
 
 .sideMenu li.active, .listComments li.active {
     opacity: 1;
-    max-height: 200px;
+    max-height: 300px;
 }
 
 .sideMenu ul {
