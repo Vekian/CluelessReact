@@ -26,3 +26,16 @@ input[type="password"]:focus {
         left: 100%; /* Termine à l'extérieur de la boîte après avoir traversé */
     }
 }
+
+.linkSettings {
+    border-left: 1px solid var(--dark-with-opacity);
+    border-right: 1px solid var(--dark-with-opacity);
+    border-top: 1px solid var(--dark-with-opacity);
+    padding: 8px;
+    border-radius: 10px 30px 0px 0px;
+}
+
+.linkSettings.active {
+    background-color: var(--primaryColor);
+    color: white !important;
+}

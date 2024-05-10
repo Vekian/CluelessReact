@@ -1,25 +1,33 @@
 import './Settings.css';
-import ChangePassword from './ChangePassword';
-import ForgottenPassword from './ForgottenPassword';
+import Account from './Account';
+import Subscription from './Subscription';
+import { Routes, Route, Link, useLocation } from 'react-router-dom';
 
 export default function Settings() {
+    const location = useLocation();
     
     return (
         <div className="ms-3 mt-3">
             <h2>
                 Paramètres
             </h2>
-            <div className='settingsItem'>
-                <h4>
-                    Changer de mot de passe
+            <div className='d-flex'>
+            <Link to="/settings/" style={{ color: 'inherit', textDecoration: 'inherit'}} className={`linkSettings ${location.pathname === "/settings/" && "active"}`} >
+                <h4 className='me-3'>
+                    Compte
                 </h4>
-                < ChangePassword />
+            </Link>
+            <Link to="/settings/subscription" style={{ color: 'inherit', textDecoration: 'inherit'}} className={`linkSettings ${location.pathname === "/settings/subscription" && "active"}`}>
+                <h4>
+                    Abonnement
+                </h4>
+            </Link>    
             </div>
-            <div className='settingsItem mt-3'>
-                <h4>
-                    Mot de passe oublié
-                </h4>
-                < ForgottenPassword />
+            <div>
+                < Routes>
+                    <Route path="/" element={< Account />} />
+                    <Route path="/subscription" element={< Subscription />} />
+                </Routes>
             </div>
         </div>
     )

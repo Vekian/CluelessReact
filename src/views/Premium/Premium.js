@@ -1,4 +1,5 @@
 import getStripe from '../../lib/getStripe';
+import { compareValiditySubscription } from '../../api/APIutils';
 import { useSelector } from 'react-redux';
 import { useState } from 'react';
 import './Premium.css';
@@ -124,6 +125,11 @@ export default function Premium() {
                                     />
                                 </div>
                                 :
+                                user.user.subscriptions && compareValiditySubscription(user.user.subscriptions[0]?.expiredAt) ?
+                                <button className="buttonPremium col-6 offset-3" disabled>
+                                    Vous êtes déjà abonnés
+                                </button>
+                                :
                                 <button className="buttonPremium col-6 offset-3" onClick={() => fetchSession('mensuel')}>S'abonner</button>
                             }
                         </div>
@@ -152,6 +158,11 @@ export default function Premium() {
                                         backgroundColor="var(--tertiaryColor)"
                                     /> 
                                 </div>
+                                :
+                                user.user.subscriptions && compareValiditySubscription(user.user.subscriptions[0]?.expiredAt) ?
+                                <button className="buttonPremium col-6 offset-3" disabled>
+                                    Vous êtes déjà abonnés
+                                </button>
                                 :
                                 <button className="buttonPremium col-6 offset-3" onClick={() => fetchSession('annuel')}>S'abonner</button>
                             }

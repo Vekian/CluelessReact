@@ -1,6 +1,6 @@
 import { loadToken, loadUserMe } from '../../../features/user/userSlice';
 import { useDispatch} from 'react-redux';
-import { fetchData } from '../../../api/APIutils';
+import { fetchData, getCookie } from '../../../api/APIutils';
 import { useEffect, useState } from 'react';
 import { useForm } from "react-hook-form"
 import GoogleLogin from './GoogleLogin';
@@ -26,29 +26,7 @@ export default function Login() {
             const body = {
                 refresh_token: cookie
             }
-            const bodyJson = JSON.stringify(body);
-            fetch(`${process.env.REACT_APP_URL}api/token/refresh`, 
-                {
-                    method: "POST",
-                    headers: {
-                        'Accept': 'application/json',
-                        'Content-Type': 'application/json',
-                    },
-                    body: bodyJson
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        console.log(response)
-                    }    
-                    return response.json()
-                })
-                .then(data => {
-                    if (data.token) {
-                        dispatch(loadToken(data.token));
-                        const userJson = JSON.parse(data.user);
-                        dispatch(loadUserMe(userJson));
-                    }
-                })
+            fetchData('token/refresh', 'POST', loadData, '', body)
         }
         
     }, [])
@@ -59,10 +37,13 @@ export default function Login() {
             const userJson = JSON.parse(data.user);
             dispatch(loadUserMe(userJson));
 
-            const cookie = `refresh_token=${data['refresh_token']}`;
-            document.cookie = cookie;
-            document.getElementById('loginModalClose').click()
-            setIsSending(false);
+            let cookie = getCookie('refresh_token');
+            if (!cookie) {
+                cookie = `refresh_token=${data['refresh_token']}`;
+                document.cookie = cookie;
+                document.getElementById('loginModalClose').click()
+                setIsSending(false);
+            }
         }
     }
 
@@ -70,23 +51,6 @@ export default function Login() {
         setIsSending(false);
         setError("Erreur d'identifiants");
     }
-
-    function getCookie(name){
-        if(document.cookie.length == 0)
-          return null;
-   
-        var regSepCookie = new RegExp('(; )', 'g');
-        var cookies = document.cookie.split(regSepCookie);
-   
-        for(var i = 0; i < cookies.length; i++){
-          var regInfo = new RegExp('=', 'g');
-          var infos = cookies[i].split(regInfo);
-          if(infos[0] == name){
-            return unescape(infos[1]);
-          }
-        }
-        return null;
-      }
 
     return (
         <div>

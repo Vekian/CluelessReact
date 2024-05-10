@@ -104,7 +104,7 @@ export default function Sidemenu() {
                             <h5 className='ps-2 ps-xxl-0'>Aide</h5>
                         </Link>
                     </li>
-                    <li className='active itemPremium ps-1'>
+                    <li className='active itemPremium ps-1 mt-2 mb-2'>
                         <Link to="/premium" className={location.pathname === "/premium" ? "item-active d-flex align-items-center pt-1 pb-1" : "d-flex align-items-center pt-1 pb-1"}  style={{ color: 'inherit', textDecoration: 'inherit'}} >
                             <i className="fa-solid fa-crown me-xxl-3"></i>
                             <h5 className='ps-2 ps-xxl-0'>Devenir premium</h5>
@@ -113,7 +113,7 @@ export default function Sidemenu() {
                     {
                         user?.id &&
                         <li className='active itemMenu ps-1'>
-                            <Link to="/settings" className={location.pathname === "/settings" ? "item-active d-flex align-items-center pt-1 pb-1" : "d-flex align-items-center pt-1 pb-1"}  style={{ color: 'inherit', textDecoration: 'inherit'}} >
+                            <Link to="/settings/" className={location.pathname === "/settings/" || location.pathname === "/settings/subscription" ? "item-active d-flex align-items-center pt-1 pb-1" : "d-flex align-items-center pt-1 pb-1"}  style={{ color: 'inherit', textDecoration: 'inherit'}} >
                                 <i className="fa-solid fa-wrench me-xxl-3"></i>
                                 <h5 className='ps-2 ps-xxl-0'>Paramètres de compte</h5>
                             </Link>

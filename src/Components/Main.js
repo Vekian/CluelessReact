@@ -21,7 +21,7 @@ export default function Main() {
                 <Route path="/clue/:id" element={< Clue />} />
                 <Route path="/profils/:id" element={< Profil />} />
                 <Route path="/profil" element={< Profil />} />
-                <Route path="/settings" element={< Settings />} />
+                <Route path="/settings/*" element={< Settings />} />
                 <Route path="/rankings" element={< Rankings />} />
                 <Route path="/helpers" element={< Helpers />} />
                 <Route path="/help" element={< Help />} />
