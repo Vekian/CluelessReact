@@ -13,7 +13,7 @@ export default function Questions() {
 
 
     return (
-        <div className="elms d-flex flex-column pe-3">
+        <div className="elms d-flex flex-column pe-md-3">
             <div className='ps-2 listOfElms'>
                 {isFetching ? 
                     <div className='d-flex justify-content-center align-items-center h-100'>

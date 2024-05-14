@@ -85,7 +85,7 @@ export default function Editor(props) {
     }
 
     return (
-        <div>
+        <div className="ps-xxl-0 pe-xxl-0 ps-3 pe-3">
             <div className="d-flex flex-column pb-3">
                 {props.type === 'question' ?
                     <h1 className="mb-4">

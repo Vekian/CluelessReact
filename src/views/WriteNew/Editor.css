@@ -28,11 +28,13 @@
 
 
 .writeQuestionItem li {
-    font-size: 1rem;
+    font-size: 0.9rem;
     padding: 2px 10px 2px 10px;
-    border: 1px solid var(--dark);
+    border: 2px solid var(--dark);
     border-radius: 5px;
-    list-style-type: none;
+    background-color: var(--tertiaryColor);
+    color: white;
+    font-weight:500;
 }
 
 .writeQuestionItem i {

@@ -21,7 +21,7 @@ export default function Podium(props) {
         <div className='mainPodium mt-4 d-flex flex-wrap'>
             {
                 props.scores ?
-                <div className='d-flex flex-column col-3'>
+                <div className='d-flex flex-column col-lg-4 col-10 offset-xxl-0 offset-1 '>
                     <div className='h-100 col-12 d-flex align-items-end'>
                         <div className='h-100 col-4 d-flex flex-column justify-content-end'>
                             {
@@ -98,7 +98,7 @@ export default function Podium(props) {
                     />
                 </div>
             }
-            <div className='d-flex col-7 descriptionContener offset-1'>
+            <div className='mt-lg-0 mt-5 d-flex col-lg-5 col-10 descriptionContener offset-1'>
                 <div className='col-12 descriptionPodium d-flex flex-column align-items-center text-center h-100'>
                     <div className='titleDescription w-100 d-flex justify-content-center pt-2 pb-2'>
                         <h4 className='me-3'>

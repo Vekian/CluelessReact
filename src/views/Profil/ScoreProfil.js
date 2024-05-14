@@ -72,7 +72,7 @@ export default function ScoreProfil(props) {
     }
 
     return (
-        <div className="d-flex justify-content-around">
+        <div className="d-flex flex-wrap justify-content-around">
             <div className="charts d-flex flex-column align-items-center">
                 <h5 className="mb-2">
                     Scores globaux
@@ -87,7 +87,7 @@ export default function ScoreProfil(props) {
             </div>
             {
                 props.userProfil.user.scores && props.userProfil.user.scores.length > 0 ?
-                <div className="charts d-flex flex-column align-items-center">
+                <div className="charts d-flex flex-column align-items-center mt-5 mt-lg-0">
                     <h5 className="mb-2">
                         Scores de votre section préférée: {getBestCategory().name}
                     </h5>

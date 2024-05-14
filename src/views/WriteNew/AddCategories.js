@@ -52,8 +52,8 @@ export default function AddCategories() {
             <label htmlFor="category" className="mb-3">
                 Sélectionnez une catégorie ou sous-catégorie pour augmenter vos chances de réponses (maximum 5)
             </label>
-            <div className="d-flex ms-2 mt-3 mb-2">
-                <select id="category" name="tags" className="me-5" onChange={event => displayCategories(event)}>
+            <div className="d-flex justify-content-center flex-wrap ms-2 mt-3 mb-2">
+                <select id="category" name="tags" className="me-sm-5 ms-1 mb-2" onChange={event => displayCategories(event)}>
                     <option value="" hidden>
                         Catégories
                     </option>
@@ -70,7 +70,7 @@ export default function AddCategories() {
                 </select>
                 {
                     writeQuestion.subCategories.length > 0 ? 
-                    <select id="subCategory" name="subTags" className="me-5">
+                    <select id="subCategory" name="subTags" className="me-sm-5 ms-1 mb-2">
                         <option value=""hidden>
                             Sous-categorie
                         </option>
@@ -84,13 +84,13 @@ export default function AddCategories() {
                             )}
                     </select> : null
                 }
-                <button className="buttonStyle" id="addCategory" onClick={event => addCategory()}>
+                <button className="buttonStyle mb-2 ms-1" id="addCategory" onClick={event => addCategory()}>
                     Ajouter
                 </button>
-                <ul className="d-flex flex-wrap align-items-center mb-0">
+                <ul className="d-flex flex-wrap align-items-center mb-2 ps-4 ps-sm-2">
                     { writeQuestion.categoriesToSend.map(categoryToSend => 
                     <div className="d-flex align-items-center">
-                        <li key={categoryToSend.id + "categoryToSend"} className="ms-2 mt-1">
+                        <li key={categoryToSend.id + "categoryToSend"} className="ms-sm-2 ms-1 mt-1">
                             {categoryToSend.name}
                         </li >
                         <i className="fa-solid fa-trash-can ms-2 pt-1" style={{color: "#e01b24",}} data-id={categoryToSend.id} onClick={event => removeCategory(event)} ></i>

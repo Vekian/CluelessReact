@@ -48,7 +48,7 @@ export default function Header () {
                             Clueless
                         </h1>
                     </div>
-                    <div className='ms-5 d-flex align-items-center'>
+                    <div className='ms-lg-5 d-flex align-items-center darkModeToggle'>
                         < DarkModeButton />
                     </div>
                 </div>

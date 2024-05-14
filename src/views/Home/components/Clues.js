@@ -11,7 +11,7 @@ export default function Clues() {
     const {currentData, error, isFetching, isSuccess} = useGetCluesQuery({ page: filterClue[0], filter: filterClue[1]});
 
     return(
-        <div className=" d-flex flex-column pe-3">
+        <div className=" d-flex flex-column pe-md-3">
             <div className='listOfElms '>
                 { isFetching ?
                     <div className='d-flex justify-content-center align-items-center h-100'>

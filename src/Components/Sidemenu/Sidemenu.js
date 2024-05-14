@@ -25,7 +25,7 @@ export default function Sidemenu() {
     }
 
     return(
-        <div className="sideMenu  ps-sm-3 ps-xl-5 ps-1 col-sm-3 col-lg-2 col-6 d-flex flex-column align-items-start d-sm-block d-none">
+        <div className="sideMenu  ps-sm-3 ps-xl-5 ps-1 col-sm-3 col-lg-2 col-7 d-flex flex-column align-items-start d-sm-block d-none">
             <div className={`d-flex text-center align-items-center mb-2 pt-1 pb-1 ps-2 itemQuestions col-11 ms-1 ${!clueMode && "active" }`} onClick={toggleClueMode}>
                 <div className='d-flex'>
                     <i className="fa-solid fa-question col-1 me-2" style={{ color: "var(--dark)" }}></i> 

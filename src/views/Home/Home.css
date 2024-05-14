@@ -79,29 +79,11 @@
     padding: 0;
 }
 
-.listTagsElmPreview li {
-    font-size: 0.7rem;
-    padding: 2px 10px 2px 10px;
-    border: 2px solid var(--dark);
-    border-radius: 5px;
-    background-color: var(--tertiaryColor);
-    color: white;
-    font-weight:500;
-}
-
-.numberPopularityPreviewElm {
-    font-size: 2rem;
-    font-weight: 600;
-}
-
 .textPopularityPreviewElm {
     font-size: 0.8rem;
 }
 
-.numberPopularityPreviewClue {
-    font-size: 1.1rem;
-    font-weight: 600;
-}
+
 
 .pageItem {
     cursor: pointer;
@@ -134,13 +116,11 @@
 }
 
 .commentsPreviewElm {
-    font-size: 0.7rem;
     color: var(--primaryColor);
     font-weight: 600;
 }
 
 .answersPreviewElm {
-    font-size: 0.7rem;
     color: var(--secondaryColor);
     font-weight: 600;
 }
@@ -235,3 +215,88 @@
   
   .toggleMode .slider.round:before {
     border-radius: 50%;}
+
+@media screen and (max-width: 576px){
+    .elmsList, .cluesList{
+        padding-left: 1px !important;
+    }
+    .elmsList li, .cluesList li{
+        font-size: 14px;
+    }
+
+    .numberPopularityPreviewClue, .numberPopularityPreviewElm {
+        font-size: 0.8rem;
+        font-weight: 500;
+    }
+
+    .listTagsElmPreview li {
+        font-size: 0.5rem;
+        padding: 1px 5px 1px 5px;
+        border: 2px solid var(--dark);
+        border-radius: 5px;
+        background-color: var(--tertiaryColor);
+        color: white;
+        font-weight:500;
+    }
+
+    .popularityContener {
+        height: 40px !important;
+    }
+
+    .answersPreviewElm, .commentsPreviewElm {
+        font-size: 0.9rem;
+    }
+
+    .checkMark {
+        height: 30px;
+    }
+}
+
+@media screen and (min-width: 577px) and (max-width: 1400px){
+    .numberPopularityPreviewClue, .numberPopularityPreviewElm {
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+
+    .listTagsElmPreview li {
+        font-size: 0.7rem;
+        padding: 2px 10px 2px 10px;
+        border: 2px solid var(--dark);
+        border-radius: 5px;
+        background-color: var(--tertiaryColor);
+        color: white;
+        font-weight:500;
+    }
+
+    .answersPreviewElm, .commentsPreviewElm {
+        font-size: 0.8rem;
+    }
+
+    .checkMark {
+        height: 35px;
+    }
+}
+
+@media screen and (min-width: 1401px){
+    .numberPopularityPreviewClue, .numberPopularityPreviewElm {
+        font-size: 1.8em;
+        font-weight: 600;
+    }
+
+    .listTagsElmPreview li {
+        font-size: 0.7rem;
+        padding: 2px 10px 2px 10px;
+        border: 2px solid var(--dark);
+        border-radius: 5px;
+        background-color: var(--tertiaryColor);
+        color: white;
+        font-weight:500;
+    }
+    .answersPreviewElm, .commentsPreviewElm {
+        font-size: 0.9rem;
+    }
+
+    .checkMark {
+        height: 40px;
+    }
+}

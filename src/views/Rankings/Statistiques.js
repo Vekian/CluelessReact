@@ -112,8 +112,8 @@ export default function Statistiques() {
                     Voici les catégories les plus populaires
                 </p>
             </div>
-            <div className="statsContener d-flex w-100">
-                <div className="col-7 d-flex justify-content-start">
+            <div className="statsContener d-flex flex-wrap w-100">
+                <div className="col-lg-7 col-12 d-flex justify-content-start">
                    {
                         isFetching ?
                         <ThreeDots
@@ -130,7 +130,7 @@ export default function Statistiques() {
                         <Bar options={options} data={parseScoreDataset()} />
                     } 
                 </div>
-                <div className="infosStats col-5 d-flex flex-column justify-content-center text-start">
+                <div className="infosStats col-lg-5 col-12 d-flex flex-column justify-content-center text-start">
                     <p>
                         *Le pourcentage de Questions/Astuces par catégories est calculé à partir du nombre de questions/astuces ayant la catégorie associée.
                     </p>

@@ -32,7 +32,7 @@
 .App.clue {
     --primaryColor: #10a3a3;
     --secondaryColor: #5f84fc;
-    --tertiaryColor: #086464;
+    --tertiaryColor: #065c5c;
     --primaryColor-with-opacity: #158b8b62;
 }
 
@@ -155,12 +155,13 @@ h4, h5, h6 {
     }
     
     .burgerSideMenu {
+        color: white;
         background-color: transparent;
         border: none;
     }
 
     .burgerSideMenu:hover {
-        background-color: var(--white);
+        background-color: var(--primaryColor);
         border-radius: 3px;
     }
 

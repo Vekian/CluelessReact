@@ -8,19 +8,19 @@ export default function Select() {
     return (
         <div>
             <ul className={`d-flex align-items-center ${clueMode ? "cluesList" : "elmsList"}  mb-1`}>
-                <li className="ms-4 active" onClick={(event) => {
+                <li className="ms-lg-4 ms-1 active" onClick={(event) => {
                         activeElm(event, clueMode ? "cluesList" : "elmsList");
                         clueMode ? changeFilterClue(['?page=1', '']) : changeFilterQuestion(['?page=1', '']);
                     }}>
                     Toutes
                 </li>
-                <li className="ms-4" onClick={(event) => {
+                <li className="ms-lg-4 ms-1" onClick={(event) => {
                         activeElm(event, clueMode ? "cluesList" : "elmsList");
                         clueMode ? changeFilterClue(['&page=1','?order[popularity]=desc']) : changeFilterQuestion(['&page=1','?order[popularity]=desc']);
                     }}>
                     Populaires
                 </li>
-                <li className="ms-4" onClick={(event) => {
+                <li className="ms-lg-4 ms-1" onClick={(event) => {
                         activeElm(event, clueMode ? "cluesList" : "elmsList");
                         clueMode ? changeFilterClue(['&page=1', '?order[createdAt]=desc']) : changeFilterQuestion(['&page=1', '?order[createdAt]=desc']);
                     }}>

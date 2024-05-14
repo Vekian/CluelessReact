@@ -48,7 +48,7 @@ export default function Rankings() {
               < Podium setFilterScores={setFilterScores} scores={currentData ? currentData['hydra:member'] : null} />
             </div>
           </div>
-          <div className='d-flex justify-content-center mt-5'>
+          <div className='d-flex justify-content-center mt-2'>
             < Statistiques />
           </div>
         </div>

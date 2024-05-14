@@ -3,7 +3,7 @@ import { getDateDetail, getLvl } from '../../../api/APIutils' ;
 export default function CluePreview(props) {
 
     return(
-        <div className="d-flex elmPreviewCard mb-2 me-3">
+        <div className="d-flex flex-wrap elmPreviewCard mb-2 me-3">
             <div className="d-flex flex-column align-items-center col-2">
                 < img src={ process.env.REACT_APP_URL_IMG + props.elm.user.avatar} className='avatar' alt="avatar" height="30px" width="30px"/>
                 <p className="userPreviewElm">
@@ -13,7 +13,7 @@ export default function CluePreview(props) {
                     Lvl {getLvl(props.elm.user.popularity)}
                 </p>
             </div>
-            <div className='d-flex flex-column col-7'>
+            <div className='d-flex flex-column col-md-7 col-10 ps-2'>
                 <div className='d-flex  align-items-center me-2 '>
                     <div className=' col-9 d-flex align-items-center'>
                         <p className="timePreviewClue">
@@ -38,7 +38,7 @@ export default function CluePreview(props) {
                     </ul>
                 </div>
             </div>
-            <div className='d-flex flex-column justify-content-center align-items-center me-2 col-3'>
+            <div className='d-flex flex-wrap flex-md-column flex-row justify-content-around justify-content-md-center align-items-center col-md-3 col-12'>
                 <div className="d-flex align-items-center justify-content-center">
                         <p className="numberPopularityPreviewElm">
                             {props.elm.popularity}

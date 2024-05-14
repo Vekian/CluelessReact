@@ -23,17 +23,17 @@ export default function Home() {
                 </p>
             </div>
             <div className="d-flex flex-column h-100">
-                <div className="d-flex align-items-center offset-1">
+                <div className="d-flex flex-wrap align-items-center offset-1">
                     <ToggleMode />
                     <Select />
                 </div>
                 {
                     !clueMode ?
-                    <div className="elmComponent offset-1 col-10" >
+                    <div className="elmComponent offset-md-1 col-md-10 col-12" >
                         < Questions />
                     </div>
                     :
-                    <div className="elmComponent offset-1 col-10" id="Clues">
+                    <div className="elmComponent offset-md-1 col-md-10 col-12" id="Clues">
                         < Clues />
                     </div>
                 }
