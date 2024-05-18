@@ -106,7 +106,7 @@ export default function Profil() {
                                     </>
                                 } 
                             </div>
-                            <div className="d-flex align-items-end  justify-content-between w-100 ">
+                            <div className="d-flex flex-wrap align-items-end  justify-content-between w-100 ">
                                 <div className="d-flex align-items-end">
                                     <h3 className="ms-4 me-3 mb-0">
                                         {userProfil.user.username}
@@ -119,7 +119,7 @@ export default function Profil() {
                                     userProfil.user.id === user.id &&
                                     <>
                                     <div>
-                                        <button className="buttonStyle" onClick={() => setEditProfilState(!editProfilState)}>
+                                        <button className="buttonStyle ms-2" onClick={() => setEditProfilState(!editProfilState)}>
                                             Éditer le profil
                                         </button>
                                     </div>
@@ -128,9 +128,9 @@ export default function Profil() {
                             </div>
                         </div>
                         <div className="d-flex mt-2">
-                            <div className="d-flex flex-column align-items-center justify-content-center col-1">
+                            <div className="d-flex flex-column align-items-center justify-content-center col-lg-1 col-3 col-sm-2">
                                 <h6>
-                                    {userProfil.user.sex}, <br />{userProfil.user.age} ans
+                                     {userProfil.user.age} ans {userProfil.user.sex === "homme" ? <i class="fa-solid fa-mars text-primary"></i> : <i class="fa-solid fa-venus"></i>}
                                 </h6>
                                 <h6>
                                     {userProfil.user.country}
@@ -141,14 +141,14 @@ export default function Profil() {
                                     {userProfil.user.firstname} {userProfil.user.lastname}
                                 </h5>
                                 <div className="separator mt-2 mb-3 ms-3"></div>
-                                <div className="d-flex  justify-content-between">
-                                    <h5 className="fw-normal">
+                                <div className="d-flex flex-wrap justify-content-between">
+                                    <h6 className="fw-normal col-lg-6 col-12">
                                         {userProfil.user.description}
-                                    </h5>
-                                    <ul className=" listTagsElmPreview d-flex align-items-center">
+                                    </h6>
+                                    <ul className=" listTagsElmPreview col-lg-6 col-12 d-flex justify-content-lg-end flex-wrap align-items-center">
                                         { userProfil.user.tags ?
                                             userProfil.user.tags.map( tag => 
-                                                <li key={tag.id ? tag.id : "general"} className="me-3">
+                                                <li key={tag.id ? tag.id : "general"} className="me-sm-3 me-1 mb-1">
                                                     {tag.category.name}
                                                 </li>
                                             ) :null

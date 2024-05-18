@@ -105,6 +105,7 @@
     background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0)); /* Dégradé de transparent à semi-transparent à transparent */
     animation: shineAnimation 2s linear infinite; /* Animation de brillance */
 }
+
   
 @keyframes shineAnimation {
 0% {
@@ -113,4 +114,26 @@
 100% {
     left: 100%; /* Termine à l'extérieur de la boîte après avoir traversé */
 }
+}
+
+@media screen and (max-width: 576px){
+
+    .questionDetail .buttonStyle {
+        padding: 4px 15px 4px 15px;
+        border: none;
+        border-radius: 15px;
+        background-color: var(--tertiaryColor);
+        color: white;
+        font-weight: 500;
+        font-size: 12px;
+        font-size: normal;
+    }
+}
+
+@media screen and (min-width: 577px) and (max-width: 1400px){
+
+}
+
+@media screen and (min-width: 1401px){
+
 }

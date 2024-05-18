@@ -49,14 +49,14 @@ export default function Premium() {
     return (
         <div>
             <div className="text-center mt-2 d-flex flex-column">
-                <h2>
+                <h2 className='text-warning'>
                     Devenir premium
                 </h2>
                 <p>
                     Devenez un membre premium, contribuez au développement du site et profitez de multiples avantages!
                 </p>
                 <div className='d-flex flex-wrap col-10 offset-1 mt-3'>
-                   <div className='d-flex flex-column col-5 text-start contener-item-premium mb-4'>
+                   <div className='d-flex flex-column col-lg-5 col-12 text-start contener-item-premium mb-4'>
                         <div className='title-item'>
                             Gagnez en visibilité
                         </div>
@@ -67,7 +67,7 @@ export default function Premium() {
                             </p>
                         </div>
                     </div> 
-                    <div className='d-flex flex-column offset-2 col-5 text-start contener-item-premium mb-4'>
+                    <div className='d-flex flex-column offset-lg-2 col-lg-5 col-12 text-start contener-item-premium mb-4'>
                         <div className='title-item'>
                             Améliorez vos probabilités de réponses
                         </div>
@@ -78,7 +78,7 @@ export default function Premium() {
                             </p>
                         </div>
                     </div> 
-                    <div className='d-flex flex-column col-5 text-start mb-4 contener-item-premium'>
+                    <div className='d-flex flex-column col-lg-5 col-12 text-start mb-4 contener-item-premium'>
                         <div className='title-item'>
                             Plus de votes, encore plus de votes
                         </div>
@@ -89,7 +89,7 @@ export default function Premium() {
                             </p>
                         </div>
                     </div>
-                    <div className='d-flex flex-column offset-2 col-5 text-start mb-4 contener-item-premium'>
+                    <div className='d-flex flex-column offset-lg-2 col-lg-5 col-12 text-start mb-4 contener-item-premium'>
                         <div className='title-item'>
                             Ayez un look d'enfer
                         </div>
@@ -100,8 +100,8 @@ export default function Premium() {
                             </p>
                         </div>
                     </div> 
-                    <div className='col-6'>
-                        <div className='d-flex flex-column justify-content-center me-3 contenerAbo mb-2 mt-2'>
+                    <div className='col-lg-6 col-12'>
+                        <div className='d-flex flex-column justify-content-center me-lg-3 contenerAbo mb-2 mt-2'>
                             <div>
                                 <h3>
                                     Abonnement Mensuel
@@ -134,8 +134,8 @@ export default function Premium() {
                             }
                         </div>
                     </div>
-                    <div className='col-6'>
-                       <div className='d-flex flex-column ms-3 justify-content-center contenerAbo  mb-2 mt-2'>
+                    <div className='col-lg-6 col-12'>
+                       <div className='d-flex flex-wrap flex-column ms-lg-3 justify-content-center contenerAbo  mb-2 mt-2'>
                             <div>
                                 <h3>
                                     Abonnement Annuel

@@ -20,19 +20,17 @@ export default function App() {
       <Router basename="/admin">
         <Admin />
       </Router>
-        < Router basename='/app'>
+      < Router basename='/app'>
         < Header />
-        
         < SubMenu />
         <div className='d-flex bodySection'>
-          
           < Sidemenu />
           <div className='d-flex flex-column col-sm-9 col-lg-10 col-12 mainContener'>
               < Main />
           </div>
         </div>
         <Login />
-        </ Router >
+      </ Router >
       </GoogleOAuthProvider>
     </div>
   );

@@ -3,9 +3,7 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { getDateDetail, getLvl} from '../../api/APIutils' ;
-import { useUpdateQuestionMutation } from '../../features/api/questionSlice';
 import { useDeleteQuestionMutation } from '../../features/api/questionSlice';
-import { useAddAnswerMutation } from '../../features/api/answerSlice';
 import { useAddCommentMutation } from '../../features/api/commentSlice';
 import { useGetQuestionQuery } from '../../features/api/questionSlice';
 import { voteApi } from '../../features/api/voteSlice';
@@ -14,6 +12,8 @@ import Comment from '../Comment';
 import TextArea from '../WriteNew/TextArea';
 import VoteElement from './VoteElement';
 import { loadingElm, displayElement } from '../../ui/UIutils';
+import EditQuestion from './Edit/EditQuestion';
+import AddAnswer from './Add/AddAnswer';
 
 export default function Question() {
     const navigate = useNavigate();
@@ -26,9 +26,7 @@ export default function Question() {
 
     const {data, error, isLoading, refetch} = useGetQuestionQuery(id);
     const [trigger] = voteApi.useLazyGetVotesQuery();
-    const [updateQuestion] = useUpdateQuestionMutation();
     const [deleteQuestion] = useDeleteQuestionMutation();
-    const [addAnswer] = useAddAnswerMutation();
     const [addComment] = useAddCommentMutation();
 
     
@@ -59,34 +57,6 @@ export default function Question() {
         }
     }
 
-    function editQuestion () {
-        const title = document.getElementById('titleQuestion').value;
-        const content = contentToSend;
-        const body = {
-            title : title,
-            content : content,
-        }
-        const token = user.token;
-        const bodyJson = JSON.stringify(body);
-        updateQuestion({ id: id, token: token, body: bodyJson});
-        setEditQuestionState(false);
-    }
-
-    const addAnswerData = async () => {
-        const body = {
-            content: contentToSend,
-            user: `/api/users/${user.user.id}`,
-            question: `/api/questions/${data.id}`,
-        }
-        const token = user.token;
-        const bodyJson = JSON.stringify(body);
-        const resultAnswer = await addAnswer({body: bodyJson, token: token});
-        if (resultAnswer.data) {
-            setIdEditor(`answerElm${resultAnswer.data.id}`);
-            refetch(id);
-        }
-    }
-
     const addCommentData = async () => {
         const body = {
             content: contentToSend,
@@ -114,37 +84,40 @@ export default function Question() {
         )
     }
     return (
-        <div className="d-flex flex-column pt-2 questionDetail">
+        <div className="d-flex flex-column ps-1 pe-2 pt-2 questionDetail">
             <span className="separator w-100"></span>
-            <div className="d-flex justify-content-between align-items-start pt-2">
+            <div className="d-flex flex-wrap justify-content-between align-items-start pt-2">
+                
                 { isLoading ? 
                     loadingElm()               
                     :
-                    <div className='d-flex align-items-center'>
-                    <Link to={`/profils/${data.user.id}`} className="d-flex  linkToProfil" style={{ color: 'inherit', textDecoration: 'inherit'}}>
-                        <img src={ process.env.REACT_APP_URL_IMG + data.user.avatar} className='avatar' alt="avatar" height="50px" width="50px" />
-                        <div className="ps-3 pe-3">
-                            <h4>
-                                { data.user.username }
-                            </h4>
-                            <h6>
-                                lvl {getLvl( data.user.popularity )}
-                            </h6>
+                    <>
+                        <Link to={`/profils/${data.user.id}`} className="d-flex col-lg-2 linkToProfil" style={{ color: 'inherit', textDecoration: 'inherit'}}>
+                            <img src={ process.env.REACT_APP_URL_IMG + data.user.avatar} className='avatar' alt="avatar" height="75px" width="75px" />
+                            <div className="ps-3 pe-3">
+                                <h4>
+                                    { data.user.username }
+                                </h4>
+                                <h6>
+                                    lvl {getLvl( data.user.popularity )}
+                                </h6>
+                            </div>
+                        </Link>
+                        <div className='d-flex col-lg-6 align-items-center'>
+                            {(data.user.id === user.user.id) &&
+                            <div>
+                                <button className='buttonStyle ms-lg-5 ms-1' onClick={() => setEditQuestionState(!editQuestionState)}>
+                                {editQuestionState ? "Annuler" : 'Editer'} 
+                                </button>
+                                <button className='buttonStyle  ms-3 bg-danger' onClick={() => {deleteQuestion({id: id, token: user.token}); navigate('/'); }}>
+                                    Supprimer
+                                </button>
+                            </div>
+                            }
                         </div>
-                    </Link>
-                    {(data.user.id === user.user.id) &&
-                    <div>
-                        <button className='buttonStyle ms-5' onClick={() => setEditQuestionState(!editQuestionState)}>
-                           {editQuestionState ? "Annuler" : 'Editer la question'} 
-                        </button>
-                        <button className='buttonStyle ms-5 ms-3 bg-danger' onClick={() => {deleteQuestion({id: id, token: user.token}); navigate('/'); }}>
-                            Effacer la question
-                        </button>
-                    </div>
-                    }
-                    </div>
+                    </>
                 }
-                <div className="d-flex flex-column align-items-end justify-content-end">
+                <div className="d-flex flex-lg-column col-lg-3 col-12 flex-row-reverse align-items-lg-end align-items-start justify-content-between justify-content-lg-end">
                     <ul className="d-flex listTagsElmPreview">
                         {isLoading ? 
                             loadingElm()
@@ -165,38 +138,37 @@ export default function Question() {
                         }
                 </div>
             </div>
-            <div>
-                <h3 className="titleQuestion offset-1">
-                    {isLoading ? 
-                        loadingElm()
-                        :
-                        editQuestionState ?
-                        <input type='text' defaultValue={data.title} id='titleQuestion'/>
-                        :
-                        data.title
-                    }
-                </h3>
-            </div>
-            <span className="separator w-100"></span>
-            <div className="d-flex w-100">
-                {isLoading ? 
-                    loadingElm()
-                    :
-                    < VoteElement refetch={refetch} class1={"question"} class2={"mt-3 mb-3"}  idAuthor={data.user.id} popularity={data.popularity} typeParent={"question"} idParentElm={data.id} idElm={`/api/questions/${data.id}`} />
-                }
-                <div className='d-flex align-items-start w-100'>
-                    {isLoading ? 
-                        loadingElm()
-                        :
-                        editQuestionState ?
-                        < TextArea id = {"question"} content={data.content} setContent={setContentToSend}/>
-                        :
-                        <div dangerouslySetInnerHTML={{ __html: data.content }} className='mt-3' />
-                    }
-                </div>
-            </div>
-            {editQuestionState && 
-            <button className='buttonStyle mb-3 mt-5' onClick={() => editQuestion()}>Soumettre</button>}
+            {
+                editQuestionState ?
+                < EditQuestion user={user} data={data} refetch={refetch} isLoading={isLoading} setEditQuestionState={setEditQuestionState} />
+                :
+                <>
+                    <div>
+                        <h3 className="titleQuestion offset-1">
+                            {isLoading ? 
+                                loadingElm()
+                                :
+                                data.title
+                            }
+                        </h3>
+                    </div>
+                    <span className="separator w-100"></span>
+                    <div className="d-flex w-100">
+                        {isLoading ? 
+                            loadingElm()
+                            :
+                            < VoteElement refetch={refetch} class1={"question"} class2={"mt-3 mb-3"}  idAuthor={data.user.id} popularity={data.popularity} typeParent={"question"} idParentElm={data.id} idElm={`/api/questions/${data.id}`} />
+                        }
+                        <div className='d-flex align-items-start w-100'>
+                            {isLoading ? 
+                                loadingElm()
+                                :
+                                <div dangerouslySetInnerHTML={{ __html: data.content }} className='mt-3' />
+                            }
+                        </div>
+                    </div>
+                </>
+            }
             <div className="d-flex offset-1 justify-content-between pb-3">
                 <div>
                     {isLoading ? 
@@ -252,11 +224,7 @@ export default function Question() {
                 null
                 :
                 idEditor === `answer${data.id}` && 
-                    <div className='d-flex flex-column align-items-center'>
-                        < TextArea id={"answer"}  setContent={setContentToSend} class={'answer'}/>
-                        <button className='buttonStyle' onClick={() => addAnswerData()}>Envoyer la réponse</button>
-                    </div>
-                
+                < AddAnswer user={user} data={data} setIdEditor={setIdEditor} refetch={refetch} />
             }
             <ul className='listComments'>
                 {isLoading ? 
@@ -274,7 +242,7 @@ export default function Question() {
                 :
                 idEditor === `comment${data.id}` && 
                 <div className='d-flex flex-column align-items-center'>
-                    < TextArea id={`comment${data.id}`}  setContent={setContentToSend} class={'comment'}/>
+                    < TextArea id={`comment${data.id}`} content={contentToSend}  setContent={setContentToSend} class={'comment'}/>
                     <button className="buttonStyle" onClick={() => addCommentData()}>Envoyer</button>
                 </div>
             }

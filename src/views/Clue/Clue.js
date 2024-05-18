@@ -63,7 +63,7 @@ export default function Clue() {
     }
 
     return (
-        <div className="d-flex flex-column pt-2 clueDetail">
+        <div className="d-flex flex-column ps-2 pe-2 pt-2 clueDetail">
             <span className="separator w-100"></span>
             <div className="d-flex justify-content-between align-items-start pt-2">
                 { isLoading ? 
@@ -121,7 +121,7 @@ export default function Clue() {
                     :
                     <>
                         < VoteElement refetch={refetch} class1={"clue"} class2={"mt-3 mb-3"} typeParent={"clue"} idAuthor={data.user.id} popularity={data.popularity} idParentElm={data.id} idElm={`/api/clues/${data.id}`} />
-                        <div className='d-flex align-items-start'>
+                        <div className='d-flex align-items-start ps-3'>
                             <div dangerouslySetInnerHTML={{ __html: data.content }} className='mt-3' />
                         </div>
                     </>

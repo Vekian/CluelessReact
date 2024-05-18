@@ -28,13 +28,13 @@ export default function Register(props) {
                     <input type="text" {...register("username", { required: true, maxLength: 100, pattern: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ })} 
                     aria-invalid={errors.username ? "true" : "false"}/>
                 </div>
-                {errors.username?.type === "maxLength" && (
+                {errors.pseudo?.type === "maxLength" && (
                     <p className='mb-1 text-danger' role="alert">Ne peut dépasser 20 caractères</p>
                 )}
-                {errors.username?.type === "minLength" && (
+                {errors.pseudo?.type === "minLength" && (
                     <p className='mb-1 text-danger' role="alert">Doit posséder au moins 3 caractères</p>
                 )}
-                {errors.username?.type === "required" && (
+                {errors.pseudo?.type === "required" && (
                     <p className='mb-1 text-danger' role="alert">Pseudo obligatoire</p>
                 )}
                 <div className="mb-3">

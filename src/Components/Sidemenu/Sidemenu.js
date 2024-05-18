@@ -116,7 +116,7 @@ export default function Sidemenu() {
                     </li>
                     <li className='active itemPremium ps-1 mt-2 mb-2'>
                         <Link to="/premium" className={location.pathname === "/premium" ? "item-active d-flex align-items-center pt-1 pb-1" : "d-flex align-items-center pt-1 pb-1"}  style={{ color: 'inherit', textDecoration: 'inherit'}} >
-                            <i className="fa-solid fa-crown me-xxl-3"></i>
+                            <i className="fa-solid fa-crown me-xxl-3 text-warning"></i>
                             <h5 className='ps-2 ps-xxl-0'>Devenir premium</h5>
                         </Link>
                     </li>

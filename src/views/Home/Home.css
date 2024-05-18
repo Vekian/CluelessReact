@@ -230,7 +230,7 @@
     }
 
     .listTagsElmPreview li {
-        font-size: 0.5rem;
+        font-size: 0.6rem;
         padding: 1px 5px 1px 5px;
         border: 2px solid var(--dark);
         border-radius: 5px;

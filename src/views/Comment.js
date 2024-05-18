@@ -41,26 +41,28 @@ export default function Comment(props) {
         <div className='d-flex flex-column offset-1 mt-2 mb-2 border border-top-0 border-start-0 '>
             <div className="d-flex p-2">
                 <div className="d-flex flex-column w-100">
-                    <div className="d-flex justify-content-between mb-2 me-3">
-                        <div className='d-flex'>
+                    <div className="d-flex flex-wrap align-items-center justify-content-between mb-2 me-3">
+                        <div className='d-flex flex-wrap'>
                             <Link to={`/profils/${props.comment.user.id}`} className="d-flex align-items-end linkToProfil" style={{ color: 'inherit', textDecoration: 'inherit'}}>
-                                <img src={ process.env.REACT_APP_URL_IMG + props.comment.user.avatar} className='avatar' alt="avatar" height="15px" width="15px" />
-                                <span className='ms-2'>
+                                <img src={ process.env.REACT_APP_URL_IMG + props.comment.user.avatar} className='avatar' alt="avatar" height="35px" width="35px" />
+                                <h5 className='ms-2 me-2'>
                                     {props.comment.user.username}
-                                </span>
+                                </h5>
                                 <span>
                                     lvl { getLvl(props.comment.user.popularity)}
                                 </span>
                             </Link>
                             {user.user.id === props.comment.user.id && 
                             <div>
-                                <button className='buttonStyle-xs ms-3' onClick={() => setEditCommentState(!editCommentState)}>Editer le commentaire</button>
-                                <button className='buttonStyle-xs bg-danger ms-4' onClick={() => { deleteCommentData()}}>Effacer le commentaire</button>
+                                <button className='buttonStyle-xs ms-lg-3 ms-1' onClick={() => setEditCommentState(!editCommentState)}>Editer</button>
+                                <button className='buttonStyle-xs bg-danger ms-lg-4 ms-2' onClick={() => { deleteCommentData()}}>Supprimer</button>
                             </div>
                             }
                         </div>
-                        <div>
-                            {getDateDetail(props.comment.createdAt)}
+                        <div className='d-flex align-items-center mt-1'>
+                            <div className=' timePreview'>
+                                {getDateDetail(props.comment.createdAt)}
+                            </div>
                         </div>
                     </div>
                     { editCommentState ? 

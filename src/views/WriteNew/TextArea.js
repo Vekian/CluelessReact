@@ -21,13 +21,12 @@ export default function TextArea(props) {
     'link',
     'list', 'bullet',
   ];
-
     
   return (
       <div id = {props.id} className={`pb-5 mb-3 mt-3 textEditor w-100 ${props.class}`}>
         <ReactQuill
           style={{ height: '150px', width: '100%' }}
-          defaultValue={props.content}
+          value={props.content}
           onChange={props.setContent}
           modules={modules}
           formats={formats}
