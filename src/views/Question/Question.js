@@ -1,24 +1,21 @@
 import './Question.css';
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { getDateDetail, getLvl} from '../../api/APIutils' ;
-import { useDeleteQuestionMutation } from '../../features/api/questionSlice';
-import { useAddCommentMutation } from '../../features/api/commentSlice';
 import { useGetQuestionQuery } from '../../features/api/questionSlice';
 import { voteApi } from '../../features/api/voteSlice';
 import Answer from './Answer';
 import Comment from '../Comment';
-import TextArea from '../WriteNew/TextArea';
 import VoteElement from './VoteElement';
 import { loadingElm, displayElement } from '../../ui/UIutils';
 import EditQuestion from './Edit/EditQuestion';
 import AddAnswer from './Add/AddAnswer';
+import AddComment from './Add/AddComment';
+import DeleteQuestion from './Delete/DeleteQuestion';
 
 export default function Question() {
-    const navigate = useNavigate();
     const [editQuestionState, setEditQuestionState] = useState(false);
-    const [contentToSend, setContentToSend] = useState();
     const [idEditor, setIdEditor] = useState();
 
     const user = useSelector(state => state.user);
@@ -26,10 +23,6 @@ export default function Question() {
 
     const {data, error, isLoading, refetch} = useGetQuestionQuery(id);
     const [trigger] = voteApi.useLazyGetVotesQuery();
-    const [deleteQuestion] = useDeleteQuestionMutation();
-    const [addComment] = useAddCommentMutation();
-
-    
 
     useEffect(() => {
         if (user.token) {
@@ -38,7 +31,7 @@ export default function Question() {
     }, [user]);
 
     useEffect(() => {
-        if (data && idEditor){
+        if (idEditor){
             let targetElement = null;
             targetElement = document.getElementById(idEditor);
             if (targetElement) {
@@ -56,23 +49,6 @@ export default function Question() {
             setIdEditor(type + id);
         }
     }
-
-    const addCommentData = async () => {
-        const body = {
-            content: contentToSend,
-            user: `/api/users/${user.user.id}`,
-            question: `/api/questions/${data.id}`,
-        }
-        const token = user.token;
-        const bodyJson = JSON.stringify(body);
-        const resultComment = await addComment({body: bodyJson, token: token});
-        if (resultComment.data) {
-            setIdEditor(`commentElm${resultComment.data.id}`);
-            refetch(id);
-        }
-    }
-
-    
 
     if (error) {
         return (
@@ -109,9 +85,7 @@ export default function Question() {
                                 <button className='buttonStyle ms-lg-5 ms-1' onClick={() => setEditQuestionState(!editQuestionState)}>
                                 {editQuestionState ? "Annuler" : 'Editer'} 
                                 </button>
-                                <button className='buttonStyle  ms-3 bg-danger' onClick={() => {deleteQuestion({id: id, token: user.token}); navigate('/'); }}>
-                                    Supprimer
-                                </button>
+                                < DeleteQuestion data={data} user={user} />
                             </div>
                             }
                         </div>
@@ -241,10 +215,7 @@ export default function Question() {
                 null
                 :
                 idEditor === `comment${data.id}` && 
-                <div className='d-flex flex-column align-items-center'>
-                    < TextArea id={`comment${data.id}`} content={contentToSend}  setContent={setContentToSend} class={'comment'}/>
-                    <button className="buttonStyle" onClick={() => addCommentData()}>Envoyer</button>
-                </div>
+                < AddComment user={user} data={data} setIdEditor={setIdEditor} refetch={refetch} author={"question"} />
             }
             <div>
                 
@@ -262,11 +233,11 @@ export default function Question() {
                     :
                     <>
                     {data.answers.map( answer => answer.status === "Validated" &&
-                        < Answer question={data}  key= {answer.id + answer.status} answer={answer} idQuestion={data.id} refetch={refetch} displayTextEditor={displayTextEditor} idEditor={idEditor} isLoading={isLoading}/>
+                        < Answer question={data}  key= {answer.id + answer.status} answer={answer} idQuestion={data.id} refetch={refetch} setIdEditor={setIdEditor} displayTextEditor={displayTextEditor} idEditor={idEditor} isLoading={isLoading}/>
                        )}
                     {
                        data.answers.map( answer => answer.status !== "Validated" &&
-                     < Answer question={data}  key= {answer.id + answer.status} answer={answer} idQuestion={data.id} refetch={refetch} displayTextEditor={displayTextEditor} idEditor={idEditor} isLoading={isLoading}/>
+                     < Answer question={data}  key= {answer.id + answer.status} answer={answer} idQuestion={data.id} refetch={refetch} setIdEditor={setIdEditor} displayTextEditor={displayTextEditor} idEditor={idEditor} isLoading={isLoading}/>
                     ) 
                     }
                     </>

@@ -4,38 +4,12 @@ import VoteElement from './Question/VoteElement';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import React, { useState } from 'react';
-import { useUpdateCommentMutation } from '../features/api/commentSlice';
-import { useDeleteCommentMutation } from '../features/api/commentSlice';
-import TextArea from './WriteNew/TextArea';
+import EditComment from './Question/Edit/EditComment';
+import DeleteComment from './Question/Delete/DeleteComment';
 
 export default function Comment(props) {
     const user = useSelector(state => state.user);
     const [editCommentState, setEditCommentState] = useState(false);
-    const [contentToSend, setContentToSend] = useState();
-    const [editComment] = useUpdateCommentMutation();
-    const [deleteComment] = useDeleteCommentMutation();
-
-    const editCommentData = async () => {
-        const content = contentToSend;
-        const body = {
-            content: content
-        }
-        const bodyJson = JSON.stringify(body);
-        const token = user.token;
-        const resultAnswer = await editComment({id: props.comment.id, token: token, body: bodyJson});
-        if (resultAnswer.data) {
-            setEditCommentState(false);
-            props.refetch(props.idQuestion);
-        }
-    }
-
-    const deleteCommentData = async () => {
-        const resultDelete = await deleteComment({id: props.comment.id, token: user.token}); 
-        if (resultDelete){
-            props.refetch(props.idQuestion);
-            setContentToSend('y');
-        }
-    }
 
     return (
         <div className='d-flex flex-column offset-1 mt-2 mb-2 border border-top-0 border-start-0 '>
@@ -55,7 +29,7 @@ export default function Comment(props) {
                             {user.user.id === props.comment.user.id && 
                             <div>
                                 <button className='buttonStyle-xs ms-lg-3 ms-1' onClick={() => setEditCommentState(!editCommentState)}>Editer</button>
-                                <button className='buttonStyle-xs bg-danger ms-lg-4 ms-2' onClick={() => { deleteCommentData()}}>Supprimer</button>
+                                < DeleteComment user={user} comment={props.comment} idQuestion={props.idQuestion} refetch={props.refetch} /> 
                             </div>
                             }
                         </div>
@@ -66,10 +40,7 @@ export default function Comment(props) {
                         </div>
                     </div>
                     { editCommentState ? 
-                        <div className='d-flex flex-column align-items-center'>
-                            <TextArea id={'comment'} content={props.comment.content} setContent={setContentToSend}/>
-                            <button className='buttonStyle' onClick={() => editCommentData()}>Modifier</button>
-                        </div>
+                        < EditComment user={user} data={props.comment} idQuestion={props.idQuestion} refetch={props.refetch} setEditCommentState={setEditCommentState} />
                         :
                         <div dangerouslySetInnerHTML={{ __html: props.comment.content }} />
                     }

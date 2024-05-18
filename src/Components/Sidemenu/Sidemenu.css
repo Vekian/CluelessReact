@@ -37,14 +37,14 @@
     background-color: var(--dark-with-opacity);
 }
 
-.sideMenu li, .listComments li{
+.sideMenu li{
     transition: max-height 0.6s ease-out, opacity 0.5s ease-out;
     opacity: 0;
     max-height: 0;
     overflow: hidden;
 }
 
-.sideMenu li.active, .listComments li.active {
+.sideMenu li.active {
     opacity: 1;
     max-height: 300px;
 }

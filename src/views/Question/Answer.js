@@ -2,20 +2,17 @@ import { getDateDetail, getLvl } from '../../api/APIutils' ;
 import { displayElement } from '../../ui/UIutils';
 import { useSelector } from 'react-redux';
 import Comment from '../Comment';
-import TextArea from '../WriteNew/TextArea';
 import VoteElement from './VoteElement';
 import { Link } from 'react-router-dom';
+import AddComment from './Add/AddComment';
 import React, { useEffect, useState } from 'react';
-import { useDeleteAnswerMutation, useUpdateAnswerMutation, useValidateAnswerMutation } from '../../features/api/answerSlice';
-import { useAddCommentMutation } from '../../features/api/commentSlice';
+import { useValidateAnswerMutation } from '../../features/api/answerSlice';
+import EditAnswer from './Edit/EditAnswer';
+import DeleteAnswer from './Delete/DeleteAnswer';
 
 export default function Answer(props) {
     const user = useSelector(state => state.user);
     const [editAnswerState, setEditAnswerState] = useState(false);
-    const [contentToSend, setContentToSend] = useState();
-    const [editAnswer] = useUpdateAnswerMutation();
-    const [deleteAnswer] = useDeleteAnswerMutation();
-    const [addComment] = useAddCommentMutation();
     const [validateAnswer] = useValidateAnswerMutation();
 
    useEffect(() => {
@@ -23,28 +20,6 @@ export default function Answer(props) {
          document.getElementById(props.idEditor).scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
     }
    }, [props.idEditor])
-
-   const editAnswerData = async () => {
-        const content = contentToSend;
-        const body = {
-            content: content
-        }
-        const bodyJson = JSON.stringify(body);
-        const token = user.token;
-        const resultAnswer = await editAnswer({id: props.answer.id, token: token, body: bodyJson});
-        if (resultAnswer.data) {
-            setEditAnswerState(false);
-            props.refetch(props.idQuestion);
-        }
-   }
-
-   const deleteAnswerData = async () => {
-        const resultDelete = await deleteAnswer({id: props.answer.id, token: user.token}); 
-        if (resultDelete){
-            props.refetch(props.idQuestion);
-            setContentToSend('y');
-        }
-   }
 
    const validateAnswerData = async() => {
         const body = {
@@ -58,20 +33,6 @@ export default function Answer(props) {
         }
    }
 
-    const addCommentData = async () => {
-        const body = {
-            content: contentToSend,
-            user: `/api/users/${user.user.id}`,
-            answer: `/api/answers/${props.answer.id}`,
-        }
-        const token = user.token;
-        const bodyJson = JSON.stringify(body);
-        const resultComment = await addComment({body: bodyJson, token: token});
-        if (resultComment.data) {
-            props.refetch(props.idQuestion);
-            props.displayTextEditor("0", "0");
-        }
-    }
     function checkScoreBeValid() {
         const question = props.question;
         if (question) {
@@ -119,7 +80,9 @@ export default function Answer(props) {
                         }
                         <div className='d-flex align-items-center'>
                             { user.user.id === props.answer.user.id && <button className='buttonStyle ms-lg-4 ms-1' onClick={() => setEditAnswerState(!editAnswerState)}>Editer</button>}
-                            { user.user.id === props.answer.user.id && <button className='buttonStyle ms-lg-4 ms-1 bg-danger' onClick={() => {deleteAnswerData({id: props.answer.id, token: user.token})}}>Supprimer</button>}
+                            { user.user.id === props.answer.user.id && 
+                                < DeleteAnswer user={user} answer={props.answer} idQuestion={props.question.id} refetch={props.refetch} />
+                            }
                             { checkScoreBeValid() && <button className='buttonStyle ms-4 bg-success' onClick={() => {validateAnswerData() }}>Valider</button>}
                         </div>
                     </div>
@@ -132,10 +95,7 @@ export default function Answer(props) {
                     < VoteElement refetch={props.refetch} class1={"answer"} class2={"mt-2 mb-2 me-2"} typeParent={"question"} popularity={props.answer.popularity} idAuthor={props.answer.user.id} idAnswer={props.answer.id} idParentElm={props.idQuestion} idElm={`/api/answers/${props.answer.id}`}/>
                     <div className='pt-2 d-flex flex-column justify-content-between w-100'>
                         {editAnswerState ?
-                        <div className='d-flex flex-column align-items-center'>
-                            <TextArea id={'answer'} content={props.answer.content} setContent={setContentToSend}/>
-                            <button className='buttonStyle mb-3' onClick={() => editAnswerData()}>Modifier</button>
-                        </div>
+                            < EditAnswer user={user} data={props.answer} question={props.question} refetch={props.refetch} setEditAnswerState={setEditAnswerState}/>
                             :
                             <div dangerouslySetInnerHTML={{ __html: props.answer.content }} />
                         }
@@ -179,10 +139,8 @@ export default function Answer(props) {
                     )}
             </ul>
             {props.idEditor === `answerComment${props.answer.id}` && 
-            <div className='d-flex flex-column align-items-center mb-3'>
-                < TextArea id={"answer" + props.answer.id} content={contentToSend} setContent={setContentToSend} class={'comment'}/>
-                <button className='buttonStyle' onClick={() => addCommentData()}>Envoyer</button>
-            </div>   }
+                < AddComment user={user} data={props.answer} setIdEditor={props.setIdEditor} refetch={props.refetch} author={"answer"} />
+           }
         </div>
     )
 }
