@@ -89,8 +89,8 @@ export default function AddCategories() {
                 </button>
                 <ul className="d-flex flex-wrap align-items-center mb-2 ps-4 ps-sm-2">
                     { writeQuestion.categoriesToSend.map(categoryToSend => 
-                    <div className="d-flex align-items-center">
-                        <li key={categoryToSend.id + "categoryToSend"} className="ms-sm-2 ms-1 mt-1">
+                    <div className="d-flex align-items-center" key={categoryToSend.id + "categoryToSend"}>
+                        <li  className="ms-sm-2 ms-1 mt-1">
                             {categoryToSend.name}
                         </li >
                         <i className="fa-solid fa-trash-can ms-2 pt-1" style={{color: "#e01b24",}} data-id={categoryToSend.id} onClick={event => removeCategory(event)} ></i>

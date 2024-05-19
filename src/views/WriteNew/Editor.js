@@ -35,6 +35,12 @@ export default function Editor(props) {
         dispatch(loadContentToSend(contentToSend));
     }, [contentToSend])
 
+    useEffect(() => {
+        if (writeQuestion.content) {
+            setContentToSend(writeQuestion.content)
+        }
+    }, [])
+
     function refreshQuestion(data, type){
         let adresse = "";
         if (type === "question") {
@@ -48,7 +54,7 @@ export default function Editor(props) {
 
     function sendQuestion(){
         setErrorState("");
-        const title = document.getElementById('title').value;
+        const title = writeQuestion.title;
         if (!title) {
             setErrorState("Un titre est requis");
             return;
@@ -137,7 +143,7 @@ export default function Editor(props) {
                         </>
                     }
                     <div>
-                        <TextArea setContent={setContentToSend} content={writeQuestion.content}/>
+                        <TextArea setContent={setContentToSend} content={contentToSend}/>
                     </div>
                 </div>
                 <div className="text-center fw-bold mt-2">

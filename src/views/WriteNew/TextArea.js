@@ -20,6 +20,7 @@ export default function TextArea(props) {
     'bold', 'italic', 'underline', 'strike',
     'link',
     'list', 'bullet',
+    'code-block', 'blockquote'
   ];
     
   return (

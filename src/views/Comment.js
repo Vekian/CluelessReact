@@ -40,7 +40,7 @@ export default function Comment(props) {
                         </div>
                     </div>
                     { editCommentState ? 
-                        < EditComment user={user} data={props.comment} idQuestion={props.idQuestion} refetch={props.refetch} setEditCommentState={setEditCommentState} />
+                        < EditComment user={user} data={props.comment} idQuestion={props.idQuestion ? props.idQuestion : props.idClue} refetch={props.refetch} setEditCommentState={setEditCommentState} />
                         :
                         <div dangerouslySetInnerHTML={{ __html: props.comment.content }} />
                     }

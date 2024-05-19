@@ -16,7 +16,7 @@ export const voteApi = createApi({
                   }
             }
         },
-        providesTags: (result, error, id) => [{ type: 'Votes', id }],
+        providesTags: (result, error, id) => [{ type: 'Votes', id: id }],
     }),
     addVote: builder.mutation({
       query(arg) {
@@ -31,7 +31,7 @@ export const voteApi = createApi({
           }
         }
       },
-      invalidatesTags: (result, error, id) => [{ type: 'Votes', id }],
+      invalidatesTags: (result, error, id) => [{ type: 'Votes', id: id }, { type: 'Scores', id: "LIST" }],
     }),
     updateVote: builder.mutation({
       query(args){
@@ -47,7 +47,7 @@ export const voteApi = createApi({
           }
         }
       },
-      invalidatesTags: (result, error, id) => [{ type: 'Votes', id }],
+      invalidatesTags: (result, error, id) => [{ type: 'Votes', id: id }, { type: 'Scores', id: "LIST" }],
     }),
     deleteVote: builder.mutation({
       query(args) {
@@ -61,7 +61,7 @@ export const voteApi = createApi({
         }
       },
       // Invalidates all queries that subscribe to this Post `id` only.
-      invalidatesTags: (result, error, id) => [{ type: 'Votes', id}],
+      invalidatesTags: (result, error, id) => [{ type: 'Votes', id: id}, { type: 'Scores', id: "LIST" }],
     }),
   }),
 })

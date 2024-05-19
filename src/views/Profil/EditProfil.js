@@ -85,18 +85,18 @@ export default function EditProfil(props) {
                                     }
                                 </select>
                             </div>
-                            {errors.username?.type === "max" && (
+                            {errors.age?.type === "max" && (
                                 <p className='mb-1 text-danger' role="alert">Allons, vous n'êtes pas aussi vieux</p>
                             )}
-                            {errors.username?.type === "min" && (
+                            {errors.age?.type === "min" && (
                                 <p className='mb-1 text-danger' role="alert">Vous êtes un foetus ?</p>
                             )}
                             <div className=" d-flex align-items-end mb-3">
                                 <label htmlFor="age"  className="me-2 fw-bold">
                                     Votre Âge: 
                                 </label>
-                                <input type="number" {...register("age", { min: 0, max: 120 })} 
-                                aria-invalid={errors.country ? "true" : "false"} defaultValue={userProfil.user.age} />
+                                <input type="number" {...register("age", { min: 1, max: 120 })} 
+                                aria-invalid={errors.age ? "true" : "false"} defaultValue={userProfil.user.age} />
                             </div>
                             <div className=" d-flex align-items-end">
                                 <label htmlFor="country"  className="me-2 fw-bold">
@@ -107,10 +107,13 @@ export default function EditProfil(props) {
                             </div>
                         </div>
                         <div className="ms-4 col-6">
+                            {errors.firstname?.type === "max" && (
+                                <p className='mb-1 text-danger' role="alert">Le prénom ne peut dépasser 120 caractères</p>
+                            )}
                             <label htmlFor="firstname"  className="me-2 mb-3 fw-bold">
                                 Votre Prénom: 
                             </label>
-                            <input type="text" {...register("firstname")} 
+                            <input type="text" {...register("firstname", { max: 120 })} 
                             aria-invalid={errors.firstname ? "true" : "false"} defaultValue={userProfil.user.firstname} />
                             <label htmlFor="lastname"  className="me-2 mb-3 fw-bold">
                                 Votre Nom de famille: 

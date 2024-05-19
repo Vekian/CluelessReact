@@ -7,7 +7,7 @@ export const scoreApi = createApi({
   endpoints: (builder) => ({
     getScore: builder.query({
       query: (id) => `/${id}`,
-      providesTags: (result, error, id) => [{ type: 'Score', id }] 
+      providesTags: (result, error, id) => [{ type: 'Scores', id: id }] 
     }),
     getScores: builder.query({
       query(parameters) {
@@ -16,6 +16,7 @@ export const scoreApi = createApi({
           url: `${filter}${page}`,
         }
       },
+      providesTags: (result, error) => [{ type: 'Scores', id: "LIST" }] 
     }),
   }),
 })

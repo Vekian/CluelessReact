@@ -7,7 +7,7 @@ export const clueApi = createApi({
   endpoints: (builder) => ({
     getClue: builder.query({
       query: (id) => `/${id}`,
-      providesTags: (result, error, id) => [{ type: 'Clues', id }] 
+      providesTags: (result, error, id) => [{ type: 'Clues', id: id }] 
     }),
     getClues: builder.query({
       query(parameters) {

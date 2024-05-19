@@ -7,8 +7,10 @@ import { categoryApi } from '../../features/api/categorySlice';
 import { displaySideMenu } from '../../ui/UIutils';
 import Notifications from './Notifications';
 import DarkModeButton from './DarkModeButton';
+import { useNavigate } from 'react-router-dom';
 
 export default function Header () {
+    const navigate = useNavigate();
     const categories = categoryApi.endpoints.getCategories.useQueryState();
     const user = useSelector(state => state.user);
     const {toggleDarkMode, clueMode, changeFilterQuestion, changeFilterClue} = useContext(UIContext);
@@ -33,6 +35,7 @@ export default function Header () {
         }
         let page = "&page=1";
         clueMode ? changeFilterClue([page, filter]) : changeFilterQuestion([page, filter]);
+        navigate('/');
     }
 
     return (

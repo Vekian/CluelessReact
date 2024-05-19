@@ -34,7 +34,7 @@ export const commentApi = createApi({
           }
         }
       },
-      invalidatesTags: (result, error, id) => [{ type: 'Questions', id: result.answer ? result.answer.question.id : result.question.id }],
+      invalidatesTags: (result, error, id) => [{ type: 'Questions', id: result.answer ? result.answer.question.id : (result.question && result.question.id) }, { type: 'Clues', id: result.clue ? result.clue.id : 0 }],
     }),
     deleteComment: builder.mutation({
       query(args) {

@@ -4,22 +4,22 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { getDateDetail, getLvl } from '../../api/APIutils' ;
 import Comment from '../Comment';
-import TextArea from '../WriteNew/TextArea';
+import AddComment from '../Question/Add/AddComment';
 import VoteElement from '../Question/VoteElement';
 import { useGetClueQuery } from '../../features/api/clueSlice';
-import { useAddCommentMutation } from '../../features/api/commentSlice';
 import { loadingElm } from '../../ui/UIutils';
 import { voteApi } from '../../features/api/voteSlice';
+import EditClue from './Edit/EditClue';
+import DeleteClue from './Delete/DeleteClue';
 
 export default function Clue() {
+    const [editClueState, setEditClueState] = useState(false);
     const user = useSelector(state => state.user);
     const [idEditor, setIdEditor] = useState();
-    const [contentToSend, setContentToSend] = useState();
     const { id } = useParams();
 
     const [trigger] = voteApi.useLazyGetVotesQuery();
     const { data, error, isLoading, refetch } = useGetClueQuery(id)
-    const [addComment] = useAddCommentMutation();
     
 
     useEffect(() => {
@@ -29,7 +29,7 @@ export default function Clue() {
     }, [user]);
 
     useEffect(() => {
-        if (data && idEditor){
+        if (idEditor){
             let targetElement = null;
             targetElement = document.getElementById(idEditor);
             if (targetElement) {
@@ -47,21 +47,6 @@ export default function Clue() {
         }
     }
 
-    const addCommentData = async () => {
-        const body = {
-            content: contentToSend,
-            user: `/api/users/${user.user.id}`,
-            clue: `/api/clues/${data.id}`,
-        }
-        const token = user.token;
-        const bodyJson = JSON.stringify(body);
-        const resultComment = await addComment({body: bodyJson, token: token});
-        if (resultComment.data) {
-            setIdEditor(`commentElm${resultComment.data.id}`);
-            refetch(id);
-        }
-    }
-
     return (
         <div className="d-flex flex-column ps-2 pe-2 pt-2 clueDetail">
             <span className="separator w-100"></span>
@@ -69,17 +54,29 @@ export default function Clue() {
                 { isLoading ? 
                     loadingElm()
                     :
-                    <Link to={`/profils/${data.user.id}`} className="d-flex  linkToProfil" style={{ color: 'inherit', textDecoration: 'inherit'}}>
-                        <img src={ process.env.REACT_APP_URL_IMG + data.user.avatar} className='avatar' alt="avatar" height="50px" width="50px" />
-                        <div className="ps-3">
-                            <h4>
-                                { data.user.username }
-                            </h4>
-                            <h6>
-                                lvl {getLvl( data.user.popularity )}
-                            </h6>
+                    <>
+                        <Link to={`/profils/${data.user.id}`} className="d-flex  linkToProfil" style={{ color: 'inherit', textDecoration: 'inherit'}}>
+                            <img src={ process.env.REACT_APP_URL_IMG + data.user.avatar} className='avatar' alt="avatar" height="50px" width="50px" />
+                            <div className="ps-3">
+                                <h4>
+                                    { data.user.username }
+                                </h4>
+                                <h6>
+                                    lvl {getLvl( data.user.popularity )}
+                                </h6>
+                            </div>
+                        </Link>
+                        <div className='d-flex col-lg-6 align-items-center'>
+                            {(data.user.id === user.user.id) &&
+                            <div>
+                                <button className='buttonStyle ms-lg-5 ms-1' onClick={() => setEditClueState(!editClueState)}>
+                                {editClueState ? "Annuler" : 'Editer'} 
+                                </button>
+                                < DeleteClue data={data} user={user} />
+                            </div>
+                            }
                         </div>
-                    </Link>
+                    </>
                 }
                 <div className="d-flex flex-column align-items-end justify-content-end">
                     <ul className="d-flex listTagsElmPreview">
@@ -105,38 +102,51 @@ export default function Clue() {
                     
                 </div>
             </div>
-            <div>
-                {isLoading ?
-                    loadingElm()
-                    :
-                    <h3 className="titleClue offset-1">
-                        {data.title}
-                    </h3>
-                }
-            </div>
-            <span className="separator w-100"></span>
-            <div className="d-flex">
-                { isLoading ? 
-                    loadingElm()
+            {
+                editClueState ?
+                    < EditClue user={user} data={data} refetch={refetch} isLoading={isLoading} setEditClueState={setEditClueState}  />
                     :
                     <>
-                        < VoteElement refetch={refetch} class1={"clue"} class2={"mt-3 mb-3"} typeParent={"clue"} idAuthor={data.user.id} popularity={data.popularity} idParentElm={data.id} idElm={`/api/clues/${data.id}`} />
-                        <div className='d-flex align-items-start ps-3'>
-                            <div dangerouslySetInnerHTML={{ __html: data.content }} className='mt-3' />
+                        <div>
+                            {isLoading ?
+                                loadingElm()
+                                :
+                                <h3 className="titleClue offset-1">
+                                    {data.title}
+                                </h3>
+                            }
+                        </div>
+                        <span className="separator w-100"></span>
+                        <div className="d-flex">
+                            { isLoading ? 
+                                loadingElm()
+                                :
+                                <>
+                                    < VoteElement refetch={refetch} class1={"clue"} class2={"mt-3 mb-3"} typeParent={"clue"} idAuthor={data.user.id} popularity={data.popularity} idParentElm={data.id} idElm={`/api/clues/${data.id}`} />
+                                    <div className='d-flex align-items-start ps-3'>
+                                        <div dangerouslySetInnerHTML={{ __html: data.content }} className='mt-3' />
+                                    </div>
+                                </>
+                            }
                         </div>
                     </>
-                }
-            </div>
+            }
             <div className="d-flex offset-1 justify-content-between pb-3">
                 { isLoading ?
                     loadingElm()
                     :
-                    <div>
-                    <button  className="me-5 buttonComment"  onClick={event => displayTextEditor("comment", data.id)}>
-                        <img src={ process.env.REACT_APP_URL_IMG + "commentIcon.png"} alt="répondre" height="20px" className="me-2"/>
+                    user.user.id ?
+                        <div>
+                            <button  className="me-5 buttonComment"  onClick={event => displayTextEditor("comment", data.id)}>
+                                <img src={ process.env.REACT_APP_URL_IMG + "commentIcon.png"} alt="répondre" height="20px" className="me-2"/>
+                                    Commenter
+                            </button>
+                        </div>
+                        :
+                        <button  className="me-5 buttonComment" data-bs-toggle="modal" data-bs-target="#loginModal" >
+                            <img src={ process.env.REACT_APP_URL_IMG + "commentIcon.png"} alt="répondre" height="20px" className="me-2"/>
                             Commenter
                         </button>
-                    </div>
                     }
             </div>
             <span className="separator w-100"></span>
@@ -144,17 +154,18 @@ export default function Clue() {
                 loadingElm()
                 :
                 idEditor === `comment${data.id}` && 
-                <>
-                    < TextArea id={`comment${data.id}`}  setContent={setContentToSend} class={'comment'} /> 
-                    <button className="buttonStyle" onClick={() => addCommentData()}>Envoyer</button>
-                    <div>
-                        <p className=' fw-bolder mt-2'>
-                            {data.comments.length} commentaire{data.comments.length > 1 ? "s" : null}
-                        </p>
-                    </div>
-                </>
+                < AddComment user={user} data={data}  setIdEditor={setIdEditor} refetch={refetch} author={"clue"} />
             }
-            
+            <div>
+                {
+                    isLoading ?
+                    loadingElm()
+                    :
+                    <p className=' fw-bolder mt-2'>
+                        {data.comments.length} commentaire{data.comments.length > 1 ? "s" : null}
+                    </p>
+                }
+            </div>
             <div>
                 { isLoading ? 
                     loadingElm()
