@@ -138,7 +138,7 @@ export default function Sidemenu() {
                     {
                         (token !== "" && jwtDecode(token).roles.includes("ROLE_ADMIN")) &&
                         <li className='active itemMenu ps-1'>
-                            <a href="http://localhost:3000/admin" className='d-flex align-items-center pt-1 pb-1' style={{ color: 'inherit', textDecoration: 'inherit'}} >
+                            <a href={`https://${window.location.hostname}/admin`} className='d-flex align-items-center pt-1 pb-1' style={{ color: 'inherit', textDecoration: 'inherit'}} >
                             <i className="fa-solid fa-screwdriver-wrench me-xxl-3"></i>
                                 <h5 className='ps-2 ps-xxl-0'>Administration</h5>
                             </a>

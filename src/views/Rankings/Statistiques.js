@@ -28,6 +28,7 @@ export default function Statistiques() {
 
     const options = {
         responsive: true,
+        maintainAspectRatio: false,
         plugins: {
           legend: {
             position: 'top',
@@ -113,7 +114,7 @@ export default function Statistiques() {
                 </p>
             </div>
             <div className="statsContener d-flex flex-wrap w-100">
-                <div className="col-lg-7 col-12 d-flex justify-content-start">
+                <div  className="col-lg-7 col-12 d-flex h-100 justify-content-start">
                    {
                         isFetching ?
                         <ThreeDots
