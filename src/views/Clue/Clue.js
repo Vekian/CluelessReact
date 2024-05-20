@@ -2,7 +2,7 @@ import './Clue.css';
 import { useParams, Link } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { getDateDetail, getLvl } from '../../api/APIutils' ;
+import { getDateDetail, getLvl, compareValiditySubscription } from '../../api/APIutils' ;
 import Comment from '../Comment';
 import AddComment from '../Question/Add/AddComment';
 import VoteElement from '../Question/VoteElement';
@@ -58,7 +58,7 @@ export default function Clue() {
                         <Link to={`/profils/${data.user.id}`} className="d-flex  linkToProfil" style={{ color: 'inherit', textDecoration: 'inherit'}}>
                             <img src={ process.env.REACT_APP_URL_IMG + data.user.avatar} className='avatar' alt="avatar" height="50px" width="50px" />
                             <div className="ps-3">
-                                <h4>
+                                <h4 className={(data.user.subscriptions && compareValiditySubscription(data.user.subscriptions[0]?.expiredAt)) && "shiny-text"}>
                                     { data.user.username }
                                 </h4>
                                 <h6>

@@ -1,4 +1,4 @@
-import { getDateDetail, getLvl } from '../../../api/APIutils' ;
+import { getDateDetail, getLvl, compareValiditySubscription } from '../../../api/APIutils' ;
 
 export default function CluePreview(props) {
 
@@ -6,7 +6,7 @@ export default function CluePreview(props) {
         <div className="d-flex flex-wrap elmPreviewCard mb-2 me-3">
             <div className="d-flex flex-column align-items-center col-2">
                 < img src={ process.env.REACT_APP_URL_IMG + props.elm.user.avatar} className='avatar' alt="avatar" height="30px" width="30px"/>
-                <p className="userPreviewElm">
+                <p className={`userPreviewElm ${props.elm.user.subscriptions && compareValiditySubscription(props.elm.user.subscriptions[0]?.expiredAt) && "shiny-text"}`}>
                     {props.elm.user.username}
                 </p>
                 <p className="lvlPreviewElm">

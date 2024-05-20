@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
+import { compareValiditySubscription } from '../../api/APIutils';
 
 // Define a service using a base URL and expected endpoints
 export const clueApi = createApi({
@@ -15,6 +16,18 @@ export const clueApi = createApi({
           return {
             url: `${filter}${page}`,
           }
+      },
+      transformResponse: (response) => {
+        response["hydra:member"].sort((a, b) => {
+          if ((compareValiditySubscription(a.user.subscriptions[0]?.expiredAt)) && !(compareValiditySubscription(b.user.subscriptions[0]?.expiredAt)) ){
+            return -1;
+          }
+          if (!(compareValiditySubscription(a.user.subscriptions[0]?.expiredAt)) && (compareValiditySubscription(b.user.subscriptions[0]?.expiredAt)) ){
+            return 1;
+          }
+          return 0;
+        });
+        return response;
       },
       providesTags: (result, error) => [{ type: 'Clues', id: 'LIST' }] 
     }),

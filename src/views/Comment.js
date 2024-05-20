@@ -1,5 +1,5 @@
 import './Comment.css';
-import { getDateDetail, getLvl } from '../api/APIutils' ;
+import { getDateDetail, getLvl, compareValiditySubscription } from '../api/APIutils' ;
 import VoteElement from './Question/VoteElement';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -19,7 +19,7 @@ export default function Comment(props) {
                         <div className='d-flex flex-wrap'>
                             <Link to={`/profils/${props.comment.user.id}`} className="d-flex align-items-end linkToProfil" style={{ color: 'inherit', textDecoration: 'inherit'}}>
                                 <img src={ process.env.REACT_APP_URL_IMG + props.comment.user.avatar} className='avatar' alt="avatar" height="35px" width="35px" />
-                                <h5 className='ms-2 me-2'>
+                                <h5 className={`ms-2 me-2 ${(props.comment.user.subscriptions && compareValiditySubscription(props.comment.user.subscriptions[0]?.expiredAt)) && "shiny-text"}`}>
                                     {props.comment.user.username}
                                 </h5>
                                 <span>

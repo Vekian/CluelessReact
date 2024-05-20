@@ -1,4 +1,4 @@
-import { getLvl } from '../../api/APIutils' ;
+import { getLvl, compareValiditySubscription } from '../../api/APIutils' ;
 import { Link } from 'react-router-dom';
 import { useDispatch} from 'react-redux';
 import { deleteUserMe} from '../../features/user/userSlice';
@@ -25,7 +25,7 @@ export default function ProfilHeader (props) {
                 <div type="button" className="buttonProfil d-flex align-items-center dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                     <img src={ process.env.REACT_APP_URL_IMG + props.user.avatar} alt="avatar"  className='me-2 avatar' />
                     <div className='me-2'>
-                       <h5>{props.user.username}</h5> 
+                       <h5 className={`text-white ${(props.user.subscriptions && compareValiditySubscription(props.user.subscriptions[0]?.expiredAt)) && "shiny-text"}`} >{props.user.username}</h5> 
                        <h6 >
                             Lvl {getLvl(props.user.popularity)}
                        </h6>

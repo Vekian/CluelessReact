@@ -96,7 +96,7 @@ export default function Premium() {
                         <div className='content-item d-flex align-items-center'>
                             <img src={ process.env.REACT_APP_URL_IMG + "assets/crown.png"} alt="visibilité" height="100px" />
                             <p className='text-start mt-2 ms-2'>
-                                Débloquez un magnifique cadre pour votre avatar ! <br /> Montrez votre prestance aux autres membres du site.
+                                Débloquez une magnifique apparence pour votre pseudo ! <br /> Montrez votre prestance aux autres membres du site.
                             </p>
                         </div>
                     </div> 

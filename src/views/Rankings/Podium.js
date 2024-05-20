@@ -1,6 +1,7 @@
 import { ThreeDots } from 'react-loader-spinner';
 import { useGetCategoriesQuery } from '../../features/api/categorySlice';
 import { Link } from 'react-router-dom';
+import { compareValiditySubscription } from '../../api/APIutils';
 
 export default function Podium(props) {
     const {currentData} =  useGetCategoriesQuery();
@@ -27,7 +28,7 @@ export default function Podium(props) {
                             {
                                 props.scores.length > 1 && 
                                 <Link to={`/profils/${props.scores[1].user.id}`} className="text-center linkToProfil" style={{ color: 'inherit', textDecoration: 'inherit'}}>
-                                    <h5>
+                                    <h5 className={`text-dark ${(props.scores[1].user.subscriptions && compareValiditySubscription(props.scores[1].user.subscriptions[0]?.expiredAt)) && "shiny-text"}`}>
                                         { props.scores[1].user.username} <i className="fa-solid fa-trophy fa-lg" style={{ color: "#9a9996" }}></i> 
                                     </h5>
                                     <h6 className="mb-1">
@@ -44,7 +45,7 @@ export default function Podium(props) {
                         </div>
                         <div className='h-100 col-4 d-flex flex-column justify-content-end'>
                             <Link to={`/profils/${props.scores[0].user.id}`} className="text-center linkToProfil" style={{ color: 'inherit', textDecoration: 'inherit'}}>
-                                <h5>
+                                <h5 className={`text-dark ${(props.scores[0].user.subscriptions && compareValiditySubscription(props.scores[0].user.subscriptions[0]?.expiredAt)) && "shiny-text"}`}>
                                     { props.scores[0].user.username} <i className="fa-solid fa-trophy fa-xl mb-2" style={{ color: "#FFD43B" }}></i> 
                                 </h5>
                                 <h6 className="mb-1">
@@ -62,7 +63,7 @@ export default function Podium(props) {
                             {
                                 props.scores.length > 2 && 
                                 <Link to={`/profils/${props.scores[2].user.id}`} className="text-center linkToProfil" style={{ color: 'inherit', textDecoration: 'inherit'}}>
-                                    <h5>
+                                    <h5 className={`text-dark ${(props.scores[2].user.subscriptions && compareValiditySubscription(props.scores[2].user.subscriptions[0]?.expiredAt)) && "shiny-text"}`}>
                                         { props.scores[2].user.username}<i className="fa-solid fa-trophy" style={{ color: "#865e3c" }}></i> 
                                     </h5>
                                     <h6 className="mb-1">
@@ -85,7 +86,7 @@ export default function Podium(props) {
                     </div>
                 </div>
                 :
-                <div className='col-3 d-flex align-items-center justify-content-center'>
+                <div className='col-lg-4 col-10 d-flex align-items-center justify-content-center'>
                     <ThreeDots
                         visible={true}
                         height="60"

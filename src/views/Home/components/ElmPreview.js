@@ -1,4 +1,4 @@
-import { getDateDetail, getLvl } from '../../../api/APIutils' ;
+import { getDateDetail, getLvl, compareValiditySubscription } from '../../../api/APIutils' ;
 
 export default function ElmPreview(props) {
 
@@ -8,7 +8,7 @@ export default function ElmPreview(props) {
                 { props.elm.user ? 
                     <>
                         < img src={ process.env.REACT_APP_URL_IMG + props.elm.user.avatar} className='avatar' alt="avatar" height="30px" width="30px"/>
-                        <p className="userPreviewElm">
+                        <p className={`userPreviewElm ${props.elm.user.subscriptions && compareValiditySubscription(props.elm.user.subscriptions[0]?.expiredAt) && "shiny-text"}`}>
                             {props.elm.user.username}
                         </p>
                         <p className="lvlPreviewElm">

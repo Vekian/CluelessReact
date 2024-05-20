@@ -6,6 +6,7 @@ import { loadingElm, displayElement } from '../../ui/UIutils';
 import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { jwtDecode } from "jwt-decode";
+import { compareValiditySubscription } from '../../api/APIutils';
 
 
 export default function Sidemenu() {
@@ -117,7 +118,12 @@ export default function Sidemenu() {
                     <li className='active itemPremium ps-1 mt-2 mb-2'>
                         <Link to="/premium" className={location.pathname === "/premium" ? "item-active d-flex align-items-center pt-1 pb-1" : "d-flex align-items-center pt-1 pb-1"}  style={{ color: 'inherit', textDecoration: 'inherit'}} >
                             <i className="fa-solid fa-crown me-xxl-3 text-warning"></i>
-                            <h5 className='ps-2 ps-xxl-0'>Devenir premium</h5>
+                            <h5 className='ps-2 ps-xxl-0'>{
+                                user.subscriptions && compareValiditySubscription(user.subscriptions[0]?.expiredAt) ?
+                                "Premium"
+                                :
+                                "Devenir premium"
+                            }</h5>
                         </Link>
                     </li>
                     {

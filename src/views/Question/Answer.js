@@ -1,4 +1,4 @@
-import { getDateDetail, getLvl } from '../../api/APIutils' ;
+import { getDateDetail, getLvl, compareValiditySubscription } from '../../api/APIutils' ;
 import { displayElement } from '../../ui/UIutils';
 import { useSelector } from 'react-redux';
 import Comment from '../Comment';
@@ -64,7 +64,7 @@ export default function Answer(props) {
                     <div className='d-flex flex-wrap'>
                         <Link to={`/profils/${props.answer.user.id}`} className="d-flex align-items-end linkToProfil" style={{ color: 'inherit', textDecoration: 'inherit'}}>
                             <img src={ process.env.REACT_APP_URL_IMG + props.answer.user.avatar} className='avatar' alt="avatar" height="50px" width="50px" />
-                            <h5 className="ms-2 mb-0">
+                            <h5 className={`ms-2 mb-0 ${(props.answer.user.subscriptions && compareValiditySubscription(props.answer.user.subscriptions[0]?.expiredAt)) && "shiny-text"}`}>
                                 {props.answer.user.username}
                             </h5>
                             <p className="ms-4 mb-0">

@@ -2,7 +2,7 @@ import './Question.css';
 import { useParams, Link } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { getDateDetail, getLvl} from '../../api/APIutils' ;
+import { getDateDetail, getLvl, compareValiditySubscription} from '../../api/APIutils' ;
 import { useGetQuestionQuery } from '../../features/api/questionSlice';
 import { voteApi } from '../../features/api/voteSlice';
 import Answer from './Answer';
@@ -71,7 +71,7 @@ export default function Question() {
                         <Link to={`/profils/${data.user.id}`} className="d-flex col-lg-2 linkToProfil" style={{ color: 'inherit', textDecoration: 'inherit'}}>
                             <img src={ process.env.REACT_APP_URL_IMG + data.user.avatar} className='avatar' alt="avatar" height="75px" width="75px" />
                             <div className="ps-3 pe-3">
-                                <h4>
+                                <h4 className={(data.user.subscriptions && compareValiditySubscription(data.user.subscriptions[0]?.expiredAt)) && "shiny-text"}>
                                     { data.user.username }
                                 </h4>
                                 <h6>

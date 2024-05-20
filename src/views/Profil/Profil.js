@@ -1,5 +1,5 @@
 import "./Profil.css";
-import { fetchData, getLvl } from "../../api/APIutils";
+import { fetchData, getLvl, compareValiditySubscription } from "../../api/APIutils";
 import { loadUserProfil, loadQuestionsUserProfil } from "../../features/user/userSlice";
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect, useState } from 'react';
@@ -108,7 +108,7 @@ export default function Profil() {
                             </div>
                             <div className="d-flex flex-wrap align-items-end  justify-content-between w-100 ">
                                 <div className="d-flex align-items-end">
-                                    <h3 className="ms-4 me-3 mb-0">
+                                    <h3 className={`ms-4 me-3 mb-0 ${(userProfil.user.subscriptions && compareValiditySubscription(userProfil.user.subscriptions[0]?.expiredAt)) && "shiny-text"}`}>
                                         {userProfil.user.username}
                                     </h3>
                                     <h5 className="mb-1">
