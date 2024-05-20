@@ -33,7 +33,7 @@ export default function Notifications(props){
         <div className="dropdown d-flex justify-content-center align-items-center notifsContener">
             {
                 props.user.user.notifications && 
-                <div className="d-flex justify-content-center align-items-center me-lg-4 me-sm-2 me-1 notifs h-100"  data-bs-toggle="dropdown">
+                <div className="d-flex justify-content-center align-items-center me-lg-4 me-sm-2 me-3 notifs h-100"  data-bs-toggle="dropdown">
                     <i className={`fa-solid fa-bell ${props.user.user.notifications.filter(notification => notification.seen === false).length > 0 && "ringing"} fa-xl`}></i>
                     {
                         props.user.user.notifications.filter(notification => notification.seen === false).length > 0 &&

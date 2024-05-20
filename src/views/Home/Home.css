@@ -125,6 +125,9 @@
     font-weight: 600;
 }
 
+.elmPreviewCard:hover .userPreviewElm{
+    color: white !important;
+}
 
 .toggleMode .switch {
     position: relative;
@@ -250,6 +253,29 @@
     .checkMark {
         height: 30px;
     }
+
+    .searchButtonHeader {
+        font-weight: 500;
+        padding: 3px;
+        font-size: small;
+        width: 40% !important;
+    }
+
+    .searchInputHeader{
+        font-size: small;
+        width: 100px;
+        width: 50% !important;
+    }
+
+    .searchSubmitHeader {
+        font-size: small;
+    }
+
+    .searchContener {
+        margin-bottom: 10px;
+        box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.233);
+        border-radius: 10px;
+    }
 }
 
 @media screen and (min-width: 577px) and (max-width: 1400px){
@@ -275,6 +301,10 @@
     .checkMark {
         height: 35px;
     }
+
+    .searchContener {
+        display: none;
+    }
 }
 
 @media screen and (min-width: 1401px){
@@ -298,5 +328,9 @@
 
     .checkMark {
         height: 40px;
+    }
+
+    .searchContener {
+        display: none;
     }
 }

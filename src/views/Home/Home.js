@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { UIContext } from "../../Components/UIProvider";
 import Select from "./components/Select";
 import ToggleMode from "./components/ToggleMode";
+import Search from "../../Components/Header/Search";
 
 export default function Home() {
     const { clueMode } = useContext(UIContext);
@@ -25,6 +26,9 @@ export default function Home() {
             <div className="d-flex flex-column h-100">
                 <div className="d-flex flex-wrap align-items-center offset-1">
                     <ToggleMode />
+                    <div className="searchContener col-11">
+                        <Search />
+                    </div>
                     <Select />
                 </div>
                 {

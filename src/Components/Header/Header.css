@@ -6,10 +6,6 @@
     z-index: 600;
 }
 
-header {
-    box-shadow: 0px 0px 6px var(--dark);
-}
-
 .logo {
     object-fit: contain;
 }
@@ -182,7 +178,7 @@ header {
         height: 20px;
     }
 
-    .darkModeToggle {
+    .searchElm {
         display: none !important;
     }
 }

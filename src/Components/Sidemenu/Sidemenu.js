@@ -146,7 +146,6 @@ export default function Sidemenu() {
                     }
                 </ul>
             </div>
-            
         </div>
     );
 }
