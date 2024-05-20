@@ -10,8 +10,8 @@ export default function Search(){
 
     function searchQuestions(event){
         event.preventDefault();
-        const idCategory = document.getElementById('categories').value;
-        const inputSearch = document.getElementById('searchInput').value;
+        const idCategory = event.target.elements['categories'].value;
+        const inputSearch = event.target.elements['content'].value;
         let filter = "";
         if (idCategory && !inputSearch){
             filter = "?tags.category.id=" + idCategory;
@@ -25,7 +25,7 @@ export default function Search(){
     }
 
     return (
-        <form action="" className="d-flex align-items-center">
+        <form action="" className="d-flex align-items-center" onSubmit={(event) => searchQuestions(event)}>
             <select className="searchButtonHeader justify-content-center ps-2" id="categories" name="categories" >
                 <option value=""  hidden>Catégories</option>
                 {
@@ -49,7 +49,7 @@ export default function Search(){
             </select>
             < input type="text" className="searchInputHeader ps-2" placeholder="Rechercher une question" id="searchInput" name="content">
             </input>
-            <button type="submit" className="searchSubmitHeader pe-3" onClick={(event) => searchQuestions(event)}>
+            <button type="submit" className="searchSubmitHeader pe-3">
                 <i className="fa-solid fa-magnifying-glass" style={{ color: "#000000" }}></i>
             </button>
         </form>
