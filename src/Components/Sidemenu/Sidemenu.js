@@ -7,6 +7,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { jwtDecode } from "jwt-decode";
 import { compareValiditySubscription } from '../../api/APIutils';
+import { displaySideMenu } from '../../ui/UIutils';
 
 
 export default function Sidemenu() {
@@ -22,7 +23,7 @@ export default function Sidemenu() {
         let filter = "?tags.category.id=" + idCategory;
         let page = "&page=1";
         clueMode ? changeFilterClue([page, filter]) : changeFilterQuestion([page, filter]);
-        
+        displaySideMenu(event);
     }
 
     return(

@@ -66,8 +66,8 @@ export default function AddCategories() {
             <label htmlFor="category" className="mb-3 fw-bold mt-3">
                 Sélectionnez une catégorie ou sous-catégorie préférée (maximum 5)
             </label>
-            <div className="d-flex ms-2">
-                <select id="category" name="tags" className="me-5" onChange={event => displayCategories(event)}>
+            <div className="d-flex flex-wrap ms-2">
+                <select id="category" name="tags" className="me-5 mb-2" onChange={event => displayCategories(event)}>
                     <option value="" hidden>
                         Catégories
                     </option>
@@ -84,7 +84,7 @@ export default function AddCategories() {
                 </select>
                 {
                     userProfil.subCategories.length > 0 ? 
-                    <select id="subCategory" name="subTags" className="me-5">
+                    <select id="subCategory" name="subTags" className="me-5 mb-2">
                         <option value=""hidden>
                             Sous-categorie
                         </option>
@@ -98,10 +98,10 @@ export default function AddCategories() {
                             )}
                     </select> : null
                 }
-                <button className="buttonStyle" id="addCategory" onClick={event => addCategory(event)}>
+                <button className="buttonStyle mb-2" id="addCategory" onClick={event => addCategory(event)}>
                     Ajouter
                 </button>
-                <ul className="d-flex align-items-center mb-0">
+                <ul className="d-flex flex-wrap align-items-center mb-2">
                 { userProfil.categories[0] && userProfil.categories.map(category => 
                     <div className="d-flex align-items-center">
                         <li key={category.id + "category"} className="ms-2 mt-1">

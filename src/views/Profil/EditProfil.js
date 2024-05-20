@@ -34,11 +34,11 @@ export default function EditProfil(props) {
         <div>
             <div className="d-flex" >
                 <form onSubmit={handleSubmit(onSubmit)} className="w-100">
-                    <div className=" d-flex align-items-end">
-                        <div  className="col-1 text-center">
+                    <div className=" d-flex flex-wrap align-items-end">
+                        <div  className="text-center">
                             <img  src={ process.env.REACT_APP_URL_IMG + userProfil.user.avatar} alt="avatar" height="80px" width="80px"/>
                         </div>
-                        <div className="d-flex align-items-center  justify-content-between w-100 ms-3">
+                        <div className="d-flex flex-lg-row flex-column-reverse flex-wrap align-items-lg-center  justify-content-between ms-lg-3 ">
                             {errors.username?.type === "maxLength" && (
                                 <p className='mb-1 text-danger' role="alert">Ne peut dépasser 100 caractères</p>
                             )}
@@ -48,26 +48,26 @@ export default function EditProfil(props) {
                             {errors.username?.type === "required" && (
                                 <p className='mb-1 text-danger' role="alert">Email obligatoire</p>
                             )}
-                            <div className=" d-flex align-items-end">
+                            <div className=" d-flex flex-wrap align-items-end">
                                 <label htmlFor="username"  className="me-2 fw-bold">
                                     Votre Pseudo: 
                                 </label>
                                 <input type="text" {...register("username", { required: true, maxLength: 20, minLength: 3 })} 
                                 aria-invalid={errors.username ? "true" : "false"} defaultValue={userProfil.user.username} />
-                                <h5 className=" ms-3">
+                                <h5 className=" ms-lg-3 ms-1">
                                     lvl {getLvl(userProfil.user.popularity)}
                                 </h5>
                             </div>
-                            <div>
+                            <div className="mb-lg-0 mb-2 ms-lg-3 d-flex justify-content-end">
                                 <button className="bg-danger buttonStyle" onClick={() => props.setEditProfilState(!props.editProfilState)}>
                                     Annuler
                                 </button>
                             </div>
                         </div>
                     </div>
-                    <div className="d-flex mt-2">
-                        <div className="d-flex col-4 flex-column  justify-content-center">
-                            <div className="d-flex">
+                    <div className="d-flex flex-wrap mt-2">
+                        <div className="d-flex flex-wrap col-lg-4 col-12 flex-column  justify-content-center">
+                            <div className="d-flex flex-wrap">
                                 <label htmlFor="sex"  className="me-2 fw-bold">
                                     Votre genre: 
                                 </label>
@@ -106,7 +106,7 @@ export default function EditProfil(props) {
                                 aria-invalid={errors.country ? "true" : "false"} defaultValue={userProfil.user.country} />
                             </div>
                         </div>
-                        <div className="ms-4 col-6">
+                        <div className="ms-lg-4 mt-lg-0 mt-3 col-lg-6 col-12">
                             {errors.firstname?.type === "max" && (
                                 <p className='mb-1 text-danger' role="alert">Le prénom ne peut dépasser 120 caractères</p>
                             )}
@@ -115,14 +115,15 @@ export default function EditProfil(props) {
                             </label>
                             <input type="text" {...register("firstname", { max: 120 })} 
                             aria-invalid={errors.firstname ? "true" : "false"} defaultValue={userProfil.user.firstname} />
-                            <label htmlFor="lastname"  className="me-2 mb-3 fw-bold">
+                            <br />
+                            <label htmlFor="lastname"  className="me-2 mb-3 mt-lg-0 mt-3 fw-bold">
                                 Votre Nom de famille: 
                             </label>
                             <input type="text" {...register("lastname")} 
                             aria-invalid={errors.lastname ? "true" : "false"} defaultValue={userProfil.user.lastname} />
                             <div className="separator mb-3 ms-3"></div>
-                            <div className="d-flex">
-                                <label htmlFor="description"  className="me-2 fw-bold">
+                            <div className="d-flex flex-wrap">
+                                <label htmlFor="description"  className="me-2 mb-lg-0 mb-3 fw-bold">
                                     Votre description: 
                                 </label>
                                 <input type="text" {...register("description")} 

@@ -133,7 +133,7 @@ export default function Question() {
                             :
                             < VoteElement refetch={refetch} class1={"question"} class2={"mt-3 mb-3"}  idAuthor={data.user.id} popularity={data.popularity} typeParent={"question"} idParentElm={data.id} idElm={`/api/questions/${data.id}`} />
                         }
-                        <div className='d-flex align-items-start w-100'>
+                        <div className='d-flex align-items-start w-100 ms-3'>
                             {isLoading ? 
                                 loadingElm()
                                 :
@@ -146,37 +146,37 @@ export default function Question() {
             <div className="d-flex offset-1 justify-content-between pb-3">
                 <div>
                     {isLoading ? 
-                        <button className="me-5 buttonAnswer" >
+                        <button className="me-lg-5 mb-1 me-2 buttonAnswer" >
                             <img src={ process.env.REACT_APP_URL_IMG + "answerIcon.png"} alt="répondre" height="20px" className="me-2"/>
                             Répondre
                         </button>
                         :
                         user.user.id ?
                             data.user.id !== user.user.id ?
-                                <button className="me-5 buttonAnswer"  onClick={event => displayTextEditor("answer", data.id)} >
+                                <button className="me-lg-5 mb-1 me-2 buttonAnswer"  onClick={event => displayTextEditor("answer", data.id)} >
                                     <img src={ process.env.REACT_APP_URL_IMG + "answerIcon.png"} alt="répondre" height="20px" className="me-2"/>
                                     Répondre
                                 </button>
                                 : null
                             : 
-                            <button className="me-5 buttonAnswer"  data-bs-toggle="modal" data-bs-target="#loginModal" >
+                            <button className="me-lg-5 mb-1 me-2 buttonAnswer"  data-bs-toggle="modal" data-bs-target="#loginModal" >
                                 <img src={ process.env.REACT_APP_URL_IMG + "answerIcon.png"} alt="répondre" height="20px" className="me-2"/>
                                 Répondre
                             </button>
                     }
                     {isLoading ? 
-                        <button  className="me-5 buttonComment">
+                        <button  className="me-lg-5 mb-1 me-2 buttonComment">
                             <img src={ process.env.REACT_APP_URL_IMG + "commentIcon.png"} alt="répondre" height="20px" className="me-2"/>
                             Commenter
                         </button>
                         :
                         user.user.id ?
-                            <button  className="me-5 buttonComment"  onClick={event => displayTextEditor("comment", data.id)}>
+                            <button  className="me-lg-5 mb-1 me-2 buttonComment"  onClick={event => displayTextEditor("comment", data.id)}>
                                 <img src={ process.env.REACT_APP_URL_IMG + "commentIcon.png"} alt="répondre" height="20px" className="me-2"/>
                                 Commenter
                             </button>
                             :
-                            <button  className="me-5 buttonComment" data-bs-toggle="modal" data-bs-target="#loginModal" >
+                            <button  className="me-lg-5 mb-1 me-2 buttonComment" data-bs-toggle="modal" data-bs-target="#loginModal" >
                                 <img src={ process.env.REACT_APP_URL_IMG + "commentIcon.png"} alt="répondre" height="20px" className="me-2"/>
                                 Commenter
                             </button>
