@@ -1,10 +1,13 @@
 import { HydraAdmin, 
-  fetchHydra, 
+  fetchHydra as baseFetchHydra, 
   hydraDataProvider, 
   FieldGuesser,
   ListGuesser,
+  CreateGuesser,
+  EditGuesser,
+  InputGuesser,
   ResourceGuesser } from "@api-platform/admin";
-  import { ReferenceField, TextField } from "react-admin";
+import { ReferenceField, ReferenceInput, ReferenceArrayInput, SelectArrayInput, AutocompleteInput, ReferenceArrayField, TextField, SingleFieldList, ChipField } from "react-admin";
 import { parseHydraDocumentation } from "@api-platform/api-doc-parser";
 import { useSelector } from 'react-redux';
 import { fetchData, getCookie } from "../../api/APIutils";
@@ -13,6 +16,7 @@ import { useDispatch} from 'react-redux';
 import { useEffect, useState } from 'react';
 import { jwtDecode } from "jwt-decode";
 
+
 // Replace with your own API entrypoint
 // For instance if https://example.com/api/books is the path to the collection of book resources, then the entrypoint is https://example.com/api
 export default function Admin() {
@@ -20,6 +24,18 @@ export default function Admin() {
   const entrypoint= process.env.REACT_APP_URL + "api";
   const token = useSelector(state => state.user.token);
   const [isSending, setIsSending] = useState( false );
+
+  const getHeaders = () => token ? {
+    Authorization: `Bearer ${token}`,
+  } : {};
+
+  const fetchHydra = (url, options = {}) =>
+    baseFetchHydra(url, {
+      ...options,
+      headers: getHeaders,
+    });
+  
+  
   const dataProvider = hydraDataProvider({
     entrypoint,
     httpClient: fetchHydra,
@@ -61,7 +77,13 @@ export default function Admin() {
       <ReferenceField label="Author" source="user" reference="users">
         <TextField source="username" />
       </ReferenceField>
-      <FieldGuesser source="tags" />
+      <ReferenceArrayField label="Categories" source="tags" reference="tags">
+        <SingleFieldList >
+          <ReferenceField label="Category" source="category" reference="categories">
+            <ChipField source="name" />
+          </ReferenceField>
+        </SingleFieldList>
+      </ReferenceArrayField>
       <FieldGuesser source="title" />
       <FieldGuesser source="content" />
       <FieldGuesser source="popularity" />
@@ -102,6 +124,56 @@ export default function Admin() {
     </ListGuesser>
   );
 
+  const CategoriesCreate = props => (
+    <CreateGuesser {...props}>
+      <InputGuesser source="name" />
+      <ReferenceInput
+        source="category"
+        reference="categories"
+      >
+        <AutocompleteInput
+          filterToQuery={searchText => ({ name: searchText })}
+          optionText="name"
+          label="Categorie principale"
+        />
+      </ReferenceInput>
+      <InputGuesser source="icon" />
+      <InputGuesser source="main" />
+    </CreateGuesser>
+  );
+
+  const CategoriesEdit = props => (
+    <EditGuesser {...props}>
+      <InputGuesser source="name" />
+      <ReferenceInput
+        source="category"
+        reference="categories"
+      >
+        <AutocompleteInput
+          filterToQuery={searchText => ({ name: searchText })}
+          optionText="name"
+          label="Categorie principale"
+        />
+      </ReferenceInput>
+  
+      <InputGuesser source="icon" />
+      <InputGuesser source="main" />
+    </EditGuesser>
+  );
+
+  const CategoriesList = (props) => (
+    <ListGuesser {...props}>
+      <FieldGuesser source="name" />
+      <ReferenceArrayField label="Categories filles" source="categories" reference="categories">
+        <SingleFieldList>
+          <ChipField source="name" />
+        </SingleFieldList>
+      </ReferenceArrayField>
+      <FieldGuesser source="icon" />
+      <FieldGuesser source="main" />
+    </ListGuesser>
+  )
+
   const QuestionsList = (props) => (
     <ListGuesser {...props}>
       <ReferenceField label="Author" source="user" reference="users">
@@ -113,9 +185,42 @@ export default function Admin() {
       <FieldGuesser source="status" />
       <FieldGuesser source="answers" />
       <FieldGuesser source="comments" />
-      <FieldGuesser source="tags" />
+      <ReferenceArrayField label="Categories" source="tags" reference="tags">
+        <SingleFieldList >
+          <ReferenceField label="Category" source="category" reference="categories">
+            <ChipField source="name" />
+          </ReferenceField>
+        </SingleFieldList>
+      </ReferenceArrayField>
       <FieldGuesser source="createdAt" />
     </ListGuesser>
+  );
+
+  const QuestionsEdit = props => (
+    <EditGuesser {...props}>
+      <InputGuesser source="title" />
+      <ReferenceInput
+        source="user"
+        reference="users"
+      >
+        <AutocompleteInput
+          filterToQuery={searchText => ({ username: searchText })}
+          optionText="username"
+          label="Auteur"
+        />
+      </ReferenceInput>
+      <ReferenceArrayInput
+        source="tags"
+        reference="tags"
+      >
+        <SelectArrayInput optionText="category" />
+      </ReferenceArrayInput>
+      <InputGuesser source="title" />
+      <InputGuesser source="content" />
+      <InputGuesser source="status" />
+      <InputGuesser source="answers" />
+      <InputGuesser source="comments" />
+    </EditGuesser>
   );
 
   return (
@@ -126,6 +231,7 @@ export default function Admin() {
         <ResourceGuesser
           name="questions"
           list={QuestionsList}
+          edit={QuestionsEdit}
         />
         <ResourceGuesser
           name="answers"
@@ -144,6 +250,9 @@ export default function Admin() {
         />
         <ResourceGuesser
           name="categories"
+          list={CategoriesList}
+          create={CategoriesCreate}
+          edit={CategoriesEdit}
         />
        </ HydraAdmin>
        :
