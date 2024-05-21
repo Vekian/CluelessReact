@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch} from 'react-redux';
 import { deleteUserMe} from '../../features/user/userSlice';
 import { googleLogout } from '@react-oauth/google';
+import { fetchData } from '../../api/APIutils';
 
 export default function ProfilHeader (props) {
     const dispatch = useDispatch();
@@ -15,8 +16,14 @@ export default function ProfilHeader (props) {
 
     function logOut(){
         dispatch(deleteUserMe());
-        deleteCookie();
+        const body = {
+        }
+        fetchData('/token/invalidate', 'POST', loadData, '', body)
         googleLogout();
+    }
+
+    function loadData(data){
+        console.log(data);
     }
 
     return (

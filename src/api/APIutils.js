@@ -64,7 +64,7 @@ export function getLvl(popularity) {
 export function fetchData(url, method, processData, token = null, bodyData = null, errorData = null) {
   let body = bodyData;
   let headers = "";
-  let credentials = 'include';
+  let credentials = 'omit';
 
   if (method === 'POST') {
     body = JSON.stringify(bodyData);
