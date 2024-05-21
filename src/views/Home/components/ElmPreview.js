@@ -35,7 +35,7 @@ export default function ElmPreview(props) {
                     </p>
                 </div>
                 
-                <p className="titlePreviewElm">
+                <p className="titlePreviewElm overflow-hidden">
                     {props.elm.title}
                 </p>
                 <ul className="d-flex flex-wrap listTagsElmPreview">

@@ -21,7 +21,7 @@ export default function CluePreview(props) {
                         </p>
                     </div>
                 </div>
-                <div className='d-flex align-items-center'>
+                <div className='d-flex align-items-center mt-1'>
                     <p className="titlePreviewElm overflow-hidden">
                         {props.elm.title}
                     </p>
