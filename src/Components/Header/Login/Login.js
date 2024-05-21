@@ -39,8 +39,6 @@ export default function Login() {
 
             let cookie = getCookie('refresh_token');
             if (!cookie) {
-                cookie = `refresh_token=1`;
-                document.cookie = cookie;
                 document.getElementById('loginModalClose').click()
                 setIsSending(false);
             }
