@@ -21,13 +21,10 @@ export default function Login() {
                                 fetchData('login_check', 'POST', loadData, '', data, errorData)}
     
     useEffect(() => {
-        const cookie = getCookie('refresh_token');
-        if (cookie){
+
             const body = {
-                refresh_token: cookie
             }
             fetchData('token/refresh', 'POST', loadData, '', body)
-        }
         
     }, [])
     

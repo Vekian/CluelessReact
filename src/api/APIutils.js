@@ -64,6 +64,7 @@ export function getLvl(popularity) {
 export function fetchData(url, method, processData, token = null, bodyData = null, errorData = null) {
   let body = bodyData;
   let headers = "";
+  let credentials = url === 'token/refresh' ? 'include' : 'omit';
 
   if (method === 'POST') {
     body = JSON.stringify(bodyData);
@@ -107,6 +108,7 @@ export function fetchData(url, method, processData, token = null, bodyData = nul
   fetch(`${process.env.REACT_APP_URL}api/${url}`, 
     {
         method: method,
+        credentials: credentials,
         headers: headers,
         body: body
     })
