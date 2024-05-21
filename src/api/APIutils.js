@@ -68,7 +68,7 @@ export function fetchData(url, method, processData, token = null, bodyData = nul
 
   if (method === 'POST') {
     body = JSON.stringify(bodyData);
-    if (url === 'login_check' || url === 'token/refresh') {
+    if (url === 'login_check' || url === 'token/refresh' || 'token/invalidate') {
       headers = {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
