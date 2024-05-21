@@ -64,7 +64,7 @@ export function getLvl(popularity) {
 export function fetchData(url, method, processData, token = null, bodyData = null, errorData = null) {
   let body = bodyData;
   let headers = "";
-  let credentials = url === 'token/refresh' ? 'include' : 'omit';
+  let credentials = 'omit';
 
   if (method === 'POST') {
     body = JSON.stringify(bodyData);
@@ -73,6 +73,7 @@ export function fetchData(url, method, processData, token = null, bodyData = nul
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       };
+      credentials = 'include';
     }
     else {
       headers = {
