@@ -8,17 +8,11 @@ import { fetchData } from '../../api/APIutils';
 export default function ProfilHeader (props) {
     const dispatch = useDispatch();
 
-
-    function deleteCookie() {
-        document.cookie = 'refresh_token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 UTC'; 
-    }
-
-
     function logOut(){
         dispatch(deleteUserMe());
         const body = {
         }
-        fetchData('/token/invalidate', 'POST', loadData, '', body)
+        fetchData('token/invalidate', 'POST', loadData, '', body)
         googleLogout();
     }
 
