@@ -45,14 +45,9 @@ export default function Admin() {
   });
 
   useEffect(() => {
-    const cookie = getCookie('refresh_token');
-    if (cookie){
-        const body = {
-            refresh_token: cookie
-        }
-        fetchData('token/refresh', 'POST', loadData, '', body)
+    const body = {
     }
-    
+    fetchData('token/refresh', 'POST', loadData, '', body)
   }, [])
 
   function loadData(data) {

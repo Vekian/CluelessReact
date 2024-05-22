@@ -34,7 +34,7 @@ export default function Podium(props) {
                                     <h6 className="mb-1">
                                         ({props.scores[1].points} points)
                                     </h6>
-                                    <img className="mb-1" src={ process.env.REACT_APP_URL_IMG + props.scores[1].user.avatar } alt="" height="50px" />
+                                    <img className="mb-1" src={ process.env.REACT_APP_URL_IMG + props.scores[1].user.avatar } alt="" height="50px" width="50px" />
                                 </Link>
                             }
                             <div className='podiumSecond'>
@@ -51,7 +51,7 @@ export default function Podium(props) {
                                 <h6 className="mb-1">
                                     ({props.scores[0].points} points)
                                 </h6>
-                                <img className="mb-1 imgFirst" src={ process.env.REACT_APP_URL_IMG + props.scores[0].user.avatar } alt="" height="50px" />
+                                <img className="mb-1 imgFirst" src={ process.env.REACT_APP_URL_IMG + props.scores[0].user.avatar } alt="" height="50px" width="50px" />
                             </Link>
                             <div className='podiumFirst'>
                                 <span className='text-light d-flex align-items-end pb-3 justify-content-center h-100'>
@@ -69,7 +69,7 @@ export default function Podium(props) {
                                     <h6 className="mb-1">
                                         ({props.scores[2].points} points)
                                     </h6>
-                                    <img className="mb-1" src={ process.env.REACT_APP_URL_IMG + props.scores[2].user.avatar } alt="" height="50px" />
+                                    <img className="mb-1" src={ process.env.REACT_APP_URL_IMG + props.scores[2].user.avatar } alt="" height="50px" width="50px" />
                                 </Link>
                             }
                             <div className='podiumThird'>

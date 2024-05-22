@@ -23,7 +23,7 @@
 .App.dark {
     --dark: white;
     --dark-with-opacity: rgb(53, 53, 53);
-    --dark-with-opacity-xl: rgba(53, 53, 53, 0.253);
+    --dark-with-opacity-xl: rgba(95, 95, 95, 0.253);
     --primaryColor-with-opacity: rgb(115, 147, 250);
     --white: rgb(20, 20, 20);
     --tertiaryColor: #173e6b;

@@ -26,7 +26,6 @@ export default function ElmPreview(props) {
                         </p>
                     </>
                 }
-                
             </div>
             <div className="d-flex flex-column col-md-6 col-8">
                 <div className='d-flex align-items-center pb-1'>
@@ -34,7 +33,6 @@ export default function ElmPreview(props) {
                         { getDateDetail(props.elm.createdAt)}
                     </p>
                 </div>
-                
                 <p className="titlePreviewElm overflow-hidden">
                     {props.elm.title}
                 </p>

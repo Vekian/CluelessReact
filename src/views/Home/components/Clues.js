@@ -12,7 +12,7 @@ export default function Clues() {
 
     return(
         <div className=" d-flex flex-column pe-md-3">
-            <div className='listOfElms '>
+            <div className='ps-2 listOfElms '>
                 { isFetching ?
                     <div className='d-flex justify-content-center align-items-center h-100'>
                         <Comment

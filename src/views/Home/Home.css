@@ -83,8 +83,17 @@
     font-size: 0.8rem;
 }
 
+.dark .searchContener, .dark .searchContener .searchSubmitHeader{
+    color: var(--dark);
+    background-color: var(--dark-with-opacity);
+    border: none;
+    border-radius: 10px;
+    transition: background-color 0.6s ease;
+}
 
-
+.dark .searchContener .searchInputHeader {
+    background-color: transparent;
+}
 .pageItem {
     cursor: pointer;
     padding: 3px 5px 3px 5px;
