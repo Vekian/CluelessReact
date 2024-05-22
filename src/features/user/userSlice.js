@@ -11,6 +11,9 @@ const initialState = {
         questions: {
 
         },
+        clues: {
+
+        },
         categories: [
 
         ],
@@ -45,6 +48,9 @@ export const userSlice = createSlice({
         loadQuestionsUserProfil: (state, action) => {
             state.userProfil.questions = action.payload;
         },
+        loadCluesUserProfil: (state, action) => {
+            state.userProfil.clues = action.payload;
+        },
         loadCategories: (state, action) => {
             state.userProfil.categories.push(action.payload)
         },
@@ -59,4 +65,4 @@ export const userSlice = createSlice({
 
 export default userSlice.reducer;
 
-export const { loadToken, loadUserMe, changeNotification, loadUserProfil, deleteUserMe, loadQuestionsUserProfil, loadCategories, removeCategories, loadSubCategories } = userSlice.actions;
+export const { loadToken, loadUserMe, changeNotification, loadUserProfil, deleteUserMe, loadQuestionsUserProfil, loadCluesUserProfil, loadCategories, removeCategories, loadSubCategories } = userSlice.actions;

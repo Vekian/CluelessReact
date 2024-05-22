@@ -1,6 +1,6 @@
 import "./Profil.css";
 import { fetchData, getLvl, compareValiditySubscription } from "../../api/APIutils";
-import { loadUserProfil, loadQuestionsUserProfil } from "../../features/user/userSlice";
+import { loadUserProfil, loadQuestionsUserProfil, loadCluesUserProfil } from "../../features/user/userSlice";
 import { useDispatch, useSelector } from 'react-redux';
 import React, { useEffect, useState } from 'react';
 import ElmPreview from "../Home/components/ElmPreview";
@@ -9,9 +9,12 @@ import EditProfil from "./EditProfil";
 import EditPicture from "./EditPicture";
 import ScoreProfil from "./ScoreProfil";
 import { ThreeDots } from 'react-loader-spinner';
+import { useContext } from "react";
+import { UIContext } from "../../Components/UIProvider";
 
 export default function Profil() {
     const dispatch = useDispatch();
+    const { clueMode } = useContext(UIContext);
     const location = useLocation();
     const userProfil= useSelector(state => state.user.userProfil);
     const user = useSelector(state => state.user.user);
@@ -35,21 +38,36 @@ export default function Profil() {
                 setUserFetchingState(true);
                 fetchData(`users/${id}`, 'GET', loadData);
                 setQuestionsFetchingState(true);
-                fetchData(`questions?page=1&user=${id}&order[createdAt]=desc`, 'GET', loadQuestionsData);
+                if (clueMode){
+                    fetchData(`clues?page=1&user=${id}&order[createdAt]=desc`, 'GET', loadCluesData);
+                }
+                else {
+                   fetchData(`questions?page=1&user=${id}&order[createdAt]=desc`, 'GET', loadQuestionsData); 
+                }
         }}
         else if (user?.id){
             dispatch(loadUserProfil(user));
             setQuestionsFetchingState(true);
-            fetchData(`questions?page=1&user=${user.id}&order[createdAt]=desc`, 'GET', loadQuestionsData);
+            if (clueMode){
+                fetchData(`clues?page=1&user=${user.id}&order[createdAt]=desc`, 'GET', loadCluesData);
+            }
+            else {
+               fetchData(`questions?page=1&user=${user.id}&order[createdAt]=desc`, 'GET', loadQuestionsData); 
+            }
         }
         else {
             setUserFetchingState(true);
             fetchData(`users/${user.id}`, 'GET', loadData);
             setQuestionsFetchingState(true);
-            fetchData(`questions?page=1&user=${user.id}&order[createdAt]=desc`, 'GET', loadQuestionsData);
+            if (clueMode){
+                fetchData(`clues?page=1&user=${user.id}&order[createdAt]=desc`, 'GET', loadCluesData);
+            }
+            else {
+               fetchData(`questions?page=1&user=${user.id}&order[createdAt]=desc`, 'GET', loadQuestionsData); 
+            }
         }
         
-    }, [])
+    }, [clueMode])
 
     function loadData(data) {
         dispatch(loadUserProfil(data));
@@ -59,6 +77,12 @@ export default function Profil() {
     function loadQuestionsData(data) {
         let arrayData = data['hydra:member'].slice(0, 5);
         dispatch(loadQuestionsUserProfil(arrayData));
+        setQuestionsFetchingState(false);
+    }
+
+    function loadCluesData(data) {
+        let arrayData = data['hydra:member'].slice(0, 5);
+        dispatch(loadCluesUserProfil(arrayData));
         setQuestionsFetchingState(false);
     }
 
@@ -183,7 +207,7 @@ export default function Profil() {
             </div>
             <div className="offset-1 col-10 mt-5">
                 <h4>
-                    Dernières questions posées
+                    Dernières { clueMode ? "astuces" : "questions" } posées
                 </h4>
                 {
                     questionsFetchingState ?
@@ -201,17 +225,32 @@ export default function Profil() {
                     </div>
                     :
                     <div className="mt-3">
-                        { userProfil.questions && userProfil.questions.length > 0 ?
-                        userProfil.questions.map(question =>
-                            <Link to={`/question/${question.id}`} style={{ color: 'inherit', textDecoration: 'inherit'}}  key={question.id + "question"}>
-                                < ElmPreview elm={question} user={userProfil}/>
-                            </Link>
-                            ): 
-                            <div>
-                                <h4>
-                                    Pas de questions posées par {userProfil.username}
-                                </h4>
-                            </div>}
+                        {
+                            clueMode ?
+                            userProfil.clues && userProfil.clues.length > 0 ?
+                                userProfil.clues.map(clue =>
+                                <Link to={`/clue/${clue.id}`} style={{ color: 'inherit', textDecoration: 'inherit'}}  key={clue.id + "clue"}>
+                                    < ElmPreview elm={clue} user={userProfil}/>
+                                </Link>
+                                ): 
+                                <div>
+                                    <h4>
+                                        Pas d'astuces posées par {userProfil.username}
+                                    </h4>
+                                </div>
+                            :
+                            userProfil.questions && userProfil.questions.length > 0 ?
+                                userProfil.questions.map(question =>
+                                <Link to={`/question/${question.id}`} style={{ color: 'inherit', textDecoration: 'inherit'}}  key={question.id + "question"}>
+                                    < ElmPreview elm={question} user={userProfil}/>
+                                </Link>
+                                ): 
+                                <div>
+                                    <h4>
+                                        Pas de questions posées par {userProfil.username}
+                                    </h4>
+                                </div>
+                        }
                     </div>
                 }
             </div>
