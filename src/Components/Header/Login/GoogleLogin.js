@@ -9,7 +9,8 @@ export default function GoogleLogin(props) {
     function sendAccesTokenGoogle(user){
         fetch(`${process.env.REACT_APP_URL}googlelogin`,
                     {
-                        method: 'GET',
+                        method: 'POST',
+                        credentials: "include",
                         headers: {
                             authorization: `Bearer ${user.access_token}`,
                             Accept: 'application/json'
