@@ -1,0 +1,57 @@
+name: Symfony CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Create .env file
+        run: |
+          rm .env
+          echo 'REACT_APP_URL_IMG=${{ secrets.REACT_APP_URL_IMG }}' >> .env
+          echo 'REACT_APP_URL=${{ secrets.REACT_APP_URL }}' >> .env
+          echo 'REACT_APP_PUBLIC_KEY_STRIPE=${{ secrets.REACT_APP_PUBLIC_KEY_STRIPE }}' >> .env
+          echo 'REACT_APP_PRICE_PREMIUM_ANNUEL=${{ secrets.REACT_APP_PRICE_PREMIUM_ANNUEL }}' >> .env
+          echo 'REACT_APP_PRICE_PREMIUM_MENSUEL=${{ secrets.REACT_APP_PRICE_PREMIUM_MENSUEL }}' >> .env
+          echo 'GENERATE_SOURCEMAP=false' >> .env
+
+      - name: Log in to Docker Hub # Using Access Token
+        run: echo "${{ secrets.DOCKERHUB_TOKEN }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+
+      - name: Build Docker image
+        run: docker compose -f docker-compose.yml build
+      - name: Push Docker image to Docker Hub
+        run: docker push ${{ secrets.DOCKER_USERNAME }}/clueless_front:latest
+      - name: Deploy to production server
+        if: success() && github.ref == 'refs/heads/main'
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          key: ${{ secrets.SSH_PROD_PRIVATE_KEY }}
+          passphrase: ${{ secrets.SSH_KEY_PASSPHRASE }}
+          script: |
+            cd /var/www/clueless_front
+            docker compose down
+            rm docker-compose.yml
+            rm .env
+            docker rmi ${{ secrets.DOCKER_USERNAME }}/clueless_front:latest || true
+            echo "${{ secrets.DOCKER_COMPOSE_FILE }}" >> docker-compose.yml
+            echo 'REACT_APP_URL_IMG=${{ secrets.REACT_APP_URL_IMG }}' >> .env
+            echo 'REACT_APP_URL=${{ secrets.REACT_APP_URL }}' >> .env
+            echo 'REACT_APP_PUBLIC_KEY_STRIPE=${{ secrets.REACT_APP_PUBLIC_KEY_STRIPE }}' >> .env
+            echo 'REACT_APP_PRICE_PREMIUM_ANNUEL=${{ secrets.REACT_APP_PRICE_PREMIUM_ANNUEL }}' >> .env
+            echo 'REACT_APP_PRICE_PREMIUM_MENSUEL=${{ secrets.REACT_APP_PRICE_PREMIUM_MENSUEL }}' >> .env
+            echo 'GENERATE_SOURCEMAP=false' >> .env
+
+            docker pull ${{ secrets.DOCKER_USERNAME }}/clueless_front:latest
+            docker compose up -d

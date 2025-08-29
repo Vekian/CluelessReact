@@ -1,0 +1,13 @@
+services:
+  react-app:
+    image: vekian/clueless_front:latest
+    container_name: clueless_front
+    restart: always
+    ports:
+      - "3300:80"
+    networks:
+      - clueless_network
+
+networks:
+  clueless_network:
+    external: true
