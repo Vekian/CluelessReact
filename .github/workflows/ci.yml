@@ -26,7 +26,7 @@ jobs:
           echo 'GENERATE_SOURCEMAP=false' >> .env
 
       - run: npm ci
-      - run: npm run build
+      - run: DISABLE_ESLINT_PLUGIN=true npm run build
       - name: Deploy build folder
         uses: appleboy/scp-action@master
         with:
