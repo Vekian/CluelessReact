@@ -3,5 +3,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    image: vekian/clueless_front:latest
     ports:
       - "3300:80"
