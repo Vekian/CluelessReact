@@ -35,4 +35,4 @@ jobs:
           key: ${{ secrets.SSH_PROD_PRIVATE_KEY }}
           passphrase: ${{ secrets.SSH_KEY_PASSPHRASE }}
           source: "build/*"
-          target: "/var/www/clueless_front/build"
+          target: "/var/www/clueless_front"
