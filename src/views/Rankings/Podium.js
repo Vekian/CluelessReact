@@ -197,11 +197,11 @@ export default function Podium(props) {
                     <h5 className="col-3 fw-normal ">{index + 1}</h5>
                     <h5 className="col-4 fw-normal">
                       <Link
-                        to={`/profils/${score.user.id}`}
+                        to={`/profils/${score.user && score.user.id}`}
                         className="text-center fw-bold linkToProfil"
                         style={{ color: "inherit", textDecoration: "inherit" }}
                       >
-                        {score.user.username}
+                        {score.user && score.user.username}
                       </Link>
                     </h5>
                     <h5 className="col-5 fw-normal">{score.points} points</h5>
