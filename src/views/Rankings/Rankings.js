@@ -50,7 +50,7 @@ export default function Rankings() {
           </p>
         </div>
         <div>
-          {currentData && currentData["hydra:member"] && (
+          {currentData && currentData["hydra:member"]?.length > 0 && (
             <Podium
               setFilterScores={setFilterScores}
               scores={currentData ? currentData["hydra:member"] : null}
