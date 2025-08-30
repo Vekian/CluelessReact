@@ -49,7 +49,14 @@ export default function Rankings() {
             communauté, félicitations à eux !
           </p>
         </div>
-        <div></div>
+        <div>
+          {currentData && currentData["hydra:member"] && (
+            <Podium
+              setFilterScores={setFilterScores}
+              scores={currentData ? currentData["hydra:member"] : null}
+            />
+          )}
+        </div>
       </div>
 
       <div className="d-flex justify-content-center mt-2">
