@@ -18,7 +18,7 @@ export default function Podium(props) {
 
   return (
     <div className="mainPodium mt-4 d-flex flex-wrap">
-      {props?.scores ? (
+      {props && props.scores ? (
         <div className="d-flex flex-column col-lg-4 col-10 offset-xxl-0 offset-1 ">
           <div className="h-100 col-12 d-flex align-items-end">
             <div className="h-100 col-4 d-flex flex-column justify-content-end">
