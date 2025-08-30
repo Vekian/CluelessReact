@@ -8,12 +8,12 @@
     width: 100%;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
     opacity: 1;
-
+    transition: max-height 0.5s ease-in;
 }
 
 .subMenuHeaderContainer {
     z-index: 551;
-    transition: transform 0.5s ease-in;
+
     position: relative;
 }
 
@@ -43,10 +43,9 @@
 }
 
 .buttonSubMenuHeader {
-    background-image: url('../../../public/assets/images/buttonSubmenu.png');
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
+    background-color: var(--primaryColor);
+    border-radius: 0px 0px 35px 35px ;
+    height: 22px;;
     width: 100px;
     cursor: pointer;
     font-size: 25px;
@@ -54,10 +53,6 @@
 }
 
 .clue .buttonSubMenuHeader {
-    background-image: url('../../../public/assets/images/buttonSubmenuClue.png');
-    background-position: center;
-    background-size: contain;
-    background-repeat: no-repeat;
     width: 100px;
     cursor: pointer;
     font-size: 25px;
@@ -80,16 +75,16 @@
 
 @media screen and (max-width: 576px){
     .subMenuHeader {
-        height: 35px;
+         max-height: 35px;
     }
     .subMenuHeaderContainer {
-        height: 57px;
+       height: 57px;
     }
 }
 
 @media screen and (min-width: 577px) and (max-width: 1400px){
     .subMenuHeader {
-        height: 35px;
+        max-height: 35px;
     }
     .subMenuHeaderContainer {
         height: 57px;
@@ -99,7 +94,7 @@
 
 @media screen and (min-width: 1401px){
     .subMenuHeader {
-        height: 40px;
+        max-height: 40px;
     }
     .subMenuHeaderContainer {
         height: 65px;
