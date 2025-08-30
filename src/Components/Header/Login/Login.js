@@ -38,6 +38,8 @@ export default function Login() {
 
       let cookie = getCookie("refresh_token");
       if (!cookie) {
+        cookie = `refresh_token=${data["refresh_token"]}`;
+        document.cookie = cookie;
         document.getElementById("loginModalClose").click();
         setIsSending(false);
       }
